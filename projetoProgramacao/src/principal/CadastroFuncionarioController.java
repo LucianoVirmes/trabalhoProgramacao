@@ -79,6 +79,7 @@ public class CadastroFuncionarioController {
 	    	funcionario.setSalario(Double.valueOf(tfSalario.getText()));
 	    	funcionario.setTelefone(tfTelefone.getText());
 	    	funcionario.setDataAdmissao(LocalDate.now());
+	    	funcionario.setFilial(cbFilial.getValue());
 	    }
 	    
 //	    void populaControle() {

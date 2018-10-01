@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,7 @@ public class CarroJDBC implements CarroDAO{
 	@Override
 	public void inserir(Carro dado) {
 		try {
-			String sql = "insert into Carro(marca, modelo, valor, cor, ano, placa, disponivel) values (?,?,?,?,?,?,?)";
+			String sql = "insert into Carro(marca, modelo, valor, cor, ano, placa, disponivel, dataAquisicao, dataDesapropriacao, filial) values (?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement statement = ConexaoUtil.getConn().prepareStatement(sql);
 			statement.setString(1, dado.getMarca());
 			statement.setString(2, dado.getModelo());
@@ -27,6 +26,9 @@ public class CarroJDBC implements CarroDAO{
 			statement.setDate(5, Date.valueOf(dado.getAno()));
 			statement.setString(6, dado.getPlaca());
 			statement.setBoolean(7, dado.isDisponivel());
+			statement.setDate(8, Date.valueOf(dado.getDataDeAquisicao()));
+			statement.setDate(9, Date.valueOf(dado.getDataDeDesapropriacao()));
+			statement.setInt(10, dado.getFilial().getCodigo());
 			statement.executeUpdate();
 
 		} catch (SQLException e) {
@@ -40,7 +42,7 @@ public class CarroJDBC implements CarroDAO{
 	public void alterar(Carro dado) {
 		try {
 			String sql = "update Carro set marca = ?, modelo= ?, valor= ?, cor=?, "
-					+ "ano=?, placa=?, diponivel=? where codigo = ?";
+					+ "ano=?, placa=?, diponivel=?, dataAquisicao = ?, dataDesapropriacao = ?, filial = ? where codigo = ?";
 			PreparedStatement statement = ConexaoUtil.getConn().prepareStatement(sql);
 			statement.setString(1, dado.getMarca());
 			statement.setString(2, dado.getModelo());
@@ -49,7 +51,10 @@ public class CarroJDBC implements CarroDAO{
 			statement.setDate(5, Date.valueOf(dado.getAno()));
 			statement.setString(6, dado.getPlaca());
 			statement.setBoolean(7, dado.isDisponivel());
-			statement.setInt(8, dado.getCodigo());
+			statement.setDate(8, Date.valueOf(dado.getDataDeAquisicao()));
+			statement.setDate(9, Date.valueOf(dado.getDataDeDesapropriacao()));
+			statement.setInt(10, dado.getFilial().getCodigo());
+			statement.setInt(11, dado.getCodigo());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -76,8 +81,9 @@ public class CarroJDBC implements CarroDAO{
 		List<Carro> carros = new ArrayList<>();
 		try {
 			Statement statement = ConexaoUtil.getConn().createStatement();
-			ResultSet rs = statement.executeQuery("select * from Carro c join AquisicaoVeiculo a on c.codigo = a.codCarro"
-					+ " where a.dataDesapropriacao = null;");
+//			ResultSet rs = statement.executeQuery("select * from Carro c join AquisicaoVeiculo a on c.codigo = a.codCarro"
+//					+ " where a.dataDesapropriacao = null;");
+			ResultSet rs = statement.executeQuery("select * from Carro c where c.dataDesapropriacao IS null;");
 			while (rs.next()) {
 				Carro carro = new Carro();
 				carro.setCodigo(rs.getInt("codigo"));
@@ -90,6 +96,14 @@ public class CarroJDBC implements CarroDAO{
 						Instant.ofEpochMilli(data.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
 				carro.setPlaca(rs.getString("placa"));
 				carro.setDisponivel(rs.getBoolean("disponivel"));
+				Date data1 = rs.getDate("dataAquisicao");
+				carro.setDataDeAquisicao(
+						Instant.ofEpochMilli(data1.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+				Date data2 = rs.getDate("dataDesapropriacao");
+				carro.setDataDeDesapropriacao(
+						Instant.ofEpochMilli(data2.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+				FilialDAO filialDao = AbstractFactory.get().filialDao();
+				carro.setFilial(filialDao.buscar(rs.getInt("codFilial")));
 				
 				carros.add(carro);
 			}
@@ -104,8 +118,7 @@ public class CarroJDBC implements CarroDAO{
 	public Carro buscar(Integer codigo) {
 		Carro carro = null;
 		try {
-			String sql = "select * from Carro c join AquisicaoVeiculo a on c.codigo = a.codCarro "
-					+ "where a.dataDesapropriacao = null and codigo = ?;";
+			String sql = "select * from Carro c where c.dataDesapropriacao = null and codigo = ?;";
 			PreparedStatement ps = ConexaoUtil.getConn().prepareStatement(sql);
 			ps.setInt(1, codigo);
 			ResultSet rs1 = ps.executeQuery();
@@ -123,6 +136,15 @@ public class CarroJDBC implements CarroDAO{
 				carro.setPlaca(rs1.getString("placa"));
 
 				carro.setDisponivel(rs1.getBoolean("disponivel"));
+				Date data1 = rs1.getDate("dataAquisicao");
+				carro.setDataDeAquisicao(
+						Instant.ofEpochMilli(data1.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+				Date data2 = rs1.getDate("dataDesapropriacao");
+				carro.setDataDeDesapropriacao(
+						Instant.ofEpochMilli(data2.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+				FilialDAO filialDao = AbstractFactory.get().filialDao();
+				carro.setFilial(filialDao.buscar(rs1.getInt("codFilial")));
+				
 
 			}
 		} catch (SQLException e) {
@@ -149,6 +171,14 @@ public class CarroJDBC implements CarroDAO{
 				carro.setAno(Instant.ofEpochMilli(data.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
 				carro.setPlaca(rs.getString("placa"));
 				carro.setDisponivel(rs.getBoolean("disponivel"));
+				Date data1 = rs.getDate("dataAquisicao");
+				carro.setDataDeAquisicao(
+						Instant.ofEpochMilli(data1.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+				Date data2 = rs.getDate("dataDesapropriacao");
+				carro.setDataDeDesapropriacao(
+						Instant.ofEpochMilli(data2.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+				FilialDAO filialDao = AbstractFactory.get().filialDao();
+				carro.setFilial(filialDao.buscar(rs.getInt("codFilial")));
 				carros.add(carro);
 			}
 		} catch (SQLException e) {
@@ -161,10 +191,10 @@ public class CarroJDBC implements CarroDAO{
 	@Override
 	public void desapropriar(Carro dado) {
 		try {
-			String sql = "update AquisicaoVeiculos set dataDesapropriacao = ? where codCarro = ?";
+			String sql = "update Carro set dataDesapropriacao = null where codCarro = ?";
 			PreparedStatement statement = ConexaoUtil.getConn().prepareStatement(sql);
-			statement.setDate(1, Date.valueOf(LocalDate.now()));
-			statement.setInt(2, dado.getCodigo());
+			// statement.setDate(1, Date.valueOf(LocalDate.now()));
+			statement.setInt(1, dado.getCodigo());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -1,6 +1,5 @@
 package principal;
 
-import java.time.LocalDate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,10 +14,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import principal.dao.AbstractFactory;
-import principal.dao.ControleFuncionariosDAO;
 import principal.dao.FilialDAO;
 import principal.dao.FuncionarioDAO;
-import principal.model.ControleFuncionarios;
 import principal.model.Filial;
 import principal.model.Funcionario;
 
@@ -80,7 +77,7 @@ public class GerenciarFuncionarioController {
 	private TextField tfSalario;
 
 	private Funcionario funcionario;
-	private ControleFuncionarios controle;
+//	private ControleFuncionarios controle;
 
 	private FuncionarioDAO funcionarioDao = AbstractFactory.get().funcionarioDao();
 	private FilialDAO filialDao = AbstractFactory.get().filialDao();
@@ -161,8 +158,7 @@ public class GerenciarFuncionarioController {
 		AlertaFactory alerta = new AlertaFactory();
 		populaFuncionario();
 		if(alerta.confirmaExclusao()) {
-
-			funcionario.setDataDemissao(LocalDate.now());
+		//  funcionario.setDataDemissao(LocalDate.now());
 			funcionarioDao.demitirFuncionario(funcionario);
 		}
 	}

@@ -11,6 +11,10 @@ public class Carro {
 	private LocalDate ano;
 	private String placa;
 	private boolean disponivel;
+	
+	private LocalDate dataDeAquisicao;
+	private LocalDate dataDeDesapropriacao = null;
+	private Filial filial;
 
 	public Carro() {
 
@@ -96,6 +100,30 @@ public class Carro {
 	@Override
 	public String toString() {
 		return this.marca + " [" + this.modelo + "]" ;
+	}
+
+	public LocalDate getDataDeAquisicao() {
+		return dataDeAquisicao;
+	}
+
+	public void setDataDeAquisicao(LocalDate dataDeAquisicao) {
+		this.dataDeAquisicao = dataDeAquisicao;
+	}
+
+	public LocalDate getDataDeDesapropriacao() {
+		return dataDeDesapropriacao;
+	}
+
+	public void setDataDeDesapropriacao(LocalDate dataDeDesapropriacao) {
+		this.dataDeDesapropriacao = dataDeDesapropriacao;
+	}
+
+	public Filial getFilial() {
+		return filial;
+	}
+
+	public void setFilial(Filial filial) {
+		this.filial = filial;
 	}
 
 }

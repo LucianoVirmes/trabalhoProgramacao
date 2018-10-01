@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
@@ -103,11 +102,11 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 				data = rs.getDate("dataAdmissao");
 				funcionario.setDataAdmissao(
 						Instant.ofEpochMilli(data.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
-				funcionarios.add(funcionario);
 				data = rs.getDate("dataDemissao");
 				funcionario.setDataDemissao(
 						Instant.ofEpochMilli(data.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
-				funcionario.setFilial(rs.getInt("codFilial"));
+				FilialDAO filialDao = AbstractFactory.get().filialDao();
+				funcionario.setFilial(filialDao.buscar(rs.getInt("codFilial")));
 				funcionarios.add(funcionario);
 			}
 		} catch (SQLException e) {
@@ -121,8 +120,7 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 	public Funcionario buscar(Integer codigo) {
 		Funcionario funcionario = null;
 		try {
-			String sql = "select * from Funcionario f join ControleFuncionarios cf on f.codigo = cf.codFuncionario " + 
-					"where cf.dataDemissao = null and codigo = ?;";
+			String sql = "select * from Funcionario f where f.dataDemissao = null and codigo = ?;";
 			PreparedStatement ps = ConexaoUtil.getConn().prepareStatement(sql);
 			ps.setInt(1, codigo);
 			ResultSet rs1 = ps.executeQuery();
@@ -140,6 +138,14 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 				funcionario.setEmail(rs1.getString("email"));
 				funcionario.setSenha(rs1.getString("senha"));
 				funcionario.setSalario(rs1.getDouble("salario"));
+				data = rs1.getDate("dataAdmissao");
+				funcionario.setDataAdmissao(
+						Instant.ofEpochMilli(data.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+				data = rs1.getDate("dataDemissao");
+				funcionario.setDataDemissao(
+						Instant.ofEpochMilli(data.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+				FilialDAO filialDao = AbstractFactory.get().filialDao();
+				funcionario.setFilial(filialDao.buscar(rs1.getInt("codFilial")));
 				
 			}
 		} catch (SQLException e) {
@@ -153,10 +159,10 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 	public void demitirFuncionario(Funcionario dado) {
 		try {
 		//	String sql = "update ControleFuncionarios set dataDemissao = ? where codFuncionario = ?";
-			String sql = "update Funcionario set dataDemissao = ? where codigo = ?";
+			String sql = "update Funcionario set dataDemissao = null where codigo = ?";
 			PreparedStatement statement = ConexaoUtil.getConn().prepareStatement(sql);
-			statement.setDate(1, Date.valueOf(LocalDate.now()));
-			statement.setInt(2, dado.getCodigo());
+		//	statement.setDate(1, Date.valueOf(LocalDate.now()));
+			statement.setInt(1, dado.getCodigo());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
