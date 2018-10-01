@@ -15,12 +15,17 @@ public class Funcionario extends Pessoa {
 
 	}
 
-	public Funcionario(Integer codigo, String senha, Double salario) {
-		super();
+	public Funcionario(Integer codigo, String senha, Double salario, LocalDate dataAdmissao, LocalDate dataDemissao,
+			Filial filial) {
 		this.codigo = codigo;
 		this.senha = senha;
 		this.salario = salario;
+		this.dataAdmissao = dataAdmissao;
+		this.dataDemissao = dataDemissao;
+		this.filial = filial;
 	}
+
+
 
 	public Integer getCodigo() {
 		return codigo;

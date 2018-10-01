@@ -84,8 +84,6 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 		List<Funcionario> funcionarios = new ArrayList<>();
 		try {
 			Statement statement = ConexaoUtil.getConn().createStatement();
-//			ResultSet rs = statement.executeQuery("select * from Funcionario f join ControleFuncionarios cf on f.codigo = cf.codFuncionario " + 
-//					"where cf.dataDemissao IS null;");
 			ResultSet rs = statement.executeQuery("select * from Funcionario f where f.dataDemissao IS null;");
 			while (rs.next()) {
 				Funcionario funcionario = new Funcionario();
@@ -100,12 +98,15 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 				funcionario.setEmail(rs.getString("email"));
 				funcionario.setSenha(rs.getString("senha"));
 				funcionario.setSalario(rs.getDouble("salario"));
-				data = rs.getDate("dataAdmissao");
+				
+				Date data1 = rs.getDate("dataAdmissao");
 				funcionario.setDataAdmissao(
-						Instant.ofEpochMilli(data.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
-				data = rs.getDate("dataDemissao");
+						Instant.ofEpochMilli(data1.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+				Date data2 = rs.getDate("dataDemissao");
+				if(data2 != null) {
 				funcionario.setDataDemissao(
-						Instant.ofEpochMilli(data.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+						Instant.ofEpochMilli(data2.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());					
+				}
 				FilialDAO filialDao = AbstractFactory.get().filialDao();
 				funcionario.setFilial(filialDao.buscar(rs.getInt("codFilial")));
 				funcionarios.add(funcionario);
@@ -159,8 +160,7 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 	@Override
 	public void demitirFuncionario(Funcionario dado) {
 		try {
-		//	String sql = "update ControleFuncionarios set dataDemissao = ? where codFuncionario = ?";
-			String sql = "update Funcionario set dataDemissao is null where codigo = ?";
+			String sql = "update Funcionario set dataDemissao = now() where codigo = ?";
 			PreparedStatement statement = ConexaoUtil.getConn().prepareStatement(sql);
 			statement.setDate(1, Date.valueOf(LocalDate.now()));
 			statement.setInt(1, dado.getCodigo());

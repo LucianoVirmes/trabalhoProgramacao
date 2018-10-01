@@ -144,7 +144,8 @@ public class GerenciarFuncionarioController {
 		populaFuncionario();
 		AlertaFactory alerta = new AlertaFactory();
 		if(alerta.confirmaAceitar()) {
-			funcionarioDao.alterar(funcionario);			
+			funcionarioDao.alterar(funcionario);
+			tblFuncionarios.refresh();
 		}
 	}
 

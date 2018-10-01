@@ -60,6 +60,7 @@ public class CadastroFuncionarioController {
 	    @FXML
 		private void initialize() {
 			populaCombo();
+			novoFuncionario();
 		}
 	    
 	    private void populaCombo(){
@@ -69,7 +70,6 @@ public class CadastroFuncionarioController {
 		}
 	    
 	    void populaFuncionario() {
-	    	funcionario = new Funcionario();
 	    	funcionario.setNome(tfNome.getText());
 	    	funcionario.setSobrenome(tfSobrenome.getText());
 	    	funcionario.setDataNascimento(dtNascimento.getValue());
@@ -82,21 +82,12 @@ public class CadastroFuncionarioController {
 	    	funcionario.setFilial(cbFilial.getValue());
 	    }
 	    
-//	    void populaControle() {
-//	    	controle.setDataDeDemissao(null);
-//	    	controle.setDataDeAdmissao(LocalDate.now());
-//	    	controle.setFilial(cbFilial.getValue());
-//	    	controle.setFuncionario(funcionario);
-//	    }
-	    
 	    @FXML
 	    void cadastrar(ActionEvent event) {
 	    	populaFuncionario();
-	    	//populaControle();
 	    	AlertaFactory alerta = new AlertaFactory();
 	    	if(alerta.confirmaAceitar()) {
 	    		funcionarioDao.inserir(funcionario);
-	    		//controleDao.inserir(controle);
 	    	}
 	    }
 

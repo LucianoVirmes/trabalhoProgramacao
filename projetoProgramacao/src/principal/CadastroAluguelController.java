@@ -94,23 +94,23 @@ public class CadastroAluguelController {
 
     @FXML
     void buscarFilial(ActionEvent event) {
-    	Stage stageDono = (Stage)btnBuscarFuncionario.getScene().getWindow();
-    	FuncionarioDialogFabrica funcionarioDialog = new FuncionarioDialogFabrica(stageDono);
-    	Funcionario funcionario = funcionarioDialog.showDialog();
-    	if(funcionario != null) {
+    	Stage stageDono = (Stage)btnBuscarFilial.getScene().getWindow();
+    	FilialDialogFabrica filialDialog = new FilialDialogFabrica(stageDono);
+    	Filial filial = filialDialog.showDialog();
+    	if(filial != null) {
     		populaComboFilial();
-    		cbFuncionario.setValue(funcionario);
+    		cbFilial.setValue(filial);
     	}
     }
 
     @FXML
     void buscarFuncionario(ActionEvent event) {
-    	Stage stageDono = (Stage)btnBuscarTipoAluguel.getScene().getWindow();
-    	TipoDialogFabrica tipoDialog = new TipoDialogFabrica(stageDono);
-    	TipoAluguel tipo = tipoDialog.showDialog();
-    	if(tipo != null) {
+    	Stage stageDono = (Stage)btnBuscarFuncionario.getScene().getWindow();
+    	FuncionarioDialogFabrica funcionarioDialog = new FuncionarioDialogFabrica(stageDono);
+    	Funcionario func = funcionarioDialog.showDialog();
+    	if(func != null) {
     		populaComboFuncionario();
-    		cbTipoAluguel.setValue(tipo);
+    		cbFuncionario.setValue(func);
     	}
     }
 

@@ -67,8 +67,11 @@ public class CadastroVeiculoController {
 	@FXML
 	void cadastrar(ActionEvent event) {
 		populaCarro();
-		carroDao.inserir(carro);
-		novoCarro();
+		AlertaFactory alerta = new AlertaFactory();
+    	if(alerta.confirmaAceitar()) {
+    		carroDao.inserir(carro);
+    		novoCarro();
+    	}
 	}
 
 	@FXML
@@ -89,6 +92,7 @@ public class CadastroVeiculoController {
 		carro.setPlaca(tfPlaca.getText());
 		carro.setValor(Double.valueOf(tfValor.getText()));
 		carro.setDataDeAquisicao(LocalDate.now());
+		carro.setDataDeDesapropriacao(null);
 		carro.setFilial(cbFilial.getValue());
 	}
 

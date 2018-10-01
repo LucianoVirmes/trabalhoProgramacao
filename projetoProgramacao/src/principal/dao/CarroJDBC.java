@@ -17,7 +17,7 @@ public class CarroJDBC implements CarroDAO{
 	@Override
 	public void inserir(Carro dado) {
 		try {
-			String sql = "insert into Carro(marca, modelo, valor, cor, ano, placa, disponivel, dataAquisicao, dataDesapropriacao, filial) values (?,?,?,?,?,?,?,?,?,?)";
+			String sql = "insert into Carro(marca, modelo, valor, cor, ano, placa, disponivel, dataAquisicao,  codFilial) values (?,?,?,?,?,?,?,?,?)";
 			PreparedStatement statement = ConexaoUtil.getConn().prepareStatement(sql);
 			statement.setString(1, dado.getMarca());
 			statement.setString(2, dado.getModelo());
@@ -27,8 +27,7 @@ public class CarroJDBC implements CarroDAO{
 			statement.setString(6, dado.getPlaca());
 			statement.setBoolean(7, dado.isDisponivel());
 			statement.setDate(8, Date.valueOf(dado.getDataDeAquisicao()));
-			statement.setDate(9, Date.valueOf(dado.getDataDeDesapropriacao()));
-			statement.setInt(10, dado.getFilial().getCodigo());
+			statement.setInt(9, dado.getFilial().getCodigo());
 			statement.executeUpdate();
 
 		} catch (SQLException e) {
@@ -100,8 +99,10 @@ public class CarroJDBC implements CarroDAO{
 				carro.setDataDeAquisicao(
 						Instant.ofEpochMilli(data1.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
 				Date data2 = rs.getDate("dataDesapropriacao");
-				carro.setDataDeDesapropriacao(
-						Instant.ofEpochMilli(data2.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+				if(data2 != null) {
+					carro.setDataDeDesapropriacao(
+							Instant.ofEpochMilli(data2.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+				}
 				FilialDAO filialDao = AbstractFactory.get().filialDao();
 				carro.setFilial(filialDao.buscar(rs.getInt("codFilial")));
 				

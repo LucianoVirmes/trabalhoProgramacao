@@ -45,6 +45,7 @@ public class CadastroClienteController {
     private ClienteDAO clienteDao = AbstractFactory.get().clienteDao();
 
     void populaCliente() {
+    	cliente = new Cliente();
     	cliente.setNome(tfNome.getText());
     	cliente.setSobrenome(tfSobrenome.getText());
     	cliente.setDataNascimento(dtNascimento.getValue());
