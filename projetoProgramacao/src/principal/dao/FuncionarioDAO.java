@@ -7,4 +7,6 @@ public interface FuncionarioDAO extends GenericDAO<Funcionario>{
 	void demitirFuncionario(Funcionario dado);
 	
 	Funcionario verificaEmail(String email);
+	
+//	Integer retornaCodigo(Funcionario funcionario);
 }

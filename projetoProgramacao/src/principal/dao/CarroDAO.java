@@ -1,7 +1,6 @@
 package principal.dao;
 
 import principal.model.Carro;
-import principal.model.Funcionario;
 
 import java.util.List;
 

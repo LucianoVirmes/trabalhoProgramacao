@@ -19,7 +19,7 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 	@Override
 	public void inserir(Funcionario dado) {
 		try {
-			String sql = "insert into Funcionario(nome, sobrenome, dataNascimento, telefone, cpf, email, senha, salario, dataAdmissao) values (?,?,?,?,?,?,?,?,?)";
+			String sql = "insert into Funcionario(nome, sobrenome, dataNascimento, telefone, cpf, email, senha, salario, dataAdmissao, codFilial) values (?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement statement = ConexaoUtil.getConn().prepareStatement(sql);
 			statement.setString(1, dado.getNome());
 			statement.setString(2, dado.getSobrenome());
@@ -30,6 +30,7 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 			statement.setString(7, dado.getSenha());
 			statement.setDouble(8, dado.getSalario());
 			statement.setDate(9, Date.valueOf(dado.getDataAdmissao()));
+			statement.setInt(10, dado.getFilial().getCodigo());
 			statement.executeUpdate();
 
 
@@ -44,7 +45,7 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 	public void alterar(Funcionario dado) {
 		try {
 			String sql = "update Funcionario set nome = ?, sobrenome= ?, dataNascimento= ?, telefone=?, "
-					+ "cpf=?, email=?, senha=?, salario = ? where codigo = ?";
+					+ "cpf=?, email=?, senha=?, salario = ?, codFilial =?, dataAdmissao = ?, dataDemissao = ? where codigo = ?";
 			PreparedStatement statement = ConexaoUtil.getConn().prepareStatement(sql);
 			statement.setString(1, dado.getNome());
 			statement.setString(2, dado.getSobrenome());
@@ -54,6 +55,9 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 			statement.setString(6, dado.getEmail());
 			statement.setString(7, dado.getSenha());
 			statement.setDouble(8, dado.getSalario());
+			statement.setInt(9, dado.getFilial().getCodigo());
+			statement.setDate(10, Date.valueOf(dado.getDataAdmissao()));
+			statement.setDate(11, Date.valueOf(dado.getDataDemissao()));
 			statement.setInt(9, dado.getCodigo());
 			statement.executeUpdate();
 		} catch (SQLException e) {
@@ -96,6 +100,14 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 				funcionario.setEmail(rs.getString("email"));
 				funcionario.setSenha(rs.getString("senha"));
 				funcionario.setSalario(rs.getDouble("salario"));
+				data = rs.getDate("dataAdmissao");
+				funcionario.setDataAdmissao(
+						Instant.ofEpochMilli(data.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+				funcionarios.add(funcionario);
+				data = rs.getDate("dataDemissao");
+				funcionario.setDataDemissao(
+						Instant.ofEpochMilli(data.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+				funcionario.setFilial(rs.getInt("codFilial"));
 				funcionarios.add(funcionario);
 			}
 		} catch (SQLException e) {
@@ -156,8 +168,7 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 	public Funcionario verificaEmail(String email) {
 		Funcionario funcionario = null;
 		try {
-			String sql = "select * from Funcionario f join ControleFuncionarios cf on f.codigo = cf.codFuncionario " + 
-					"where cf.dataDemissao = null and email = ?;";
+			String sql = "select * from Funcionario where f.dataDemissao = null and email = ?;";
 			PreparedStatement ps = ConexaoUtil.getConn().prepareStatement(sql);
 			ps.setString(1, email);
 			ResultSet rs1 = ps.executeQuery();
@@ -182,5 +193,15 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 		}
 		return funcionario;
 	}
+
+//	@Override
+//	public Integer retornaCodigo(Funcionario funcionario) {
+//		for(Funcionario func : listar()) {
+//			if(func.getCpf().equals(funcionario.getCpf())) {
+//				return func.getCodigo();
+//			}
+//		}			
+//		return null;
+//	}
 
 }

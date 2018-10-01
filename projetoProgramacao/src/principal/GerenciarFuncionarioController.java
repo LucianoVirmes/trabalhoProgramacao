@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -14,7 +15,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import principal.dao.AbstractFactory;
+import principal.dao.ControleFuncionariosDAO;
+import principal.dao.FilialDAO;
 import principal.dao.FuncionarioDAO;
+import principal.model.ControleFuncionarios;
+import principal.model.Filial;
 import principal.model.Funcionario;
 
 public class GerenciarFuncionarioController {
@@ -39,6 +44,10 @@ public class GerenciarFuncionarioController {
 
 	@FXML
 	private TableColumn<Funcionario, String> tbcCpf;
+	
+
+    @FXML
+    private ComboBox<Filial> cbFilial;
 
 	@FXML
 	private DatePicker dtpDataNasc;
@@ -71,10 +80,17 @@ public class GerenciarFuncionarioController {
 	private TextField tfSalario;
 
 	private Funcionario funcionario;
-//	private ControleFuncionarios controle;
+	private ControleFuncionarios controle;
 
 	private FuncionarioDAO funcionarioDao = AbstractFactory.get().funcionarioDao();
+	private FilialDAO filialDao = AbstractFactory.get().filialDao();
 //	private ControleFuncionariosDAO controleDao = AbstractFactory.get().controleFuncionariosDao();
+	
+	 private void populaCombo(){
+			for(Filial filial: filialDao.listar()){
+				cbFilial.getItems().add(filial);
+			}
+		}
 
 	private ObservableList<Funcionario> funcionarios = FXCollections.observableArrayList();
 
@@ -85,6 +101,7 @@ public class GerenciarFuncionarioController {
 		tbcSobrenome.setCellValueFactory(new PropertyValueFactory<>("sobrenome"));
 		tbcCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
 		tblFuncionarios.setItems(atualizaTabela());
+		populaCombo();
 	}
 
 	@FXML
@@ -117,9 +134,12 @@ public class GerenciarFuncionarioController {
 		funcionario.setDataNascimento(dtpDataNasc.getValue());
 	}
 	
-//	void populaControle() {
-//		
-//	}
+//    void populaControle() {
+//    	controle.setDataDeDemissao(null);
+//    	controle.setDataDeAdmissao(LocalDate.now());
+//    	controle.setFilial(cbFilial.getValue());
+//    	controle.setFuncionario(funcionario);
+//    }
 
 	
 	@FXML

@@ -9,6 +9,8 @@ public class Funcionario extends Pessoa {
 	private Double salario;
 	private LocalDate dataAdmissao;
 	private LocalDate dataDemissao;
+	private Filial filial;
+	
 	public Funcionario() {
 
 	}
@@ -47,6 +49,13 @@ public class Funcionario extends Pessoa {
 		this.senha = senha;
 	}
 
+	public Filial getFilial() {
+		return filial;
+	}
+
+	public void setFilial(Filial filial) {
+		this.filial = filial;
+	}
 
 	public Double getSalario() {
 		return salario;

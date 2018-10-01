@@ -51,11 +51,11 @@ public class CadastroFuncionarioController {
 
 	    private Funcionario funcionario;
 	    
-//	    private ControleFuncionarios controle;
+	    //private ControleFuncionarios controle;
 	    
 	    private FuncionarioDAO funcionarioDao = AbstractFactory.get().funcionarioDao();
 	    private FilialDAO filialDao = AbstractFactory.get().filialDao();
-//	    private ControleFuncionariosDAO controleDao = AbstractFactory.get().controleFuncionariosDao();
+	    //private ControleFuncionariosDAO controleDao = AbstractFactory.get().controleFuncionariosDao();
 	    
 	    @FXML
 		private void initialize() {
@@ -69,7 +69,6 @@ public class CadastroFuncionarioController {
 		}
 	    
 	    void populaFuncionario() {
-
 	    	funcionario = new Funcionario();
 	    	funcionario.setNome(tfNome.getText());
 	    	funcionario.setSobrenome(tfSobrenome.getText());
@@ -92,11 +91,11 @@ public class CadastroFuncionarioController {
 	    @FXML
 	    void cadastrar(ActionEvent event) {
 	    	populaFuncionario();
-//	    	populaControle();
+	    	//populaControle();
 	    	AlertaFactory alerta = new AlertaFactory();
 	    	if(alerta.confirmaAceitar()) {
 	    		funcionarioDao.inserir(funcionario);
-//	    		controleDao.inserir(controle);
+	    		//controleDao.inserir(controle);
 	    	}
 	    }
 
