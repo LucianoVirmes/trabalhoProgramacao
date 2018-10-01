@@ -118,7 +118,7 @@ public class CarroJDBC implements CarroDAO{
 	public Carro buscar(Integer codigo) {
 		Carro carro = null;
 		try {
-			String sql = "select * from Carro c where c.dataDesapropriacao = null and codigo = ?;";
+			String sql = "select * from Carro c where c.dataDesapropriacao IS null and codigo = ?;";
 			PreparedStatement ps = ConexaoUtil.getConn().prepareStatement(sql);
 			ps.setInt(1, codigo);
 			ResultSet rs1 = ps.executeQuery();

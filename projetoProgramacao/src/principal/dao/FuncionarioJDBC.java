@@ -120,7 +120,7 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 	public Funcionario buscar(Integer codigo) {
 		Funcionario funcionario = null;
 		try {
-			String sql = "select * from Funcionario f where f.dataDemissao = null and codigo = ?;";
+			String sql = "select * from Funcionario f where f.dataDemissao is null and codigo = ?;";
 			PreparedStatement ps = ConexaoUtil.getConn().prepareStatement(sql);
 			ps.setInt(1, codigo);
 			ResultSet rs1 = ps.executeQuery();
@@ -159,7 +159,7 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 	public void demitirFuncionario(Funcionario dado) {
 		try {
 		//	String sql = "update ControleFuncionarios set dataDemissao = ? where codFuncionario = ?";
-			String sql = "update Funcionario set dataDemissao = null where codigo = ?";
+			String sql = "update Funcionario set dataDemissao is null where codigo = ?";
 			PreparedStatement statement = ConexaoUtil.getConn().prepareStatement(sql);
 		//	statement.setDate(1, Date.valueOf(LocalDate.now()));
 			statement.setInt(1, dado.getCodigo());
@@ -174,7 +174,7 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 	public Funcionario verificaEmail(String email) {
 		Funcionario funcionario = null;
 		try {
-			String sql = "select * from Funcionario where f.dataDemissao = null and email = ?;";
+			String sql = "select * from Funcionario where f.dataDemissao is null and email = ?;";
 			PreparedStatement ps = ConexaoUtil.getConn().prepareStatement(sql);
 			ps.setString(1, email);
 			ResultSet rs1 = ps.executeQuery();
