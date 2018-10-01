@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
@@ -161,7 +162,7 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 		//	String sql = "update ControleFuncionarios set dataDemissao = ? where codFuncionario = ?";
 			String sql = "update Funcionario set dataDemissao is null where codigo = ?";
 			PreparedStatement statement = ConexaoUtil.getConn().prepareStatement(sql);
-		//	statement.setDate(1, Date.valueOf(LocalDate.now()));
+			statement.setDate(1, Date.valueOf(LocalDate.now()));
 			statement.setInt(1, dado.getCodigo());
 			statement.executeUpdate();
 		} catch (SQLException e) {

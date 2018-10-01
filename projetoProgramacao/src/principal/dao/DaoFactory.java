@@ -18,7 +18,4 @@ public interface DaoFactory {
 	
 	TipoPagamentoDAO tipoPagamentoDao();
 	
-	ControleFuncionariosDAO controleFuncionariosDao();
-	
-	AquisicaoVeiculosDAO aquisicaoDao();
 }
