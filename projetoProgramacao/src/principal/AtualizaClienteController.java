@@ -15,7 +15,7 @@ import principal.dao.AbstractFactory;
 import principal.dao.ClienteDAO;
 import principal.model.Cliente;
 
-public class AlualizaClienteController {
+public class AtualizaClienteController {
 
 	@FXML
 	private Button btnAtualizar;
