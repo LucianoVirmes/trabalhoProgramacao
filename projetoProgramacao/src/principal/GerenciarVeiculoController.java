@@ -157,7 +157,8 @@ public class GerenciarVeiculoController {
     	populaFuncionario();
 		AlertaFactory alerta = new AlertaFactory();
 		if(alerta.confirmaAceitar()) {
-			carroDao.alterar(carro);			
+			carroDao.alterar(carro);
+			tblVeiculos.refresh();
 		}
     }
 

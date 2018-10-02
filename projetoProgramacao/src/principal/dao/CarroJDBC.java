@@ -41,7 +41,7 @@ public class CarroJDBC implements CarroDAO{
 	public void alterar(Carro dado) {
 		try {
 			String sql = "update Carro set marca = ?, modelo= ?, valor= ?, cor=?, "
-					+ "ano=?, placa=?, diponivel=?, dataAquisicao = ?, dataDesapropriacao = ?, filial = ? where codigo = ?";
+					+ "ano=?, placa=?, disponivel=?, codFilial = ? where codigo = ?";
 			PreparedStatement statement = ConexaoUtil.getConn().prepareStatement(sql);
 			statement.setString(1, dado.getMarca());
 			statement.setString(2, dado.getModelo());
@@ -50,10 +50,8 @@ public class CarroJDBC implements CarroDAO{
 			statement.setDate(5, Date.valueOf(dado.getAno()));
 			statement.setString(6, dado.getPlaca());
 			statement.setBoolean(7, dado.isDisponivel());
-			statement.setDate(8, Date.valueOf(dado.getDataDeAquisicao()));
-			statement.setDate(9, Date.valueOf(dado.getDataDeDesapropriacao()));
-			statement.setInt(10, dado.getFilial().getCodigo());
-			statement.setInt(11, dado.getCodigo());
+			statement.setInt(8, dado.getFilial().getCodigo());
+			statement.setInt(9, dado.getCodigo());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -195,9 +193,8 @@ public class CarroJDBC implements CarroDAO{
 	@Override
 	public void desapropriar(Carro dado) {
 		try {
-			String sql = "update Carro set dataDesapropriacao = null where codCarro = ?";
+			String sql = "update Carro set dataDesapropriacao = now() where codCarro = ?";
 			PreparedStatement statement = ConexaoUtil.getConn().prepareStatement(sql);
-			// statement.setDate(1, Date.valueOf(LocalDate.now()));
 			statement.setInt(1, dado.getCodigo());
 			statement.executeUpdate();
 		} catch (SQLException e) {
