@@ -61,9 +61,9 @@ public class AtualizaClienteController {
 
 	@FXML
 	private TextField tfCnh;
-	
+
 	private Cliente cliente;
-	
+
 	private ClienteDAO clienteDao = AbstractFactory.get().clienteDao();
 	private ObservableList<Cliente> clientes = FXCollections.observableArrayList();
 
@@ -75,12 +75,12 @@ public class AtualizaClienteController {
 		tbcCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
 		tblClientes.setItems(atualizaTabela());
 	}
-	
+
 	private ObservableList<Cliente> atualizaTabela() {
 		clientes = FXCollections.observableArrayList(clienteDao.listar());
 		return clientes;
 	}
-	
+
 	public void populaTela(Cliente cliente) {
 		tfNome.setText(cliente.getNome());
 		tfSobrenome.setText(cliente.getSobrenome());
@@ -90,7 +90,7 @@ public class AtualizaClienteController {
 		tfCnh.setText(cliente.getCnh());
 		dtpDataNasc.setValue(cliente.getDataNascimento());
 	}
-	
+
 	public void populaCliente() {
 		cliente.setNome(tfNome.getText());
 		cliente.setSobrenome(tfSobrenome.getText());
@@ -100,13 +100,13 @@ public class AtualizaClienteController {
 		cliente.setCnh(tfCnh.getText());
 		cliente.setDataNascimento(dtpDataNasc.getValue());
 	}
-	
+
 	@FXML
 	void atualizar(ActionEvent event) {
 		populaCliente();
 		AlertaFactory alerta = new AlertaFactory();
-		if(alerta.confirmaAceitar()) {
-			clienteDao.alterar(cliente);			
+		if (alerta.confirmaAceitar()) {
+			clienteDao.alterar(cliente);
 		}
 	}
 
@@ -114,7 +114,7 @@ public class AtualizaClienteController {
 	void buscar(ActionEvent event) {
 		tblClientes.setItems(buscarCliente());
 	}
-	
+
 	private ObservableList<Cliente> buscarCliente() {
 		ObservableList<Cliente> clientePesquisa = FXCollections.observableArrayList();
 		for (int x = 0; x < clientes.size(); x++) {
@@ -128,7 +128,7 @@ public class AtualizaClienteController {
 	@FXML
 	void selecionaCliente(MouseEvent event) {
 		if (tblClientes.getSelectionModel().getSelectedItem() != null) {
-			cliente = tblClientes.getSelectionModel().getSelectedItem();			
+			cliente = tblClientes.getSelectionModel().getSelectedItem();
 			populaTela(cliente);
 		}
 	}
