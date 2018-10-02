@@ -115,11 +115,9 @@ public class GerenciarVeiculoController {
 		tfPlaca.setText(car.getPlaca());
 		tfValor.setText(car.getValor().toString());
 		dtpAno.setValue(car.getAno());
-		System.out.println(car.isDisponivel());
 		if(car.isDisponivel()) {
 			ckbDisponivel.setSelected(true);
 		}
-		ckbDisponivel.setVisible(car.isDisponivel());
 		cbFilial.getSelectionModel().select(car.getFilial());
 		
 	}
@@ -127,7 +125,7 @@ public class GerenciarVeiculoController {
 	public void populaFuncionario() {
 		carro.setAno(dtpAno.getValue());
 		carro.setCor(tfCor.getText());
-		if(ckbDisponivel.isArmed()) {
+		if(ckbDisponivel.isSelected()) {
 			carro.setDisponivel(true);
 		}else {
 			carro.setDisponivel(false);			
