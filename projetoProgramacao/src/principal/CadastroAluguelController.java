@@ -166,6 +166,7 @@ public class CadastroAluguelController {
     }
     
     private void populaAluguel() {
+    	aluguel = new Aluguel();
     	aluguel.setCarro(cbCarro.getValue());
     	aluguel.setCliente(cbCliente.getValue());
     	aluguel.setDataAluguel(dtAluguel.getValue());

@@ -144,8 +144,10 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 				funcionario.setDataAdmissao(
 						Instant.ofEpochMilli(data.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
 				data = rs1.getDate("dataDemissao");
-				funcionario.setDataDemissao(
-						Instant.ofEpochMilli(data.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+				if(data != null) {
+					funcionario.setDataDemissao(
+							Instant.ofEpochMilli(data.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+				}
 				FilialDAO filialDao = AbstractFactory.get().filialDao();
 				funcionario.setFilial(filialDao.buscar(rs1.getInt("codFilial")));
 				
