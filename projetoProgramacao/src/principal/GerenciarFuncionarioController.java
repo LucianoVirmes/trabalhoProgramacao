@@ -77,11 +77,9 @@ public class GerenciarFuncionarioController {
 	private TextField tfSalario;
 
 	private Funcionario funcionario;
-//	private ControleFuncionarios controle;
 
 	private FuncionarioDAO funcionarioDao = AbstractFactory.get().funcionarioDao();
 	private FilialDAO filialDao = AbstractFactory.get().filialDao();
-//	private ControleFuncionariosDAO controleDao = AbstractFactory.get().controleFuncionariosDao();
 	
 	 private void populaCombo(){
 			for(Filial filial: filialDao.listar()){
@@ -130,13 +128,6 @@ public class GerenciarFuncionarioController {
 		funcionario.setSalario(Double.valueOf(tfSalario.getText()));
 		funcionario.setDataNascimento(dtpDataNasc.getValue());
 	}
-	
-//    void populaControle() {
-//    	controle.setDataDeDemissao(null);
-//    	controle.setDataDeAdmissao(LocalDate.now());
-//    	controle.setFilial(cbFilial.getValue());
-//    	controle.setFuncionario(funcionario);
-//    }
 
 	
 	@FXML

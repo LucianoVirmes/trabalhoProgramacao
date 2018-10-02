@@ -176,8 +176,11 @@ public class CarroJDBC implements CarroDAO{
 				carro.setDataDeAquisicao(
 						Instant.ofEpochMilli(data1.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
 				Date data2 = rs.getDate("dataDesapropriacao");
-				carro.setDataDeDesapropriacao(
-						Instant.ofEpochMilli(data2.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+				if(data2 != null) {
+					carro.setDataDeDesapropriacao(
+							Instant.ofEpochMilli(data2.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+					
+				}
 				FilialDAO filialDao = AbstractFactory.get().filialDao();
 				carro.setFilial(filialDao.buscar(rs.getInt("codFilial")));
 				carros.add(carro);

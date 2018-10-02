@@ -85,10 +85,10 @@ public class GerenciarVeiculoController {
     @FXML
 	private void initialize() {
 		tbcPlaca.setCellValueFactory(new PropertyValueFactory<>("placa"));
-		tbcMarca.setCellValueFactory(new PropertyValueFactory<>("nome"));
-		tbcModelo.setCellValueFactory(new PropertyValueFactory<>("sobrenome"));
-		tbcValor.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-		tbcDisponibilidade.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+		tbcMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
+		tbcModelo.setCellValueFactory(new PropertyValueFactory<>("modelo"));
+		tbcValor.setCellValueFactory(new PropertyValueFactory<>("valor"));
+		tbcDisponibilidade.setCellValueFactory(new PropertyValueFactory<>("disponivel"));
 		tblVeiculos.setItems(atualizaTabela());
 		populaCombo();
 	}
@@ -123,7 +123,11 @@ public class GerenciarVeiculoController {
 	public void populaFuncionario() {
 		carro.setAno(dtpAno.getValue());
 		carro.setCor(tfCor.getText());
-		carro.setDisponivel(ckbDisponivel.isArmed());
+		if(ckbDisponivel.isArmed()) {
+			carro.setDisponivel(true);
+		}else {
+			carro.setDisponivel(false);			
+		}
 		carro.setMarca(tfMarca.getText());
 		carro.setModelo(tfModelo.getText());
 		carro.setPlaca(tfPlaca.getText());
