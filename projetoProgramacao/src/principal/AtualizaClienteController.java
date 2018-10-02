@@ -1,5 +1,7 @@
 package principal;
 
+import java.time.LocalDate;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -100,7 +102,15 @@ public class AtualizaClienteController {
 		cliente.setCnh(tfCnh.getText());
 		cliente.setDataNascimento(dtpDataNasc.getValue());
 	}
-
+	public void LimpaTela() {
+		tfNome.clear();
+		tfSobrenome.clear();
+		tfCpf.clear();
+		tfTelefone.clear();
+		tfEmail.clear();
+		tfCnh.clear();
+		dtpDataNasc.setValue(null);
+	}
 	@FXML
 	void atualizar(ActionEvent event) {
 		populaCliente();
@@ -108,6 +118,7 @@ public class AtualizaClienteController {
 		if (alerta.confirmaAceitar()) {
 			clienteDao.alterar(cliente);
 		}
+		LimpaTela();
 	}
 
 	@FXML
