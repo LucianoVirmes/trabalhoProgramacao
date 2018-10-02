@@ -117,6 +117,9 @@ public class GerenciarVeiculoController {
 		dtpAno.setValue(car.getAno());
 		if(car.isDisponivel()) {
 			ckbDisponivel.setSelected(true);
+		} else {
+			ckbDisponivel.setSelected(false);
+
 		}
 		cbFilial.getSelectionModel().select(car.getFilial());
 		
@@ -160,6 +163,7 @@ public class GerenciarVeiculoController {
 		AlertaFactory alerta = new AlertaFactory();
 		if(alerta.confirmaAceitar()) {
 			carroDao.alterar(carro);
+			ckbDisponivel.setSelected(false);
 			tblVeiculos.refresh();
 		}
     }
