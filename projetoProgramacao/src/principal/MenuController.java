@@ -41,7 +41,9 @@ public class MenuController {
 			e1.printStackTrace();
 		}
 
-	}@FXML
+	}
+
+	@FXML
 	void abreTelaCadastroAluguel(ActionEvent event) {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("CadastroAluguel.fxml"));
@@ -53,6 +55,7 @@ public class MenuController {
 		}
 
 	}
+
 	@FXML
 	void abreTelaCadastroCliente(ActionEvent event) {
 		FXMLLoader loader = new FXMLLoader();
@@ -65,6 +68,7 @@ public class MenuController {
 		}
 
 	}
+
 	@FXML
 	void abreTelaCadastroFuncionario(ActionEvent event) {
 		FXMLLoader loader = new FXMLLoader();
@@ -77,8 +81,7 @@ public class MenuController {
 		}
 
 	}
-	
-	
+
 	/* Aba gerenciar */
 	@FXML
 	void abreTelaGerenciarFuncionario(ActionEvent event) {
@@ -92,6 +95,7 @@ public class MenuController {
 		}
 
 	}
+
 	@FXML
 	void abreTelaGerenciarVeiculo(ActionEvent event) {
 		FXMLLoader loader = new FXMLLoader();
@@ -104,6 +108,7 @@ public class MenuController {
 		}
 
 	}
+
 	@FXML
 	void abreTelaGerenciarAluguel(ActionEvent event) {
 		FXMLLoader loader = new FXMLLoader();
@@ -116,10 +121,10 @@ public class MenuController {
 		}
 
 	}
-	
-    @FXML
-    void abreTelaAtualizaCliente(ActionEvent event) {
-    	FXMLLoader loader = new FXMLLoader();
+
+	@FXML
+	void abreTelaAtualizaCliente(ActionEvent event) {
+		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("AtualizarCliente.fxml"));
 		try {
 			AnchorPane View = (AnchorPane) loader.load();
@@ -127,12 +132,11 @@ public class MenuController {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-    }
-    
+	}
 
-    @FXML
-    void abreTelaCarrosDisponiveis(ActionEvent event) {
-    	FXMLLoader loader = new FXMLLoader();
+	@FXML
+	void abreTelaCarrosDisponiveis(ActionEvent event) {
+		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("CarrosDisponiveis.fxml"));
 		try {
 			AnchorPane View = (AnchorPane) loader.load();
@@ -140,7 +144,6 @@ public class MenuController {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-    }
-	
-	
+	}
+
 }
