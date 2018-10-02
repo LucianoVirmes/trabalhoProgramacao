@@ -29,9 +29,10 @@
               <MenuItem mnemonicParsing="false" onAction="#abreTelaAtualizaCliente" text="Cliente" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Carros Disponiveis">
+            <Menu mnemonicParsing="false" text="Visualizar">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#abreTelaCarrosDisponiveis" text="Ver lista" />
+                <MenuItem mnemonicParsing="false" onAction="#abreTelaCarrosDisponiveis" text="Carros disponíveis" />
+                  <MenuItem mnemonicParsing="false" onAction="#abreTelaAlugueisEmAtividade" text="Alugueis em atividade" />
               </items>
             </Menu>
         </menus>

@@ -145,5 +145,17 @@ public class MenuController {
 			e1.printStackTrace();
 		}
 	}
+	
+    @FXML
+    void abreTelaAlugueisEmAtividade(ActionEvent event) {
+    	FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("AlugueisEmAtividade.fxml"));
+		try {
+			AnchorPane View = (AnchorPane) loader.load();
+			bpPrincipal.setCenter(View);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+    }
 
 }
