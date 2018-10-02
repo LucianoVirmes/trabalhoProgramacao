@@ -54,11 +54,11 @@ public class AlugueisEmAtividadeController {
 	@FXML
 	private void initialize() {
 		tbcCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
-		tbcPlaca.setCellValueFactory(new PropertyValueFactory<>("carro.placa"));
+		tbcPlaca.setCellValueFactory(new PropertyValueFactory<>("carro"));
 		tbcData.setCellValueFactory(new PropertyValueFactory<>("dataAluguel"));
-		tbcTipo.setCellValueFactory(new PropertyValueFactory<>("tipoAluguel.descricao"));
-		tbcCliente.setCellValueFactory(new PropertyValueFactory<>("cliente.nome"));
-		tbcSaida.setCellValueFactory(new PropertyValueFactory<>("quilometroSaida"));
+		tbcTipo.setCellValueFactory(new PropertyValueFactory<>("tipoAluguel"));
+		tbcCliente.setCellValueFactory(new PropertyValueFactory<>("cliente"));
+		tbcSaida.setCellValueFactory(new PropertyValueFactory<>("quilometrosSaida"));
 		tblAlugueis.setItems(atualizaTabela());
 	}
 	
