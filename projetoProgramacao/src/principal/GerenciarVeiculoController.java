@@ -115,6 +115,10 @@ public class GerenciarVeiculoController {
 		tfPlaca.setText(car.getPlaca());
 		tfValor.setText(car.getValor().toString());
 		dtpAno.setValue(car.getAno());
+		System.out.println(car.isDisponivel());
+		if(car.isDisponivel()) {
+			ckbDisponivel.setSelected(true);
+		}
 		ckbDisponivel.setVisible(car.isDisponivel());
 		cbFilial.getSelectionModel().select(car.getFilial());
 		
