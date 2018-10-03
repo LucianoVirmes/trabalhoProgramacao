@@ -131,7 +131,10 @@ public class CadastroAluguelController {
     	if(verificaAluguel() == true) {
     		populaAluguel();
     		if(alerta.confirmaAceitar()) {
-    			aluguelDao.inserir(aluguel);    			
+    			aluguelDao.inserir(aluguel); 
+    			Carro car = aluguel.getCarro();
+    			car.setDisponivel(false);
+    			carroDao.alterar(car);
     		}
     	}	
 	}

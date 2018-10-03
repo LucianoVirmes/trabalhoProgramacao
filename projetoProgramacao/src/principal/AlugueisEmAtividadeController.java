@@ -16,7 +16,6 @@ import principal.dao.AluguelDAO;
 import principal.model.Aluguel;
 import principal.model.Carro;
 import principal.model.Cliente;
-import principal.model.TipoAluguel;
 
 public class AlugueisEmAtividadeController {
 
@@ -39,13 +38,13 @@ public class AlugueisEmAtividadeController {
 	private TableColumn<Aluguel, LocalDate> tbcData;
 
 	@FXML
-	private TableColumn<Aluguel, TipoAluguel> tbcTipo;
+	private TableColumn<Aluguel, String> tbcTipo;
 
 	@FXML
 	private TableColumn<Aluguel, Cliente> tbcCliente;
 
 	@FXML
-	private TableColumn<Aluguel, Number> tbcSaida;
+	private TableColumn<Aluguel, Double> tbcSaida;
 	
 	private ObservableList<Aluguel> alugueis = FXCollections.observableArrayList();
 	
