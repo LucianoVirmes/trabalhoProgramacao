@@ -32,7 +32,7 @@ public class AlugueisEmAtividadeController {
 	private TableColumn<Aluguel, Number> tbcCodigo;
 
 	@FXML
-	private TableColumn<Aluguel, Carro> tbcPlaca;
+	private TableColumn<Aluguel, Carro> tbcCarro;
 
 	@FXML
 	private TableColumn<Aluguel, LocalDate> tbcData;
@@ -43,8 +43,6 @@ public class AlugueisEmAtividadeController {
 	@FXML
 	private TableColumn<Aluguel, Cliente> tbcCliente;
 
-	@FXML
-	private TableColumn<Aluguel, Double> tbcSaida;
 	
 	private ObservableList<Aluguel> alugueis = FXCollections.observableArrayList();
 	
@@ -53,11 +51,10 @@ public class AlugueisEmAtividadeController {
 	@FXML
 	private void initialize() {
 		tbcCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
-		tbcPlaca.setCellValueFactory(new PropertyValueFactory<>("carro"));
+		tbcCarro.setCellValueFactory(new PropertyValueFactory<>("carro"));
 		tbcData.setCellValueFactory(new PropertyValueFactory<>("dataAluguel"));
 		tbcTipo.setCellValueFactory(new PropertyValueFactory<>("tipoAluguel"));
 		tbcCliente.setCellValueFactory(new PropertyValueFactory<>("cliente"));
-		tbcSaida.setCellValueFactory(new PropertyValueFactory<>("quilometrosSaida"));
 		tblAlugueis.setItems(atualizaTabela());
 	}
 	

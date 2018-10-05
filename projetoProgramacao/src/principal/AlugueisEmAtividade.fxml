@@ -25,11 +25,10 @@
             <TableView fx:id="tblAlugueis" layoutX="23.0" layoutY="89.0" prefHeight="484.0" prefWidth="751.0">
               <columns>
                 <TableColumn fx:id="tbcCodigo" prefWidth="61.042545318603516" text="código" />
-                <TableColumn fx:id="tbcPlaca" prefWidth="149.8794708251953" text="Placa do carro" />
-                  <TableColumn fx:id="tbcData" minWidth="0.0" prefWidth="141.1205596923828" text="data do aluguel" />
-                  <TableColumn fx:id="tbcTipo" prefWidth="149.77304077148438" text="tipo do aluguel" />
-                  <TableColumn fx:id="tbcCliente" minWidth="0.0" prefWidth="126.2269287109375" text="cliente" />
-                  <TableColumn fx:id="tbcSaida" minWidth="0.0" prefWidth="127.411376953125" text="km saida" />
+                <TableColumn fx:id="tbcCarro" prefWidth="161.0" text="carro" />
+                  <TableColumn fx:id="tbcData" minWidth="0.0" prefWidth="143.0" text="data do aluguel" />
+                  <TableColumn fx:id="tbcTipo" prefWidth="166.0" text="tipo do aluguel" />
+                  <TableColumn fx:id="tbcCliente" minWidth="0.0" prefWidth="218.0" text="cliente" />
               </columns>
             </TableView>
             <Label layoutX="504.0" layoutY="26.0" text="Alugueis em atividade">
