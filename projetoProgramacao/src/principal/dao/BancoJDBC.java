@@ -1,6 +1,7 @@
 package principal.dao;
 
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -70,7 +71,16 @@ public class BancoJDBC implements BancoDAO  {
 		return views;
 
 	}
-
 	
-
+	public void reajusta_taxa(Double reajuste) {
+		try {
+			String sql = "call reajusta_taxa(?);";
+			PreparedStatement statement = ConexaoUtil.getConn().prepareStatement(sql);
+			statement.setDouble(1, reajuste);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
