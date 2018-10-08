@@ -99,7 +99,7 @@ public class Carro {
 
 	@Override
 	public String toString() {
-		return this.marca + " [" + this.modelo + "]" ;
+		return this.marca + " [" + this.modelo + "] - " + this.placa ;
 	}
 
 	public LocalDate getDataDeAquisicao() {
