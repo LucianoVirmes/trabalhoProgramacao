@@ -2,7 +2,7 @@ package principal.model;
 
 import java.time.LocalDate;
 
-public class View {
+public class Banco {
 	
 	private String string1;
 	private String string2;
@@ -12,7 +12,7 @@ public class View {
 	private String uf;
 	private LocalDate ultimaModificacao;
 	
-	public View(String string1, String string2, String string3, LocalDate dataInicio, String nomeFilial, String uf,
+	public Banco(String string1, String string2, String string3, LocalDate dataInicio, String nomeFilial, String uf,
 			LocalDate ultimaModificacao) {
 		super();
 		this.string1 = string1;
@@ -24,7 +24,7 @@ public class View {
 		this.ultimaModificacao = ultimaModificacao;
 	}
 
-	public View() {
+	public Banco() {
 
 	}
 

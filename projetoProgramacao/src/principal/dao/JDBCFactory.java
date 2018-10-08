@@ -43,7 +43,7 @@ public class JDBCFactory implements DaoFactory{
 	}
 
 	@Override
-	public BancoDAO viewDao() {
+	public BancoDAO bancoDao() {
 		return new BancoJDBC();
 	}
 

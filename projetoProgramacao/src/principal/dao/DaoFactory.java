@@ -18,6 +18,6 @@ public interface DaoFactory {
 	
 	TipoPagamentoDAO tipoPagamentoDao();
 	
-	BancoDAO viewDao();
+	BancoDAO bancoDao();
 	
 }

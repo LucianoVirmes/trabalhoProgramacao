@@ -9,6 +9,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import principal.dao.AbstractFactory;
 import principal.dao.TipoAluguelDAO;
 import principal.model.TipoAluguel;
@@ -47,6 +48,9 @@ public class GerenciarTipoAluguelController {
 
 	@FXML
 	private Button btnExcluir;
+
+    @FXML
+    private Button btnReajustar;
 
 	private TipoAluguel tipo;
 	
@@ -117,6 +121,13 @@ public class GerenciarTipoAluguelController {
 		editando = false;		
 		tblTipoAluguel.setItems(FXCollections.observableArrayList(tipoDao.listar()));
 	}
+	
+    @FXML
+    void reajustar(ActionEvent event) {
+    	Stage stageDono = (Stage)btnReajustar.getScene().getWindow();
+    	ReajustaDialogFabrica reajustaDialog = new ReajustaDialogFabrica(stageDono);
+    	reajustaDialog.showDialog();
+    }
 	
 
 }

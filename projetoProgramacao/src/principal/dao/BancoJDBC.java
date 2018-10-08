@@ -11,18 +11,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import principal.conexao.ConexaoUtil;
-import principal.model.View;
+import principal.model.Banco;
 
 public class BancoJDBC implements BancoDAO  {
 	
-	public List<View> viewControleFuncionario() {
-		List<View> views = new ArrayList<>();
+	public List<Banco> viewControleFuncionario() {
+		List<Banco> views = new ArrayList<>();
 		try {
 			Statement statement = ConexaoUtil.getConn().createStatement();
 			ResultSet rs = statement.executeQuery("select nome, sobrenome, cpf, data_admissao,"
 					+ "nome_filial,uf, ultima_modificacao from controle_de_funcionarios;");
 			while (rs.next()) {
-				View view = new View();
+				Banco view = new Banco();
 				view.setString1(rs.getString("nome"));
 				view.setString2(rs.getString("sobrenome"));
 				view.setString3(rs.getString("cpf"));
@@ -44,14 +44,14 @@ public class BancoJDBC implements BancoDAO  {
 	}
 	
 	
-	public List<View> viewAquisicaoVeiculos() {
-		List<View> views = new ArrayList<>();
+	public List<Banco> viewAquisicaoVeiculos() {
+		List<Banco> views = new ArrayList<>();
 		try {
 			Statement statement = ConexaoUtil.getConn().createStatement();
 			ResultSet rs = statement.executeQuery("select marca, modelo, placa, data_aquisicao,"
 					+ " nome_filial, uf, ultima_modificacao from aquisicao_veiculo;");
 			while (rs.next()) {
-				View view = new View();
+				Banco view = new Banco();
 				view.setString1(rs.getString("marca"));
 				view.setString2(rs.getString("modelo"));
 				view.setString3(rs.getString("placa"));
