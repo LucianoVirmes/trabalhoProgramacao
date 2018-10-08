@@ -42,4 +42,9 @@ public class JDBCFactory implements DaoFactory{
 		return new TipoPagamentoJDBC();
 	}
 
+	@Override
+	public ViewDAO viewDao() {
+		return new ViewJDBC();
+	}
+
 }
