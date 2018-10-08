@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import principal.dao.AbstractFactory;
+import principal.dao.BancoDAO;
 import principal.dao.CarroDAO;
 import principal.model.Carro;
 
@@ -37,18 +38,24 @@ public class CarrosDisponiveisController {
 
     @FXML
     private TableColumn<Carro, String> tbcCor;
-
+    
     @FXML
-    private Button tbnBuscar;
+    private Button btnCarroMaisAlugado;
 
     @FXML
     private TextField tfPlaca;
+    @FXML
+    
+    private Button tbnBuscar;
     
     private ObservableList<Carro> carros = FXCollections.observableArrayList();
     
     private Stage dialogStage;
     
     private Carro carro;
+    
+    private CarroDAO carroDao = AbstractFactory.get().carroDao();
+    private BancoDAO bancoDao = AbstractFactory.get().bancoDao();
     
     @FXML
 	private void initialize() {
@@ -66,6 +73,11 @@ public class CarrosDisponiveisController {
     	tblCarros.setItems(buscarCarro());
     }
     
+    @FXML
+    void maisAlugado(ActionEvent event) {
+    	carro = carroDao.buscar(bancoDao.codigoCarroMaisAlugado());
+    	tfPlaca.setText(carro.getPlaca());
+    }
     
     public ObservableList<Carro> atualizaTabela(){
     	CarroDAO carroDao = AbstractFactory.get().carroDao();

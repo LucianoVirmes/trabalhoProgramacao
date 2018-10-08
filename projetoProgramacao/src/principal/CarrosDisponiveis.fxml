@@ -39,5 +39,10 @@
             <Font name="Comic Sans MS" size="24.0" />
          </font>
       </Label>
+      <Button fx:id="btnCarroMaisAlugado" layoutX="36.0" layoutY="17.0" mnemonicParsing="false" onAction="#maisAlugado" text="Carro mais alugado">
+         <font>
+            <Font name="Comic Sans MS" size="13.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
