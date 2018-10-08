@@ -43,8 +43,8 @@ public class JDBCFactory implements DaoFactory{
 	}
 
 	@Override
-	public ViewDAO viewDao() {
-		return new ViewJDBC();
+	public BancoDAO viewDao() {
+		return new BancoJDBC();
 	}
 
 }

@@ -12,9 +12,9 @@ import java.util.List;
 import principal.conexao.ConexaoUtil;
 import principal.model.View;
 
-public class ViewJDBC implements ViewDAO  {
+public class BancoJDBC implements BancoDAO  {
 	
-	public List<View> listarControleFuncionario() {
+	public List<View> viewControleFuncionario() {
 		List<View> views = new ArrayList<>();
 		try {
 			Statement statement = ConexaoUtil.getConn().createStatement();
@@ -43,7 +43,7 @@ public class ViewJDBC implements ViewDAO  {
 	}
 	
 	
-	public List<View> listarAquisicaoVeiculos() {
+	public List<View> viewAquisicaoVeiculos() {
 		List<View> views = new ArrayList<>();
 		try {
 			Statement statement = ConexaoUtil.getConn().createStatement();
