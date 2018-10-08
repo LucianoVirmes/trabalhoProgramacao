@@ -15,6 +15,7 @@ import principal.model.Banco;
 
 public class BancoJDBC implements BancoDAO  {
 	
+	@Override
 	public List<Banco> viewControleFuncionario() {
 		List<Banco> views = new ArrayList<>();
 		try {
@@ -43,7 +44,7 @@ public class BancoJDBC implements BancoDAO  {
 
 	}
 	
-	
+	@Override
 	public List<Banco> viewAquisicaoVeiculos() {
 		List<Banco> views = new ArrayList<>();
 		try {
@@ -72,6 +73,7 @@ public class BancoJDBC implements BancoDAO  {
 
 	}
 	
+	@Override
 	public void reajusta_taxa(Double reajuste) {
 		try {
 			String sql = "call reajusta_taxa(?);";
@@ -82,5 +84,23 @@ public class BancoJDBC implements BancoDAO  {
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public Integer codigoCarroMaisAlugado() {
+		Integer codigo = null;
+		try {
+			Statement statement = ConexaoUtil.getConn().createStatement();
+			ResultSet rs = statement.executeQuery("select carro_mais_alugado();");
+			while (rs.next()) {
+				codigo = rs.getInt("carro_mais_alugado()");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return codigo;
+		
+	}
+	
+	
 	
 }
