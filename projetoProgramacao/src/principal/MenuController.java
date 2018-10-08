@@ -158,4 +158,15 @@ public class MenuController {
 		}
     }
 
+    @FXML
+    void abreTelaDevolucao(ActionEvent event) {
+    	FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("Devolucao.fxml"));
+		try {
+			AnchorPane View = (AnchorPane) loader.load();
+			bpPrincipal.setCenter(View);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+    }
 }
