@@ -56,9 +56,9 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 			statement.setString(7, dado.getSenha());
 			statement.setDouble(8, dado.getSalario());
 			statement.setInt(9, dado.getFilial().getCodigo());
-			statement.setDate(10, Date.valueOf(dado.getDataAdmissao()));
-			statement.setDate(11, Date.valueOf(dado.getDataDemissao()));
-			statement.setInt(9, dado.getCodigo());
+			statement.setDate(10, Date.valueOf(dado.getDataAdmissao().toString()));
+			statement.setDate(11, Date.valueOf(dado.getDataDemissao().toString()));
+			statement.setInt(12, dado.getCodigo());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

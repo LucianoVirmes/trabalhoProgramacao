@@ -119,14 +119,17 @@ public class GerenciarFuncionarioController {
 	}
 
 	public void populaFuncionario() {
+		funcionario = new Funcionario();
 		funcionario.setNome(tfNome.getText());
 		funcionario.setSobrenome(tfSobrenome.getText());
 		funcionario.setCpf(tfCpf.getText());
 		funcionario.setTelefone(tfTelefone.getText());
 		funcionario.setEmail(tfEmail.getText());
 		funcionario.setSenha(tfSenha.getText());
+		funcionario.setFilial(cbFilial.getValue());
 		funcionario.setSalario(Double.valueOf(tfSalario.getText()));
 		funcionario.setDataNascimento(dtpDataNasc.getValue());
+		funcionario.setDataDemissao(null);
 	}
 
 	

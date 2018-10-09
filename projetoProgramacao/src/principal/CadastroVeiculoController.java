@@ -50,8 +50,6 @@ public class CadastroVeiculoController {
 	private Carro carro;
 	private CarroDAO carroDao = AbstractFactory.get().carroDao();
 	private FilialDAO filialDao = AbstractFactory.get().filialDao();
-	// private AquisicaoVeiculosDAO aquisicaoDao =
-	// AbstractFactory.get().aquisicaoDao();
 
 	@FXML
 	private void initialize() {

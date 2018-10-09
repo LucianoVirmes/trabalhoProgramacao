@@ -40,7 +40,7 @@ public class CarrosDisponiveisController {
     private TableColumn<Carro, String> tbcCor;
     
     @FXML
-    private Button btnCarroMaisAlugado;
+    private Button btnCarroMaisBarato;
 
     @FXML
     private TextField tfPlaca;
@@ -74,7 +74,7 @@ public class CarrosDisponiveisController {
     }
     
     @FXML
-    void maisAlugado(ActionEvent event) {
+    void maisBarato(ActionEvent event) {
     	carro = carroDao.buscar(bancoDao.codigoCarroMaisAlugado());
     	tfPlaca.setText(carro.getPlaca());
     }

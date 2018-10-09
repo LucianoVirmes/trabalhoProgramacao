@@ -1,10 +1,12 @@
 package principal.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -89,10 +91,14 @@ public class BancoJDBC implements BancoDAO  {
 	public Integer codigoCarroMaisAlugado() {
 		Integer codigo = null;
 		try {
-			Statement statement = ConexaoUtil.getConn().createStatement();
-			ResultSet rs = statement.executeQuery("select carro_mais_alugado();");
-			while (rs.next()) {
-				codigo = rs.getInt("carro_mais_alugado()");
+			CallableStatement statement = ConexaoUtil.getConn().prepareCall("{ ? = call carro_mais_alugado()}");
+			statement.registerOutParameter(1, Types.INTEGER);
+			ResultSet rs = statement.executeQuery();
+			
+			if (rs.next()) {
+				codigo = rs.getInt(1);
+			}else {
+				codigo = 0;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

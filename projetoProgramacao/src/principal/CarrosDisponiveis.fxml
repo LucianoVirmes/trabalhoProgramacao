@@ -39,7 +39,7 @@
             <Font name="Comic Sans MS" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="btnCarroMaisAlugado" layoutX="36.0" layoutY="17.0" mnemonicParsing="false" onAction="#maisAlugado" text="Carro mais alugado">
+      <Button fx:id="btnCarroMaisBarato" layoutX="36.0" layoutY="17.0" mnemonicParsing="false" onAction="#maisBarato" text="Carro mais barato">
          <font>
             <Font name="Comic Sans MS" size="13.0" />
          </font>
