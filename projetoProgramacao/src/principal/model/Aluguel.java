@@ -104,9 +104,6 @@ public class Aluguel {
 		this.cliente = cliente;
 	}
 	
-	public String getPlaca() {
-		return this.carro.getPlaca();
-	}
 
 	@Override
 	public String toString() {
