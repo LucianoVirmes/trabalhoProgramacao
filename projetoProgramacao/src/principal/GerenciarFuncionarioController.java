@@ -119,7 +119,6 @@ public class GerenciarFuncionarioController {
 	}
 
 	public void populaFuncionario() {
-		funcionario = new Funcionario();
 		funcionario.setNome(tfNome.getText());
 		funcionario.setSobrenome(tfSobrenome.getText());
 		funcionario.setCpf(tfCpf.getText());
@@ -129,18 +128,20 @@ public class GerenciarFuncionarioController {
 		funcionario.setFilial(cbFilial.getValue());
 		funcionario.setSalario(Double.valueOf(tfSalario.getText()));
 		funcionario.setDataNascimento(dtpDataNasc.getValue());
-		funcionario.setDataDemissao(null);
 	}
 
 	
 	@FXML
 	void atualizar(ActionEvent event) {
-		populaFuncionario();
-		AlertaFactory alerta = new AlertaFactory();
-		if(alerta.confirmaAceitar()) {
-			funcionarioDao.alterar(funcionario);
-			tblFuncionarios.refresh();
+		if (tblFuncionarios.getSelectionModel().getSelectedItem() != null) {
+			funcionario = tblFuncionarios.getSelectionModel().getSelectedItem();			
+			AlertaFactory alerta = new AlertaFactory();
+			if(alerta.confirmaAceitar()) {
+				funcionarioDao.alterar(funcionario);
+				tblFuncionarios.refresh();
+			}
 		}
+		tblFuncionarios.refresh();
 	}
 
 	@FXML

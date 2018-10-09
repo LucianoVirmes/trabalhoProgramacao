@@ -45,7 +45,7 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 	public void alterar(Funcionario dado) {
 		try {
 			String sql = "update Funcionario set nome = ?, sobrenome= ?, dataNascimento= ?, telefone=?, "
-					+ "cpf=?, email=?, senha=?, salario = ?, codFilial =?, dataAdmissao = ?, dataDemissao = ? where codigo = ?";
+					+ "cpf=?, email=?, senha=?, salario = ?, codFilial =? where codigo = ?;";
 			PreparedStatement statement = ConexaoUtil.getConn().prepareStatement(sql);
 			statement.setString(1, dado.getNome());
 			statement.setString(2, dado.getSobrenome());
@@ -56,9 +56,7 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 			statement.setString(7, dado.getSenha());
 			statement.setDouble(8, dado.getSalario());
 			statement.setInt(9, dado.getFilial().getCodigo());
-			statement.setDate(10, Date.valueOf(dado.getDataAdmissao().toString()));
-			statement.setDate(11, Date.valueOf(dado.getDataDemissao().toString()));
-			statement.setInt(12, dado.getCodigo());
+			statement.setInt(10, dado.getCodigo());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -177,7 +175,7 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 	public Funcionario verificaEmail(String email) {
 		Funcionario funcionario = null;
 		try {
-			String sql = "select * from Funcionario where f.dataDemissao is null and email = ?;";
+			String sql = "select * from Funcionario f where f.dataDemissao is null and email = ?";
 			PreparedStatement ps = ConexaoUtil.getConn().prepareStatement(sql);
 			ps.setString(1, email);
 			ResultSet rs1 = ps.executeQuery();
@@ -195,6 +193,18 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 				funcionario.setEmail(rs1.getString("email"));
 				funcionario.setSenha(rs1.getString("senha"));
 				funcionario.setSalario(rs1.getDouble("salario"));
+				
+				data = rs1.getDate("dataDemissao");
+				if(data != null) {
+					funcionario.setDataDemissao(
+							Instant.ofEpochMilli(data.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+				}
+				
+				data = rs1.getDate("dataAdmissao");
+				if(data != null) {
+					funcionario.setDataAdmissao(
+							Instant.ofEpochMilli(data.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+				}
 				
 			}
 		} catch (SQLException e) {
