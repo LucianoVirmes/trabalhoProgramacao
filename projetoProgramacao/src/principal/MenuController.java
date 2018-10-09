@@ -169,4 +169,16 @@ public class MenuController {
 			e1.printStackTrace();
 		}
     }
+    
+    @FXML
+    void abreTelaGerenciarTipoPagamento(ActionEvent event) {
+    	FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("TipoPagamento.fxml"));
+		try {
+			AnchorPane View = (AnchorPane) loader.load();
+			bpPrincipal.setCenter(View);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+    }
 }

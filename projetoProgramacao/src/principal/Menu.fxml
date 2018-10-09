@@ -23,6 +23,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#abreTelaGerenciarAluguel" text="Gerenciar Tipo Aluguel" />
                   <MenuItem mnemonicParsing="false" onAction="#abreTelaGerenciarFuncionario" text="Gerenciar Funcionario" />
                   <MenuItem mnemonicParsing="false" onAction="#abreTelaGerenciarVeiculo" text="Gerenciar Veiculo" />
+                  <MenuItem mnemonicParsing="false" onAction="#abreTelaGerenciarTipoPagamento" text="Gerenciar Tipo Pagamento" />
                </items></Menu>
           <Menu mnemonicParsing="false" text="Atualizar">
             <items>
