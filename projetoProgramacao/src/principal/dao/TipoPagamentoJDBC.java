@@ -34,7 +34,7 @@ public class TipoPagamentoJDBC implements TipoPagamentoDAO {
 			PreparedStatement statement = ConexaoUtil.getConn().prepareStatement(sql);
 			statement.setString(1, dado.getDescricao());
 			statement.setDouble(2, dado.getDesconto());
-			statement.setInt(4, dado.getCodigo());
+			statement.setInt(3, dado.getCodigo());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
