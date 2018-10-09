@@ -24,39 +24,39 @@ public class CadastroAluguelController {
 
     @FXML
     private DatePicker dtAluguel;
+    
+    @FXML
+    private ComboBox<Carro> cbCarro;
+    
+    @FXML
+    private Button btnBuscarCarro;
+    
+    @FXML
+    private ComboBox<Cliente> cbCliente;
+    
+    @FXML
+    private Button btnBuscarCliente;
 
     @FXML
     private ComboBox<TipoAluguel> cbTipoAluguel;
 
     @FXML
-    private ComboBox<Carro> cbCarro;
-
-    @FXML
-    private TextField tfKmSaida;
-
-    @FXML
-    private ComboBox<Cliente> cbCliente;
+    private Button btnBuscarTipoAluguel;
     
     @FXML
     private ComboBox<Funcionario> cbFuncionario;
-
+    
+    @FXML
+    private Button btnBuscarFuncionario;
+    
     @FXML
     private ComboBox<Filial> cbFilial;
     
     @FXML
-    private Button btnBuscarCarro;
-
-    @FXML
-    private Button btnBuscarCliente;
-
-    @FXML
-    private Button btnBuscarTipoAluguel;
-
-    @FXML
     private Button btnBuscarFilial;
-
+    
     @FXML
-    private Button btnBuscarFuncionario;
+    private TextField tfKmSaida;
     
     @FXML
     private Button btnRealizarAluguel;

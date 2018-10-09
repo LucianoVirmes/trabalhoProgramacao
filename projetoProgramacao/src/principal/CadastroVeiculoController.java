@@ -17,8 +17,6 @@ import principal.model.Filial;
 
 public class CadastroVeiculoController {
 
-	@FXML
-	private ComboBox<Filial> cbFilial;
 
 	@FXML
 	private TextField tfMarca;
@@ -40,6 +38,9 @@ public class CadastroVeiculoController {
 
 	@FXML
 	private CheckBox cbkDisponivel;
+
+	@FXML
+	private ComboBox<Filial> cbFilial;
 
 	@FXML
 	private Button btnCadastrar;

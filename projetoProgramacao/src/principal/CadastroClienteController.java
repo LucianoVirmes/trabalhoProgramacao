@@ -28,10 +28,10 @@ public class CadastroClienteController {
     private TextField tfCpf;
 
     @FXML
-    private TextField tfEmail;
-
-    @FXML
     private TextField tfCnh;
+    
+    @FXML
+    private TextField tfEmail;
 
 
     @FXML

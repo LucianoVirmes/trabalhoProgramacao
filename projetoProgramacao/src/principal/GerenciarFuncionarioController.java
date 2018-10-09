@@ -43,12 +43,6 @@ public class GerenciarFuncionarioController {
 	private TableColumn<Funcionario, String> tbcCpf;
 	
 
-    @FXML
-    private ComboBox<Filial> cbFilial;
-
-	@FXML
-	private DatePicker dtpDataNasc;
-
 	@FXML
 	private Button btnAtualizar;
 
@@ -72,9 +66,15 @@ public class GerenciarFuncionarioController {
 
 	@FXML
 	private TextField tfSenha;
+	
+	@FXML
+	private DatePicker dtpDataNasc;
 
 	@FXML
 	private TextField tfSalario;
+	
+	@FXML
+	private ComboBox<Filial> cbFilial;
 
 	private Funcionario funcionario;
 

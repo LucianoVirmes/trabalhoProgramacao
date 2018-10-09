@@ -16,96 +16,97 @@ import principal.model.Funcionario;
 
 public class CadastroFuncionarioController {
 
-	 @FXML
-	    private TextField tfNome;
+	@FXML
+	private TextField tfNome;
+	
+	@FXML
+	private TextField tfSobrenome;
 
-	    @FXML
-	    private TextField tfSobrenome;
+	@FXML
+	private DatePicker dtNascimento;
+	
+	@FXML
+	private TextField tfTelefone;
+	
+	@FXML
+	private TextField tfCpf;
+	
+	@FXML
+	private TextField tfEmail;
+	
+	@FXML
+	private TextField tfSalario;
+	
+	@FXML
+	private TextField tfSenha;
+	
+	@FXML
+	private ComboBox<Filial> cbFilial;
 
-	    @FXML
-	    private DatePicker dtNascimento;
+	@FXML
+	private Button btnNovo;
 
-	    @FXML
-	    private TextField tfTelefone;
+	@FXML
+	private Button btnCadastro;
 
-	    @FXML
-	    private TextField tfCpf;
+	private Funcionario funcionario;
 
-	    @FXML
-	    private TextField tfEmail;
+	// private ControleFuncionarios controle;
 
-	    @FXML
-	    private TextField tfSalario;
-	    
-	    @FXML
-	    private TextField tfSenha;
+	private FuncionarioDAO funcionarioDao = AbstractFactory.get().funcionarioDao();
+	private FilialDAO filialDao = AbstractFactory.get().filialDao();
+	// private ControleFuncionariosDAO controleDao =
+	// AbstractFactory.get().controleFuncionariosDao();
 
-	    @FXML
-	    private ComboBox<Filial> cbFilial;
+	@FXML
+	private void initialize() {
+		populaCombo();
+		novoFuncionario();
+	}
 
-	    @FXML
-	    private Button btnNovo;
-
-	    @FXML
-	    private Button btnCadastro;
-
-	    private Funcionario funcionario;
-	    
-	    //private ControleFuncionarios controle;
-	    
-	    private FuncionarioDAO funcionarioDao = AbstractFactory.get().funcionarioDao();
-	    private FilialDAO filialDao = AbstractFactory.get().filialDao();
-	    //private ControleFuncionariosDAO controleDao = AbstractFactory.get().controleFuncionariosDao();
-	    
-	    @FXML
-		private void initialize() {
-			populaCombo();
-			novoFuncionario();
+	private void populaCombo() {
+		for (Filial filial : filialDao.listar()) {
+			cbFilial.getItems().add(filial);
 		}
-	    
-	    private void populaCombo(){
-			for(Filial filial: filialDao.listar()){
-				cbFilial.getItems().add(filial);
-			}
-		}
-	    
-	    void populaFuncionario() {
-	    	funcionario.setNome(tfNome.getText());
-	    	funcionario.setSobrenome(tfSobrenome.getText());
-	    	funcionario.setDataNascimento(dtNascimento.getValue());
-	    	funcionario.setEmail(tfEmail.getText());
-	    	funcionario.setCpf(tfCpf.getText());
-	    	funcionario.setSenha(tfSenha.getText());
-	    	funcionario.setSalario(Double.valueOf(tfSalario.getText()));
-	    	funcionario.setTelefone(tfTelefone.getText());
-	    	funcionario.setDataAdmissao(LocalDate.now());
-	    	funcionario.setFilial(cbFilial.getValue());
-	    }
-	    
-	    @FXML
-	    void cadastrar(ActionEvent event) {
-	    	populaFuncionario();
-	    	AlertaFactory alerta = new AlertaFactory();
-	    	if(alerta.confirmaAceitar()) {
-	    		funcionarioDao.inserir(funcionario);
-	    	}
-	    }
+	}
 
-	    @FXML
-	    void novo(ActionEvent event) {
-	    	novoFuncionario();
-	    }
-	    
-	    void novoFuncionario(){
-	    	funcionario = new Funcionario();
-	    	tfNome.clear();
-	    	tfSobrenome.clear();
-	    	dtNascimento.setValue(null);
-	    	tfEmail.clear();
-	    	tfSenha.clear();
-	    	tfSalario.clear();
-	    	tfCpf.clear();
-	    	tfTelefone.clear();
-	    	cbFilial.getSelectionModel().clearSelection();
-	    }
+	void populaFuncionario() {
+		funcionario.setNome(tfNome.getText());
+		funcionario.setSobrenome(tfSobrenome.getText());
+		funcionario.setDataNascimento(dtNascimento.getValue());
+		funcionario.setEmail(tfEmail.getText());
+		funcionario.setCpf(tfCpf.getText());
+		funcionario.setSenha(tfSenha.getText());
+		funcionario.setSalario(Double.valueOf(tfSalario.getText()));
+		funcionario.setTelefone(tfTelefone.getText());
+		funcionario.setDataAdmissao(LocalDate.now());
+		funcionario.setFilial(cbFilial.getValue());
+	}
+
+	@FXML
+	void cadastrar(ActionEvent event) {
+		populaFuncionario();
+		AlertaFactory alerta = new AlertaFactory();
+		if (alerta.confirmaAceitar()) {
+			funcionarioDao.inserir(funcionario);
+		}
+	}
+
+	@FXML
+	void novo(ActionEvent event) {
+		novoFuncionario();
+	}
+
+	void novoFuncionario() {
+		funcionario = new Funcionario();
+		tfNome.clear();
+		tfSobrenome.clear();
+		dtNascimento.setValue(null);
+		tfEmail.clear();
+		tfSenha.clear();
+		tfSalario.clear();
+		tfCpf.clear();
+		tfTelefone.clear();
+		cbFilial.getSelectionModel().clearSelection();
+	}
 }

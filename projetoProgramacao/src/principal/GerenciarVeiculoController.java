@@ -22,40 +22,28 @@ import principal.model.Filial;
 public class GerenciarVeiculoController {
 
 	@FXML
-    private CheckBox ckbDisponivel;
-
-    @FXML
-    private ComboBox<Filial> cbFilial;
+	private TextField tfBuscar;
 	
-    @FXML
-    private Button btnDesapropriar;
-
-    @FXML
-    private TextField tfBuscar;
-
-    @FXML
-    private Button btnBuscar;
-
-    @FXML
-    private TableView<Carro> tblVeiculos;
-
-    @FXML
-    private TableColumn<Carro, String> tbcPlaca;
-
-    @FXML
-    private TableColumn<Carro, String> tbcMarca;
-
-    @FXML
-    private TableColumn<Carro, String> tbcModelo;
-
-    @FXML
-    private TableColumn<Carro, Double> tbcValor;
-
-    @FXML
-    private TableColumn<Carro, Boolean> tbcDisponibilidade;
-
-    @FXML
-    private Button btnSalvar;
+	@FXML
+	private Button btnBuscar;
+	
+	@FXML
+	private TableView<Carro> tblVeiculos;
+	
+	@FXML
+	private TableColumn<Carro, String> tbcPlaca;
+	
+	@FXML
+	private TableColumn<Carro, String> tbcMarca;
+	
+	@FXML
+	private TableColumn<Carro, String> tbcModelo;
+	
+	@FXML
+	private TableColumn<Carro, Double> tbcValor;
+	
+	@FXML
+	private TableColumn<Carro, Boolean> tbcDisponibilidade;
 
     @FXML
     private TextField tfMarca;
@@ -74,6 +62,18 @@ public class GerenciarVeiculoController {
 
     @FXML
     private DatePicker dtpAno;
+    
+	@FXML
+    private CheckBox ckbDisponivel;
+
+    @FXML
+    private ComboBox<Filial> cbFilial;
+
+    @FXML
+    private Button btnSalvar;
+    
+    @FXML
+    private Button btnDesapropriar;
 
     private Carro carro;
     

@@ -40,6 +40,9 @@ public class GerenciarTipoAluguelController {
     @FXML
     private TableColumn<TipoAluguel, Double> tbcTaxa;
 
+    @FXML
+    private Button btnReajustar;
+    
 	@FXML
 	private Button btnNovo;
 
@@ -48,9 +51,6 @@ public class GerenciarTipoAluguelController {
 
 	@FXML
 	private Button btnExcluir;
-
-    @FXML
-    private Button btnReajustar;
 
 	private TipoAluguel tipo;
 	

@@ -17,8 +17,6 @@ import principal.model.Cliente;
 
 public class AtualizaClienteController {
 
-	@FXML
-	private Button btnAtualizar;
 
 	@FXML
 	private TextField tfBuscar;
@@ -42,9 +40,6 @@ public class AtualizaClienteController {
 	private TableColumn<Cliente, String> tbcCpf;
 
 	@FXML
-	private DatePicker dtpDataNasc;
-
-	@FXML
 	private TextField tfNome;
 
 	@FXML
@@ -61,6 +56,12 @@ public class AtualizaClienteController {
 
 	@FXML
 	private TextField tfCnh;
+
+	@FXML
+	private DatePicker dtpDataNasc;
+	
+	@FXML
+	private Button btnAtualizar;
 
 	private Cliente cliente;
 

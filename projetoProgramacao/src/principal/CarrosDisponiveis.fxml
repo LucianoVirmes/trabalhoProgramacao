@@ -25,21 +25,21 @@
             </TableView>
          </children>
       </Pane>
-      <Button fx:id="tbnBuscar" layoutX="339.0" layoutY="62.0" mnemonicParsing="false" onAction="#buscar" text="Buscar">
+      <Button fx:id="tbnBuscar" layoutX="345.0" layoutY="62.0" mnemonicParsing="false" onAction="#buscar" prefHeight="0.0" prefWidth="69.0" text="Buscar">
          <font>
             <Font name="Comic Sans MS" size="13.0" />
          </font></Button>
-      <TextField fx:id="tfPlaca" layoutX="149.0" layoutY="62.0" prefHeight="27.0" prefWidth="196.0" />
+      <TextField fx:id="tfPlaca" layoutX="149.0" layoutY="62.0" prefHeight="29.0" prefWidth="196.0" />
       <Label layoutX="36.0" layoutY="67.0" text="Placa do veiculo">
          <font>
             <Font name="Comic Sans MS" size="13.0" />
          </font></Label>
-      <Label layoutX="529.0" layoutY="27.0" text="Carros disponiveis">
+      <Label layoutX="573.0" layoutY="28.0" text="Carros disponiveis">
          <font>
             <Font name="Comic Sans MS" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="btnCarroMaisBarato" layoutX="36.0" layoutY="17.0" mnemonicParsing="false" onAction="#maisBarato" text="Carro mais barato">
+      <Button fx:id="btnCarroMaisBarato" layoutX="36.0" layoutY="15.0" mnemonicParsing="false" onAction="#maisBarato" text="Carro mais barato">
          <font>
             <Font name="Comic Sans MS" size="13.0" />
          </font>

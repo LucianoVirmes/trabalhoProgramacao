@@ -15,10 +15,10 @@ public class LoginController {
     private TextField tfEmail;
 
     @FXML
-    private Button btnEntrar;
+    private PasswordField pfSenha;
 
     @FXML
-    private PasswordField pfSenha;
+    private Button btnEntrar;
     
     private FuncionarioDAO funcionarioDao = AbstractFactory.get().funcionarioDao(); 
     
