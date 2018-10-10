@@ -50,13 +50,8 @@ public class CadastroFuncionarioController {
 	private Button btnCadastro;
 
 	private Funcionario funcionario;
-
-	// private ControleFuncionarios controle;
-
 	private FuncionarioDAO funcionarioDao = AbstractFactory.get().funcionarioDao();
 	private FilialDAO filialDao = AbstractFactory.get().filialDao();
-	// private ControleFuncionariosDAO controleDao =
-	// AbstractFactory.get().controleFuncionariosDao();
 
 	@FXML
 	private void initialize() {
@@ -87,8 +82,12 @@ public class CadastroFuncionarioController {
 	void cadastrar(ActionEvent event) {
 		populaFuncionario();
 		AlertaFactory alerta = new AlertaFactory();
-		if (alerta.confirmaAceitar()) {
-			funcionarioDao.inserir(funcionario);
+		if(funcionario.validaCpf()) {
+			if (alerta.confirmaAceitar()) {
+				funcionarioDao.inserir(funcionario);
+			}
+		}else {
+			alerta.mensagemDeAlerta("CPF inválido");
 		}
 	}
 
