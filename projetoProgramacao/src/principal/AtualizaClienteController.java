@@ -101,7 +101,7 @@ public class AtualizaClienteController {
 		cliente.setCnh(tfCnh.getText());
 		cliente.setDataNascimento(dtpDataNasc.getValue());
 	}
-	public void LimpaTela() {
+	public void limpaTela() {
 		tfNome.clear();
 		tfSobrenome.clear();
 		tfCpf.clear();
@@ -114,10 +114,12 @@ public class AtualizaClienteController {
 	void atualizar(ActionEvent event) {
 		populaCliente();
 		AlertaFactory alerta = new AlertaFactory();
-		if (alerta.confirmaAceitar()) {
-			clienteDao.alterar(cliente);
+		if(cliente.validaCpf()) {
+			if (alerta.confirmaAceitar()) {
+				clienteDao.alterar(cliente);
+			}
 		}
-		LimpaTela();
+		limpaTela();
 	}
 
 	@FXML
