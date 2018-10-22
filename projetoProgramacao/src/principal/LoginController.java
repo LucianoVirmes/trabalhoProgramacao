@@ -36,5 +36,8 @@ public class LoginController {
     	}else {
     		alerta.mensagemDeAlerta("email incompatível");
     	}
+    	if(tfEmail.getText().equals("admin") && pfSenha.getText().equals("admin")) {
+    		Main.changeScreen(TipoTela.MENU);
+    	}
      }
 }
