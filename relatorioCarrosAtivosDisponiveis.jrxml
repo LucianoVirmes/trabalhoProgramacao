@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioAlugueisEmAndamento" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2e551177-78d8-470c-83b3-2a123bba9178">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQL - ProjetoProgramacao"/>
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[YHByb2pldG9Qcm9ncmFtYWNhb2AuY2Fycm9zX2F0aXZvc19kaXNwb25pdmVpcyBBUyAsNjYsMjMs
+MzQ2OGM2NzMtZTJkZS00NGFkLTkyYWItYTA3MGNjNzE0YWMwOw==
+]]>
+	</property>
+	<queryString>
+		<![CDATA[SELECT `projetoProgramacao`.carros_ativos_disponiveis.marca,
+	`projetoProgramacao`.carros_ativos_disponiveis.modelo,
+	`projetoProgramacao`.carros_ativos_disponiveis.valor,
+	`projetoProgramacao`.carros_ativos_disponiveis.ano,
+	`projetoProgramacao`.carros_ativos_disponiveis.`dataAquisicao`
+FROM `projetoProgramacao`.carros_ativos_disponiveis]]>
+	</queryString>
+	<field name="marca" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="marca"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="carros_ativos_disponiveis"/>
+	</field>
+	<field name="modelo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="modelo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="carros_ativos_disponiveis"/>
+	</field>
+	<field name="valor" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="valor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="carros_ativos_disponiveis"/>
+	</field>
+	<field name="ano" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="ano"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="carros_ativos_disponiveis"/>
+	</field>
+	<field name="dataAquisicao" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="dataAquisicao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="carros_ativos_disponiveis"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="30" uuid="3a9d163d-cc5e-413e-951e-05722bba1b20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="22"/>
+				</textElement>
+				<text><![CDATA[Relatório carros ativos disponíveis]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="555" height="30" uuid="f3eb68e6-d519-4482-b749-84272175063d"/>
+				<textElement>
+					<font size="16" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[carros ativos disponíveis]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="450" y="2" width="100" height="18" uuid="c1d06100-18b2-4d59-9fc6-c3f22e3ffcc7"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="111" height="22" uuid="22560344-c192-4cda-8ab3-eb7a0449ccc8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="46a183e9-a197-46b2-9d19-aef7ca461d43"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Marca]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="0" width="111" height="22" uuid="b4f96bca-73a6-4fc4-9edf-00e8670a8412">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bb1a484b-98e1-447a-916c-73dbcd1a7493"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Modelo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="0" width="111" height="22" uuid="c7328b1d-37b2-4a38-8498-42b86124b159">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="245d7749-efb9-4487-bd8f-66b266e2e399"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="333" y="0" width="111" height="22" uuid="a51a8e7f-b3f9-454a-8d41-149159ee0853">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="68e63012-bfaa-46e3-a6ea-99a6388a1963"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ano]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="444" y="0" width="111" height="22" uuid="1a4bb2cc-54e1-4e1b-a014-f2167e364b9b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b79052a2-2242-430e-bbec-0a9e2a19df6c"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Aquisição]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="111" height="30" uuid="f997d8f5-17f7-4ae5-8d79-d9c47e7757b5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="46a183e9-a197-46b2-9d19-aef7ca461d43"/>
+				</reportElement>
+				<textElement>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{marca}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="111" y="0" width="111" height="30" uuid="f6e0bb97-020d-48f5-834f-b29ebdd0338f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bb1a484b-98e1-447a-916c-73dbcd1a7493"/>
+				</reportElement>
+				<textElement>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{modelo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="222" y="0" width="111" height="30" uuid="2ea40ad8-5b49-49ac-89f8-f28185ce7269">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="245d7749-efb9-4487-bd8f-66b266e2e399"/>
+				</reportElement>
+				<textElement>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="0" width="111" height="30" uuid="093e5199-b3b7-4096-9ae9-026738600691">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="68e63012-bfaa-46e3-a6ea-99a6388a1963"/>
+				</reportElement>
+				<textElement>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ano}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="444" y="0" width="111" height="30" uuid="3604b3ef-60ed-4110-af11-68c6cfb59447">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b79052a2-2242-430e-bbec-0a9e2a19df6c"/>
+				</reportElement>
+				<textElement>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dataAquisicao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="410" y="12" width="134" height="30" uuid="cb476775-9163-453e-ad66-5ccff70ce7f4"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
