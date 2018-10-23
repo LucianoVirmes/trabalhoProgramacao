@@ -41,6 +41,11 @@
                   <MenuItem mnemonicParsing="false" onAction="#abreTelaDevolucao" text="Devolver Veículo" />
                </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="Configurações">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#saiDoMenu" text="Sair" />
+               </items>
+            </Menu>
         </menus>
       </MenuBar>
    </top>

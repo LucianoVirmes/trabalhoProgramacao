@@ -26,7 +26,10 @@ public class LoginController {
     void entrar(ActionEvent event) {
     	Funcionario f = new Funcionario();
     	AlertaFactory alerta = new AlertaFactory();
-    	if (funcionarioDao.verificaEmail(tfEmail.getText()) != null) {
+    	if(tfEmail.getText().equals("admin") && pfSenha.getText().equals("admin")) {
+    		Main.changeScreen(TipoTela.MENU);
+    	}
+    	else if (funcionarioDao.verificaEmail(tfEmail.getText()) != null) {
     		f = funcionarioDao.verificaEmail(tfEmail.getText());
     		if(f.getSenha().equals(pfSenha.getText())){
     			Main.changeScreen(TipoTela.MENU);
@@ -35,9 +38,6 @@ public class LoginController {
     		}
     	}else {
     		alerta.mensagemDeAlerta("email incompatível");
-    	}
-    	if(tfEmail.getText().equals("admin") && pfSenha.getText().equals("admin")) {
-    		Main.changeScreen(TipoTela.MENU);
     	}
      }
 }

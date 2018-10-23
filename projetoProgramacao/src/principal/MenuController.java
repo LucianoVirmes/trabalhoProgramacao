@@ -147,6 +147,11 @@ public class MenuController {
 	}
 	
     @FXML
+    void saiDoMenu(ActionEvent event) {
+    	Main.changeScreen(TipoTela.LOGIN);
+    }	
+	
+    @FXML
     void abreTelaAlugueisEmAtividade(ActionEvent event) {
     	FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("AlugueisEmAtividade.fxml"));
