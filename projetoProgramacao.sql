@@ -157,23 +157,9 @@ select * from Carro c join AquisicaoVeiculo a on c.codigo = a.codCarro where a.d
 update ControleFuncionarios set dataDemissao = now() where codFuncionario = ?;
 
 -- view com alugueis em andamento
-create or replace view alugueis_em_andamento as select a.codigo as codigo, car.placa as placa, a.dataAluguel as dataAluguel, t.descricao as descricao, 
-c.nome as nome, a.quilometroSaida as  quilometroSaida
-from Aluguel a join Devolucao d on d.codAluguel = a.codigo
-						join Cliente c on c.codigo = a.codCliente
-                        join Carro car on car.codigo = a.codCarro
-                        join TipoAluguel t on t.codigo = a.codTipoAluguel
-where d.dataChegada = null;
+create or replace view carros_ativos_disponiveis as select * from carro where disponivel = true and dataDesapropriacao = null;
 
-
-
--- viewnome de fucionarios ativos
-create or replace view funcionarios_ativos as select f.nome as nome, f.sobrenome as sobrenome, f.dataNascimento as dt_nasc, f.telefone 
-as tel, f.email as email, c.dataAdmissao as data_contratacao
-from Funcionario f join ControleFuncionarios c on f.codigo = c.codFuncionario
-where dataDemissao = null;
-
--- FALTA:
+select * from Carro;
 
 -- CRIAR VIEW PARA MOSTRAR DADOS DE CONTROLE FUNCIONARIO E AQUISICAO
 create or replace view controle_de_funcionarios as 
