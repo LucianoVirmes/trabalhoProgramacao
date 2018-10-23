@@ -10,21 +10,20 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="principal.AtualizaClienteController">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="principal.AtualizaClienteController">
    <children>
       <Pane prefHeight="600.0" prefWidth="800.0">
          <children>
-            <Button fx:id="btnAtualizar" layoutX="688.0" layoutY="505.0" mnemonicParsing="false" onAction="#atualizar" text="Atualizar">
-               <font>
-                  <Font name="Comic Sans MS" size="14.0" />
-               </font>
-            </Button>
             <Label layoutX="567.0" layoutY="35.0" prefHeight="35.0" prefWidth="201.0" text="Atualizar cliente">
                <font>
                   <Font name="Comic Sans MS" size="24.0" />
                </font>
             </Label>
+            <Button fx:id="btnAtualizar" layoutX="687.0" layoutY="506.0" mnemonicParsing="false" onAction="#atualizar" text="Atualizar">
+               <font>
+                  <Font name="Comic Sans MS" size="14.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <Label layoutX="54.0" layoutY="69.0" text="CPF:">
@@ -81,12 +80,12 @@
             <Font name="Comic Sans MS" size="13.0" />
          </font>
       </Label>
-      <DatePicker fx:id="dtpDataNasc" layoutX="579.0" layoutY="324.0" />
       <TextField fx:id="tfNome" layoutX="110.0" layoutY="324.0" prefHeight="27.0" prefWidth="201.0" />
       <TextField fx:id="tfSobrenome" layoutX="110.0" layoutY="361.0" prefHeight="27.0" prefWidth="201.0" />
       <TextField fx:id="tfTelefone" layoutX="110.0" layoutY="399.0" prefHeight="27.0" prefWidth="201.0" />
       <TextField fx:id="tfCpf" layoutX="110.0" layoutY="433.0" prefHeight="27.0" prefWidth="201.0" />
       <TextField fx:id="tfEmail" layoutX="110.0" layoutY="468.0" prefHeight="27.0" prefWidth="201.0" />
       <TextField fx:id="tfCnh" layoutX="110.0" layoutY="511.0" prefHeight="27.0" prefWidth="201.0" />
+      <DatePicker fx:id="dtpDataNasc" layoutX="579.0" layoutY="324.0" />
    </children>
 </AnchorPane>

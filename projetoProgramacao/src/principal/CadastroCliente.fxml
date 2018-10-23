@@ -13,41 +13,41 @@
    <children>
       <Pane layoutX="-8.0" layoutY="1.0" prefHeight="600.0" prefWidth="800.0">
          <children>
-            <Label layoutX="21.0" layoutY="161.0" text="Nome:">
+            <Label layoutX="32.0" layoutY="161.0" text="Nome:">
                <font>
                   <Font name="Comic Sans MS" size="13.0" />
                </font></Label>
-            <Label layoutX="357.0" layoutY="161.0" text="Sobrenome:">
+            <Label layoutX="31.0" layoutY="207.0" text="Sobrenome:">
                <font>
                   <Font name="Comic Sans MS" size="13.0" />
                </font></Label>
-            <TextField fx:id="tfNome" layoutX="88.0" layoutY="157.0" prefHeight="27.0" prefWidth="225.0" />
-            <TextField fx:id="tfSobrenome" layoutX="456.0" layoutY="157.0" prefHeight="27.0" prefWidth="210.0" />
-            <Label layoutX="16.0" layoutY="208.0" text="Data de Nascimento:">
+            <TextField fx:id="tfNome" layoutX="108.0" layoutY="157.0" prefHeight="27.0" prefWidth="210.0" />
+            <TextField fx:id="tfSobrenome" layoutX="108.0" layoutY="203.0" prefHeight="27.0" prefWidth="210.0" />
+            <TextField fx:id="tfCpf" layoutX="106.0" layoutY="247.0" prefHeight="27.0" prefWidth="210.0" />
+            <TextField fx:id="tfCnh" layoutX="107.0" layoutY="289.0" prefHeight="27.0" prefWidth="210.0" />
+            <Label layoutX="398.0" layoutY="161.0" text="Data de Nascimento:">
                <font>
                   <Font name="Comic Sans MS" size="13.0" />
                </font></Label>
-            <DatePicker fx:id="dtNascimento" layoutX="148.0" layoutY="204.0" prefHeight="27.0" prefWidth="165.0" />
-            <Label layoutX="370.0" layoutY="207.0" text="Telefone:">
+            <DatePicker fx:id="dtNascimento" layoutX="530.0" layoutY="157.0" prefHeight="27.0" prefWidth="177.0" />
+            <Label layoutX="400.0" layoutY="207.0" text="Telefone:">
                <font>
                   <Font name="Comic Sans MS" size="13.0" />
                </font></Label>
-            <TextField fx:id="tfTelefone" layoutX="458.0" layoutY="203.0" prefHeight="27.0" prefWidth="210.0" />
-            <Label layoutX="25.0" layoutY="254.0" text="CPF: ">
+            <TextField fx:id="tfTelefone" layoutX="467.0" layoutY="203.0" prefHeight="27.0" prefWidth="241.0" />
+            <Label layoutX="36.0" layoutY="251.0" text="CPF: ">
                <font>
                   <Font name="Comic Sans MS" size="13.0" />
                </font></Label>
-            <TextField fx:id="tfCpf" layoutX="75.0" layoutY="250.0" prefHeight="27.0" prefWidth="180.0" />
-            <Label layoutX="357.0" layoutY="293.0" text="E-mail:">
+            <Label layoutX="400.0" layoutY="252.0" text="E-mail:">
                <font>
                   <Font name="Comic Sans MS" size="13.0" />
                </font></Label>
-            <TextField fx:id="tfEmail" layoutX="416.0" layoutY="288.0" prefHeight="27.0" prefWidth="249.0" />
-            <Label layoutX="24.0" layoutY="292.0" text="CNH:">
+            <TextField fx:id="tfEmail" layoutX="458.0" layoutY="249.0" prefHeight="27.0" prefWidth="249.0" />
+            <Label layoutX="36.0" layoutY="293.0" text="CNH:">
                <font>
                   <Font name="Comic Sans MS" size="13.0" />
                </font></Label>
-            <TextField fx:id="tfCnh" layoutX="75.0" layoutY="288.0" prefHeight="27.0" prefWidth="180.0" />
             <Text layoutX="24.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CADASTRO DE CLIENTE">
                <font>
                   <Font name="Comic Sans MS" size="24.0" />
