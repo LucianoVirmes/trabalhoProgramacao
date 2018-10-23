@@ -52,7 +52,7 @@ public class Main extends Application {
 		switch (tipo) {
 		case LOGIN:
 			stage.setScene(loginScene);
-			break;
+			break; 
 		case MENU:
 			stage.setScene(menuScene);
 			break;
