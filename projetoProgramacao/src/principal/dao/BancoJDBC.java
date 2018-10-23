@@ -91,7 +91,7 @@ public class BancoJDBC implements BancoDAO  {
 	public Integer codigoCarroMaisAlugado() {
 		Integer codigo = null;
 		try {
-			CallableStatement statement = ConexaoUtil.getConn().prepareCall("{ ? = call carro_mais_alugado()}");
+			CallableStatement statement = ConexaoUtil.getConn().prepareCall("{ ? = call carro_mais_barato()}");
 			statement.registerOutParameter(1, Types.INTEGER);
 			ResultSet rs = statement.executeQuery();
 			
