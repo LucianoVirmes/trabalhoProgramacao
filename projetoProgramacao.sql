@@ -196,10 +196,14 @@ order by uf, nome_filial;
 
 select marca, modelo, placa, data_aquisicao, nome_filial, uf, ultima_modificacao from aquisicao_veiculo;
                                         
+select * from ControleFuncionarios;
+
+
+drop trigger if exists trg_insere_controle_funcionario;
 
 -- trigger para controle e aquisicao
 delimiter $
-create trigger trg_insere_controle_funcionario after insert on Funcionarios for each row
+create trigger trg_insere_controle_funcionario after insert on Funcionario for each row
 begin
 
     declare _codFilial bigint(20);
@@ -214,7 +218,7 @@ end$
 delimiter ;
 
 delimiter $
-create trigger trg_insere_controle_funcionario after update on Funcionarios for each row
+create trigger trg_update_controle_funcionario after update on Funcionario for each row
 begin
 
     declare _codFilial bigint(20);
@@ -223,13 +227,14 @@ begin
     set _codFuncionario = NEW.codigo;
     set _codFilial = NEW.codFilial;
     
-    insert into ControleFuncionarios(descricao, dataModificacao, codFuncionario, codFilial) values ("Atualiza",now(), _codFuncionario, _codFilial);
+    update ControleFuncionarios set descricao = "Atualiza" , dataModificacao = now() , codFuncionario = _codFuncionario, 
+    codFilial = _codFilial where codFuncionario = _codFuncionario;
 	
 end$
 delimiter ;
 
 delimiter $
-create trigger trg_insere_controle_funcionario after delete on Funcionarios for each row
+create trigger trg_deleta_controle_funcionario after delete on Funcionario for each row
 begin
 
     declare _codFilial bigint(20);
@@ -238,7 +243,8 @@ begin
     set _codFuncionario = OLD.codigo;
     set _codFilial = OLD.codFilial;
     
-    insert into ControleFuncionarios(descricao, dataModificacao, codFuncionario, codFilial) values ("Deleta",now(), _codFuncionario, _codFilial);
+    update ControleFuncionarios set descricao = "Deleta" , dataModificacao = now() , codFuncionario = _codFuncionario, 
+    codFilial = _codFilial where codFuncionario = _codFuncionario;
 	
 end$
 delimiter ;
@@ -259,7 +265,7 @@ end$
 delimiter ;
 
 delimiter $
-create trigger trg_insere_aquisicao_carro after update on Carro for each row
+create trigger trg_atualiza_aquisicao_carro after update on Carro for each row
 begin
 
     declare _codFilial bigint(20);
@@ -268,13 +274,14 @@ begin
     set _codCarro = NEW.codigo;
     set _codFilial = NEW.codFilial;
     
-    insert into AquisicaoVeiculo(descricao, dataModificacao, codCarro, codFilial) values ("atualiza",now(), _codCarro, _codFilial);
+    update AquisicaoVeiculo set descricao = "atualiza", dataModificacao = now(), codCarro = _codCarro, codFilial = _codFilial
+    where codCarro = _codCarro;
 	
 end$
 delimiter ;
 
 delimiter $
-create trigger trg_insere_aquisicao_carro after delete on Carro for each row
+create trigger trg_deleta_aquisicao_carro after delete on Carro for each row
 begin
 
     declare _codFilial bigint(20);
@@ -283,7 +290,8 @@ begin
     set _codCarro = OLD.codigo;
     set _codFilial = OLD.codFilial;
     
-    insert into AquisicaoVeiculo(descricao, dataModificacao, codCarro, codFilial) values ("Deleta", now(), _codCarro, _codFilial);
+    update AquisicaoVeiculo set descricao = "deleta", dataModificacao = now(), codCarro = _codCarro, codFilial = _codFilial
+    where codCarro = _codCarro;
 	
 end$
 delimiter ;
