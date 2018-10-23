@@ -61,13 +61,18 @@ public class CadastroClienteController {
     void cadastrar(ActionEvent event) {
     	populaCliente();
     	AlertaFactory alerta = new AlertaFactory();
-    	if(cliente.validaCpf()) {
-    		if (alerta.confirmaAceitar()) {
-    			clienteDao.inserir(cliente);
-    		}
+    	if(tfCpf.getText().length() == 11) {
+    		if(cliente.validaCpf()) {
+    			if (alerta.confirmaAceitar()) {
+    				clienteDao.inserir(cliente);
+    			}
+    		}else {
+    			alerta.mensagemDeAlerta("CPF inválido");
+    		}    		
     	}else {
-    		alerta.mensagemDeAlerta("CPF inválido");
+    		alerta.mensagemDeAlerta("Digite o CPF completo sem pontuação");
     	}
+    	
     }
 
     @FXML

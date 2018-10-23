@@ -20,7 +20,9 @@ public abstract class Pessoa {
 		int decimaPosicao = 10;
 		int total = 0;
 		char[] chars = this.getCpf().toCharArray();
-
+		
+		
+		
 		for (int i = 0; i < 9; i++) {
 			int valorCaracterEmPosicao = Integer.valueOf(String.valueOf(chars[i]));
 			total = total + (valorCaracterEmPosicao * decimaPosicao);
