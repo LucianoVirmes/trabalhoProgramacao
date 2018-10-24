@@ -75,7 +75,7 @@ public class CarrosDisponiveisController {
     
     @FXML
     void maisBarato(ActionEvent event) {
-    	carro = carroDao.buscar(bancoDao.codigoCarroMaisAlugado());
+    	carro = carroDao.buscar(bancoDao.codigoCarroMaisBarato());
     	tfPlaca.setText(carro.getPlaca());
     }
     

@@ -9,5 +9,5 @@ public interface BancoDAO {
 	List<Banco> viewControleFuncionario();
 	List<Banco> viewAquisicaoVeiculos();
 	void reajusta_taxa(Double reajuste);
-	Integer codigoCarroMaisAlugado();
+	Integer codigoCarroMaisBarato();
 }

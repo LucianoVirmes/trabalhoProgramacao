@@ -88,7 +88,7 @@ public class BancoJDBC implements BancoDAO  {
 	}
 
 	@Override
-	public Integer codigoCarroMaisAlugado() {
+	public Integer codigoCarroMaisBarato() {
 		Integer codigo = null;
 		try {
 			CallableStatement statement = ConexaoUtil.getConn().prepareCall("{ ? = call carro_mais_barato()}");
