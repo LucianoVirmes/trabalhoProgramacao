@@ -127,6 +127,7 @@ public class GerenciarTipoAluguelController {
     	Stage stageDono = (Stage)btnReajustar.getScene().getWindow();
     	ReajustaDialogFabrica reajustaDialog = new ReajustaDialogFabrica(stageDono);
     	reajustaDialog.showDialog();
+    	tblTipoAluguel.setItems(FXCollections.observableArrayList(tipoDao.listar()));
     }
 	
 
