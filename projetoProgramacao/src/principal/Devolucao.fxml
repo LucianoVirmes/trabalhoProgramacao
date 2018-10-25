@@ -18,17 +18,18 @@
                <font>
                   <Font size="13.0" />
                </font></Label>
-            <TextField layoutX="296.0" layoutY="50.0" />
-            <Button layoutX="636.0" layoutY="50.0" mnemonicParsing="false" text="Buscar">
+            <TextField fx:id="tfPlaca" layoutX="296.0" layoutY="50.0" />
+            <Button fx:id="btnBuscar" layoutX="636.0" layoutY="50.0" mnemonicParsing="false" onAction="#buscar" text="Buscar">
                <font>
                   <Font size="13.0" />
                </font></Button>
-            <TableView fx:id="tblCarro" layoutX="200.0" layoutY="136.0" prefHeight="220.0" prefWidth="546.0">
+            <TableView fx:id="tblAluguel" layoutX="200.0" layoutY="136.0" prefHeight="220.0" prefWidth="546.0">
               <columns>
                 <TableColumn fx:id="tbcCodigo" prefWidth="75.0" text="Código" />
                   <TableColumn fx:id="tbcCarro" prefWidth="75.0" text="Carro" />
                   <TableColumn fx:id="tbcTipoAluguel" prefWidth="119.0" text="Tipo de Aluguel" />
                   <TableColumn fx:id="tbcFuncionario" prefWidth="119.0" text="Funcionário" />
+                  <TableColumn fx:id="tbcCliente" prefWidth="157.0" text="Cliente" />
               </columns>
             </TableView>
             <Label layoutX="179.0" layoutY="390.0" text="Quilimetragem de Chegada:">
