@@ -87,9 +87,6 @@ public class CadastroVeiculoController {
 	public boolean populaCarro() {
 		carro = new Carro();
 		carro.setAno(dtAno.getValue());
-		if(dtAno.getValue().equals(null)) {
-			return false;
-		}
 		carro.setCor(tfCor.getText());
 		if(tfCor.getText().isEmpty()) {
 			return false;
