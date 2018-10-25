@@ -118,16 +118,46 @@ public class GerenciarFuncionarioController {
 		dtpDataNasc.setValue(func.getDataNascimento());
 	}
 
-	public void populaFuncionario() {
+	public boolean populaFuncionario() {
 		funcionario.setNome(tfNome.getText());
+		if(tfNome.getText().isEmpty()) {
+			return false;
+		}
 		funcionario.setSobrenome(tfSobrenome.getText());
-		funcionario.setCpf(tfCpf.getText());
-		funcionario.setTelefone(tfTelefone.getText());
-		funcionario.setEmail(tfEmail.getText());
-		funcionario.setSenha(tfSenha.getText());
-		funcionario.setFilial(cbFilial.getValue());
-		funcionario.setSalario(Double.valueOf(tfSalario.getText()));
+		if(tfSobrenome.getText().isEmpty()) {
+			return false;
+		}
 		funcionario.setDataNascimento(dtpDataNasc.getValue());
+		if(dtpDataNasc.getValue().equals(null)) {
+			return false;
+		}
+		funcionario.setEmail(tfEmail.getText());
+		if(tfEmail.getText().isEmpty()) {
+			return false;
+		}
+		funcionario.setCpf(tfCpf.getText());
+		if(tfCpf.getText().isEmpty()) {
+			return false;
+		}
+		funcionario.setSenha(tfSenha.getText());
+		if(tfSenha.getText().isEmpty()) {
+			return false;
+		}
+		funcionario.setTelefone(tfTelefone.getText());
+		if(tfTelefone.getText().isEmpty()) {
+			return false;
+		}
+		funcionario.setFilial(cbFilial.getValue());
+		if(cbFilial.getValue().equals(null)) {
+			return false;
+		}
+		if(tfSalario.getText().isEmpty()) {
+			return false;
+		}else {
+			funcionario.setSalario(Double.valueOf(tfSalario.getText()));
+		}
+		return true;
+
 	}
 
 	
@@ -136,9 +166,13 @@ public class GerenciarFuncionarioController {
 		if (tblFuncionarios.getSelectionModel().getSelectedItem() != null) {
 			funcionario = tblFuncionarios.getSelectionModel().getSelectedItem();			
 			AlertaFactory alerta = new AlertaFactory();
-			if(alerta.confirmaAceitar()) {
-				funcionarioDao.alterar(funcionario);
-				tblFuncionarios.refresh();
+			if(populaFuncionario()) {
+				if(alerta.confirmaAceitar()) {
+					funcionarioDao.alterar(funcionario);
+					tblFuncionarios.refresh();
+				}				
+			}else {
+				alerta.mensagemDeAlerta("preencha todos os campos");
 			}
 		}
 		tblFuncionarios.refresh();

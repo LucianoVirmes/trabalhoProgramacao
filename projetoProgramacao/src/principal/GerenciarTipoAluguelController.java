@@ -81,14 +81,18 @@ public class GerenciarTipoAluguelController {
 
 	@FXML
 	void salvar(ActionEvent event) {
-		populaTipo();
-		if (editando) {
-			tipoDao.alterar(tipo);
-		} else {
-			tipoDao.inserir(tipo);				
+		AlertaFactory alerta = new AlertaFactory();
+		if(populaTipo()) {
+			if (editando) {
+				tipoDao.alterar(tipo);
+			} else {
+				tipoDao.inserir(tipo);				
+			}
+		}else {
+			alerta.mensagemDeAlerta("preencha todos os campos");
 		}
 		novoTipoAluguel();
-		tblTipoAluguel.refresh();
+		tblTipoAluguel.refresh();			
 
 	}
 
@@ -101,10 +105,22 @@ public class GerenciarTipoAluguelController {
 		}
 	}
 	
-	public void populaTipo() {
+	public boolean populaTipo() {
 		tipo.setDescricao(tfDescricao.getText());
-		tipo.setValor(Double.valueOf(tfValor.getText()));
-		tipo.setTaxa(Double.valueOf(tfTaxa.getText()));
+		if(tfDescricao.getText().isEmpty()) {
+			return false;
+		}
+		if(tfValor.getText().isEmpty()) {
+			return false;
+		}else {
+			tipo.setValor(Double.valueOf(tfValor.getText()));
+		}
+		if(tfTaxa.getText().isEmpty()) {
+			return false;
+		}else {
+			tipo.setTaxa(Double.valueOf(tfTaxa.getText()));
+		}
+		return true;
 	}
 	
 	public void populaTela(TipoAluguel tipo) {

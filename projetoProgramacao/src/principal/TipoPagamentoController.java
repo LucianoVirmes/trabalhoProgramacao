@@ -67,14 +67,18 @@ public class TipoPagamentoController {
 
     @FXML
     void salvar(ActionEvent event) {
-    	populaTipo();
-		if (editando) {
-			tipoDao.alterar(tipo);
-		} else {
-			tipoDao.inserir(tipo);				
-		}
-		novoTipoPagamento();
-		tblTipoPagamento.refresh();
+    	if(populaTipo()) {
+    		if (editando) {
+    			tipoDao.alterar(tipo);
+    		} else {
+    			tipoDao.inserir(tipo);				
+    		}
+    	}else {
+    		AlertaFactory alerta = new AlertaFactory();
+    		alerta.mensagemDeAlerta("preencha todos os campos");
+    	}
+    	novoTipoPagamento();
+    	tblTipoPagamento.refresh();
     }
 
     @FXML
@@ -86,9 +90,17 @@ public class TipoPagamentoController {
 		}
     }
     
-	public void populaTipo() {
+	public boolean populaTipo() {
 		tipo.setDescricao(tfDescricao.getText());
-		tipo.setDesconto(Double.valueOf(tfDesconto.getText()));
+		if(tfDescricao.getText().isEmpty()) {
+			return false;
+		}
+		if(tfDesconto.getText().isEmpty()) {
+			return false;
+		}else {
+			tipo.setDesconto(Double.valueOf(tfDesconto.getText()));			
+		}
+		return true;
 	}
 	
 	public void populaTela(TipoPagamento tipo) {

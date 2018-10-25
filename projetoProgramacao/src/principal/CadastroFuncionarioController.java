@@ -65,33 +65,65 @@ public class CadastroFuncionarioController {
 		}
 	}
 
-	void populaFuncionario() {
-		funcionario.setNome(tfNome.getText());
-		funcionario.setSobrenome(tfSobrenome.getText());
-		funcionario.setDataNascimento(dtNascimento.getValue());
-		funcionario.setEmail(tfEmail.getText());
-		funcionario.setCpf(tfCpf.getText());
-		funcionario.setSenha(tfSenha.getText());
-		funcionario.setSalario(Double.valueOf(tfSalario.getText()));
-		funcionario.setTelefone(tfTelefone.getText());
+	boolean populaFuncionario() {
 		funcionario.setDataAdmissao(LocalDate.now());
+		funcionario.setNome(tfNome.getText());
+		if(tfNome.getText().isEmpty()) {
+			return false;
+		}
+		funcionario.setSobrenome(tfSobrenome.getText());
+		if(tfSobrenome.getText().isEmpty()) {
+			return false;
+		}
+		funcionario.setDataNascimento(dtNascimento.getValue());
+		if(dtNascimento.getValue().equals(null)) {
+			return false;
+		}
+		funcionario.setEmail(tfEmail.getText());
+		if(tfEmail.getText().isEmpty()) {
+			return false;
+		}
+		funcionario.setCpf(tfCpf.getText());
+		if(tfCpf.getText().isEmpty()) {
+			return false;
+		}
+		funcionario.setSenha(tfSenha.getText());
+		if(tfSenha.getText().isEmpty()) {
+			return false;
+		}
+		funcionario.setTelefone(tfTelefone.getText());
+		if(tfTelefone.getText().isEmpty()) {
+			return false;
+		}
 		funcionario.setFilial(cbFilial.getValue());
+		if(cbFilial.getValue().equals(null)) {
+			return false;
+		}
+		if(tfSalario.getText().isEmpty()) {
+			return false;
+		}else {
+			funcionario.setSalario(Double.valueOf(tfSalario.getText()));
+		}
+		return true;
 	}
 
 	@FXML
 	void cadastrar(ActionEvent event) {
-		populaFuncionario();
 		AlertaFactory alerta = new AlertaFactory();
-		if(tfCpf.getText().length() == 11) {
-			if(funcionario.validaCpf()) {
-				if (alerta.confirmaAceitar()) {
-					funcionarioDao.inserir(funcionario);
-				}
+		if(populaFuncionario()) {
+			if(tfCpf.getText().length() == 11) {
+				if(funcionario.validaCpf()) {
+					if (alerta.confirmaAceitar()) {
+						funcionarioDao.inserir(funcionario);
+					}
+				}else {
+					alerta.mensagemDeAlerta("CPF inválido");
+				}			
 			}else {
-				alerta.mensagemDeAlerta("CPF inválido");
-			}			
+				alerta.mensagemDeAlerta("Digite o CPF completo sem pontuação");
+			}
 		}else {
-			alerta.mensagemDeAlerta("Digite o CPF completo sem pontuação");
+			alerta.mensagemDeAlerta("preencha todos os campos");
 		}
 		
 	}

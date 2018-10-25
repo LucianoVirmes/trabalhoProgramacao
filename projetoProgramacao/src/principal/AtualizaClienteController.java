@@ -92,14 +92,36 @@ public class AtualizaClienteController {
 		dtpDataNasc.setValue(cliente.getDataNascimento());
 	}
 
-	public void populaCliente() {
+	public boolean populaCliente() {
 		cliente.setNome(tfNome.getText());
+		if(tfNome.getText().isEmpty()) {
+			return false;
+		}
 		cliente.setSobrenome(tfSobrenome.getText());
+		if(tfSobrenome.getText().isEmpty()) {
+			return false;
+		}
 		cliente.setCpf(tfCpf.getText());
+		if(tfCpf.getText().isEmpty()) {
+			return false;
+		}
 		cliente.setTelefone(tfTelefone.getText());
+		if(tfTelefone.getText().isEmpty()) {
+			return false;
+		}
 		cliente.setEmail(tfEmail.getText());
+		if(tfEmail.getText().isEmpty()) {
+			return false;
+		}
 		cliente.setCnh(tfCnh.getText());
+		if(tfCnh.getText().isEmpty()) {
+			return false;
+		}
 		cliente.setDataNascimento(dtpDataNasc.getValue());
+		if(dtpDataNasc.getValue().equals(null)) {
+			return false;
+		}
+		return true;
 	}
 	public void limpaTela() {
 		tfNome.clear();
@@ -112,14 +134,17 @@ public class AtualizaClienteController {
 	}
 	@FXML
 	void atualizar(ActionEvent event) {
-		populaCliente();
 		AlertaFactory alerta = new AlertaFactory();
-		if(cliente.validaCpf()) {
-			if (alerta.confirmaAceitar()) {
-				clienteDao.alterar(cliente);
-			}
+		if(populaCliente()) {
+			if(cliente.validaCpf()) {
+				if (alerta.confirmaAceitar()) {
+					clienteDao.alterar(cliente);
+					limpaTela();
+				}
+			}			
+		}else {
+			alerta.mensagemDeAlerta("preencha todos os campos");
 		}
-		limpaTela();
 	}
 
 	@FXML

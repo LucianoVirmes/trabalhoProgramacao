@@ -44,33 +44,58 @@ public class CadastroClienteController {
     
     private ClienteDAO clienteDao = AbstractFactory.get().clienteDao();
 
-    void populaCliente() {
+    public boolean populaCliente() {
     	cliente = new Cliente();
-    	cliente.setNome(tfNome.getText());
-    	cliente.setSobrenome(tfSobrenome.getText());
-    	cliente.setDataNascimento(dtNascimento.getValue());
     	cliente.setDataDeCadastro(LocalDate.now());
-    	cliente.setEmail(tfEmail.getText());
-    	cliente.setCnh(tfCnh.getText());
-    	cliente.setCpf(tfCpf.getText());
-    	cliente.setTelefone(tfTelefone.getText());
+    	cliente.setNome(tfNome.getText());
+		if(tfNome.getText().isEmpty()) {
+			return false;
+		}
+		cliente.setSobrenome(tfSobrenome.getText());
+		if(tfSobrenome.getText().isEmpty()) {
+			return false;
+		}
+		cliente.setCpf(tfCpf.getText());
+		if(tfCpf.getText().isEmpty()) {
+			return false;
+		}
+		cliente.setTelefone(tfTelefone.getText());
+		if(tfTelefone.getText().isEmpty()) {
+			return false;
+		}
+		cliente.setEmail(tfEmail.getText());
+		if(tfEmail.getText().isEmpty()) {
+			return false;
+		}
+		cliente.setCnh(tfCnh.getText());
+		if(tfCnh.getText().isEmpty()) {
+			return false;
+		}
+		cliente.setDataNascimento(dtNascimento.getValue());
+		if(dtNascimento.getValue().equals(null)) {
+			return false;
+		}
+		return true;
     }
     
     
     @FXML
     void cadastrar(ActionEvent event) {
-    	populaCliente();
     	AlertaFactory alerta = new AlertaFactory();
-    	if(tfCpf.getText().length() == 11) {
-    		if(cliente.validaCpf()) {
-    			if (alerta.confirmaAceitar()) {
-    				clienteDao.inserir(cliente);
-    			}
+    	if(populaCliente()) {
+    		if(tfCpf.getText().length() == 11) {
+    			if(cliente.validaCpf()) {
+    				if (alerta.confirmaAceitar()) {
+    					clienteDao.inserir(cliente);
+    				}
+    			}else {
+    				alerta.mensagemDeAlerta("CPF inválido");
+    			}    		
     		}else {
-    			alerta.mensagemDeAlerta("CPF inválido");
+    			alerta.mensagemDeAlerta("Digite o CPF completo sem pontuação");
     		}    		
     	}else {
-    		alerta.mensagemDeAlerta("Digite o CPF completo sem pontuação");
+    		alerta.mensagemDeAlerta("preencha todos os campos");
     	}
     	
     }

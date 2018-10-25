@@ -65,12 +65,15 @@ public class CadastroVeiculoController {
 
 	@FXML
 	void cadastrar(ActionEvent event) {
-		populaCarro();
 		AlertaFactory alerta = new AlertaFactory();
-    	if(alerta.confirmaAceitar()) {
-    		carroDao.inserir(carro);
-    		novoCarro();
-    	}
+		if(populaCarro()) {
+			if(alerta.confirmaAceitar()) {
+				carroDao.inserir(carro);
+				novoCarro();
+			}			
+		}else {
+			alerta.mensagemDeAlerta("preencha todos os campos");
+		}
 	}
 
 	@FXML
@@ -81,18 +84,41 @@ public class CadastroVeiculoController {
 	/**
 	 * popula carro com as entradas do usuario
 	 */
-	public void populaCarro() {
+	public boolean populaCarro() {
 		carro = new Carro();
 		carro.setAno(dtAno.getValue());
+		if(dtAno.getValue().equals(null)) {
+			return false;
+		}
 		carro.setCor(tfCor.getText());
+		if(tfCor.getText().isEmpty()) {
+			return false;
+		}
 		carro.setDisponivel(cbkDisponivel.isSelected());
 		carro.setMarca(tfMarca.getText());
+		if(tfMarca.getText().isEmpty()) {
+			return false;
+		}
 		carro.setModelo(tfModelo.getText());
+		if(tfModelo.getText().isEmpty()) {
+			return false;
+		}
 		carro.setPlaca(tfPlaca.getText());
-		carro.setValor(Double.valueOf(tfValor.getText()));
+		if(tfPlaca.getText().isEmpty()) {
+			return false;
+		}
 		carro.setDataDeAquisicao(LocalDate.now());
 		carro.setDataDeDesapropriacao(null);
 		carro.setFilial(cbFilial.getValue());
+		if(cbFilial.getValue().equals(null)) {
+			return false;
+		}
+		if(tfValor.getText().isEmpty()) {
+			return false;
+		}else {
+			carro.setValor(Double.valueOf(tfValor.getText()));
+		}	
+		return true;
 	}
 
 	public void novoCarro() {

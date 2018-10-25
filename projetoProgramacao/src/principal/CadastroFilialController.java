@@ -23,11 +23,21 @@ public class CadastroFilialController {
 
 	private FilialDAO filialDao = AbstractFactory.get().filialDao();
 
-	void populaFilial() {
+	boolean populaFilial() {
 		filial = new Filial();
 		filial.setNome(tfNome.getText());
+		if(tfNome.getText().isEmpty()) {
+			return false;
+		}
 		filial.setCidade(tfCidade.getText());
+		if(tfCidade.getText().isEmpty()) {
+			return false;
+		}
 		filial.setUf(tfUf.getText());
+		if(tfUf.getText().isEmpty()) {
+			return false;
+		}
+		return true;
 	}
 
 	void novaFilial() {
@@ -45,10 +55,13 @@ public class CadastroFilialController {
 
 	@FXML
 	void cadastrar(ActionEvent event) {
-		populaFilial();
 		AlertaFactory alerta = new AlertaFactory();
-		if (alerta.confirmaAceitar()) {
-			filialDao.inserir(filial);
+		if(populaFilial()) {
+			if (alerta.confirmaAceitar()) {
+				filialDao.inserir(filial);
+			}					
+		}else {
+			alerta.mensagemDeAlerta("preencha todos os campos");
 		}
 	}
 

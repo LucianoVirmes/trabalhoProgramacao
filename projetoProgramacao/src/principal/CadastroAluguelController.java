@@ -128,55 +128,53 @@ public class CadastroAluguelController {
     @FXML
     void realizarAluguel(ActionEvent event) {
     	AlertaFactory alerta = new AlertaFactory();
-    	if(verificaAluguel() == true) {
-    		populaAluguel();
+    	if(populaAluguel()) {
     		if(alerta.confirmaAceitar()) {
     			aluguelDao.inserir(aluguel); 
     			Carro car = aluguel.getCarro();
     			car.setDisponivel(false);
     			carroDao.alterar(car);
     		}
-    	}	
+    	}else {
+    		alerta.mensagemDeAlerta("preencha todos os campos");
+    	}
+ 	
 	}
     
-    private boolean verificaAluguel() {
-    	boolean verificador = true;
-    	AlertaFactory alerta = new AlertaFactory();
-    	
-    	if(dtAluguel.getValue().equals(null)) {
-    		alerta.mensagemDeAlerta("Data invalida");
-    		verificador = false;
-    	}else if(cbTipoAluguel.getValue().equals(null)) {
-    		alerta.mensagemDeAlerta("Tipo de aluguel não selecionado");
-    		verificador = false;
-    	}else if(cbCarro.getValue().equals(null)) {
-    		alerta.mensagemDeAlerta("Carro não selecionado");
-    		verificador = false;
-    	}else if(tfKmSaida.getText().equals(null)) {
-    		alerta.mensagemDeAlerta("Quilometragem de saida não informada");
-    		verificador = false;
-    	}else if(cbCliente.getValue().equals(null)) {
-    		alerta.mensagemDeAlerta("Cliente não selecionado");
-    		verificador = false;
-    	}else if(cbFuncionario.getValue().equals(null)) {
-    		alerta.mensagemDeAlerta("Funcionario não selecionado");
-    		verificador = false;
-    	}else if(cbFilial.getValue().equals(null)) {
-    		alerta.mensagemDeAlerta("Filial não selecionado");
-    		verificador = false;
-    	}
-    	return verificador;
-    }
+
     
-    private void populaAluguel() {
+    private boolean populaAluguel() {
     	aluguel = new Aluguel();
     	aluguel.setCarro(cbCarro.getValue());
+    	if(cbCarro.getValue().equals(null)) {
+    		return false;
+    	}
     	aluguel.setCliente(cbCliente.getValue());
+    	if(cbCliente.getValue().equals(null)) {
+    		return false;
+    	}
     	aluguel.setDataAluguel(dtAluguel.getValue());
+    	if(dtAluguel.getValue().equals(null)) {
+    		return false;
+    	}
     	aluguel.setFilial(cbFilial.getValue());
+    	if(cbFilial.getValue().equals(null)) {
+    		return false;
+    	}
     	aluguel.setFuncionario(cbFuncionario.getValue());
-    	aluguel.setQuilometrosSaida(Double.valueOf(tfKmSaida.getText()));
+    	if(cbFuncionario.getValue().equals(null)) {
+    		return false;
+    	}
     	aluguel.setTipoAluguel(cbTipoAluguel.getValue());
+    	if(cbTipoAluguel.getValue().equals(null)) {
+    		return false;
+    	}
+    	if(tfKmSaida.getText().isEmpty()) {
+    		return false;
+    	}else {
+    		aluguel.setQuilometrosSaida(Double.valueOf(tfKmSaida.getText()));
+    	}
+    	return true;
     }
     		
     
