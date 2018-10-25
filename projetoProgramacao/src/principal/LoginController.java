@@ -24,7 +24,7 @@ public class LoginController {
     
     /**
      * verifica se o email e senha sao compativeis
-     * ou se é admin admin, se for realiza login 
+     * ou se é admin admin, se for realiza login. 
      * @param event
      */
     @FXML
