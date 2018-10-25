@@ -22,6 +22,11 @@ public class LoginController {
     
     private FuncionarioDAO funcionarioDao = AbstractFactory.get().funcionarioDao(); 
     
+    /**
+     * verifica se o email e senha sao compativeis
+     * ou se é admin admin, se for realiza login 
+     * @param event
+     */
     @FXML
     void entrar(ActionEvent event) {
     	Funcionario f = new Funcionario();
