@@ -125,19 +125,42 @@ public class GerenciarVeiculoController {
 		
 	}
 
-	public void populaFuncionario() {
+	public boolean populaCarro() {
 		carro.setAno(dtpAno.getValue());
+		if(!dtpAno.hasProperties()) {
+			return false;
+		}
 		carro.setCor(tfCor.getText());
+		if(tfCor.getText().isEmpty()) {
+			return false;
+		}
+		carro.setMarca(tfMarca.getText());
+		if(tfMarca.getText().isEmpty()) {
+			return false;
+		}
+		carro.setModelo(tfModelo.getText());
+		if(tfModelo.getText().isEmpty()) {
+			return false;
+		}
+		carro.setPlaca(tfPlaca.getText());
+		if(tfPlaca.getText().isEmpty()) {
+			return false;
+		}
+		if(tfValor.getText().isEmpty()) {
+			return false;
+		}else {
+			carro.setValor(Double.valueOf(tfValor.getText()));			
+		}
+		carro.setFilial(cbFilial.getValue());
+		if(!cbFilial.isArmed()) {
+			return false;
+		}
 		if(ckbDisponivel.isSelected()) {
 			carro.setDisponivel(true);
 		}else {
 			carro.setDisponivel(false);			
 		}
-		carro.setMarca(tfMarca.getText());
-		carro.setModelo(tfModelo.getText());
-		carro.setPlaca(tfPlaca.getText());
-		carro.setValor(Double.valueOf(tfValor.getText()));
-		carro.setFilial(cbFilial.getValue());
+		return true;
 	}
 
 
@@ -151,7 +174,7 @@ public class GerenciarVeiculoController {
     @FXML
     void desapropriar(ActionEvent event) {
     	AlertaFactory alerta = new AlertaFactory();
-		populaFuncionario();
+		carro = tblVeiculos.getSelectionModel().getSelectedItem();
 		if(alerta.confirmaExclusao()) {
 			carroDao.desapropriar(carro);
 		}
@@ -159,13 +182,16 @@ public class GerenciarVeiculoController {
 
     @FXML
     void salvar(ActionEvent event) {
-    	populaFuncionario();
-		AlertaFactory alerta = new AlertaFactory();
-		if(alerta.confirmaAceitar()) {
-			carroDao.alterar(carro);
-			ckbDisponivel.setSelected(false);
-			tblVeiculos.refresh();
-		}
+    	AlertaFactory alerta = new AlertaFactory();
+    	if(populaCarro()) {
+    		if(alerta.confirmaAceitar()) {
+    			carroDao.alterar(carro);
+    			ckbDisponivel.setSelected(false);
+    			tblVeiculos.refresh();
+    		}
+    	}else {
+    		alerta.mensagemDeAlerta("preencha todos os campos");
+    	}
     }
 
     @FXML

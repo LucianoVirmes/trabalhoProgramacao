@@ -186,7 +186,7 @@ public class GerenciarFuncionarioController {
 	@FXML
 	void demitir(ActionEvent event) {
 		AlertaFactory alerta = new AlertaFactory();
-		populaFuncionario();
+		funcionario = tblFuncionarios.getSelectionModel().getSelectedItem();
 		if(alerta.confirmaExclusao()) {
 		//  funcionario.setDataDemissao(LocalDate.now());
 			funcionarioDao.demitirFuncionario(funcionario);

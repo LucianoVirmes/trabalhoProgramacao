@@ -146,27 +146,27 @@ public class CadastroAluguelController {
     private boolean populaAluguel() {
     	aluguel = new Aluguel();
     	aluguel.setCarro(cbCarro.getValue());
-    	if(cbCarro.getValue().equals(null)) {
+    	if(!cbCarro.isArmed()) {
     		return false;
     	}
     	aluguel.setCliente(cbCliente.getValue());
-    	if(cbCliente.getValue().equals(null)) {
+    	if(!cbCliente.isArmed()) {
     		return false;
     	}
     	aluguel.setDataAluguel(dtAluguel.getValue());
-    	if(dtAluguel.getValue().equals(null)) {
+    	if(!dtAluguel.isArmed()) {
     		return false;
     	}
     	aluguel.setFilial(cbFilial.getValue());
-    	if(cbFilial.getValue().equals(null)) {
+    	if(!cbFilial.isArmed()) {
     		return false;
     	}
     	aluguel.setFuncionario(cbFuncionario.getValue());
-    	if(cbFuncionario.getValue().equals(null)) {
+    	if(!cbFuncionario.isArmed()) {
     		return false;
     	}
     	aluguel.setTipoAluguel(cbTipoAluguel.getValue());
-    	if(cbTipoAluguel.getValue().equals(null)) {
+    	if(!cbTipoAluguel.isArmed()) {
     		return false;
     	}
     	if(tfKmSaida.getText().isEmpty()) {

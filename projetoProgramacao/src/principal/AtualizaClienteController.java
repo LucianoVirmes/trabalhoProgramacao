@@ -118,7 +118,7 @@ public class AtualizaClienteController {
 			return false;
 		}
 		cliente.setDataNascimento(dtpDataNasc.getValue());
-		if(dtpDataNasc.getValue().equals(null)) {
+		if(!dtpDataNasc.hasProperties()) {
 			return false;
 		}
 		return true;
