@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -27,17 +28,22 @@ public class DevolverVeiculoController {
 
 	@FXML
 	private TableColumn<Aluguel, String> tbcTipoAluguel;
+	
 	@FXML
 	private TableColumn<Aluguel, String> tbcCliente;
 
 	@FXML
 	private TableColumn<Aluguel, String> tbcFuncionario;
+	
 	@FXML
 	private TextField tfPlaca;
+	
 	@FXML
 	private TextField tfKmChegada;
+
 	@FXML
-	private TextField tfValor;
+	private Label lblValor;
+
 	@FXML
 	private ComboBox<String> cbTipoPagamento;
 	@FXML
