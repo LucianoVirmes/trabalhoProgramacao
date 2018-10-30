@@ -41,6 +41,14 @@
                   <MenuItem mnemonicParsing="false" onAction="#abreTelaDevolucao" text="Devolver Veículo" />
                </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="Relatórios">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#relatorioAlugueisPorCarro" text="Alugueis por carro" />
+                  <MenuItem mnemonicParsing="false" onAction="#relatorioAquisicaoVeiculos" text="Aquisição de veículos" />
+                  <MenuItem mnemonicParsing="false" onAction="#relatorioCarrosAtivosDisponiveis" text="Carros ativos disponíveis" />
+                  <MenuItem mnemonicParsing="false" onAction="#relatorioControleFuncionario" text="Controle Funcionario" />
+              </items>
+            </Menu>
             <Menu mnemonicParsing="false" text="Configurações">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#saiDoMenu" text="Sair" />

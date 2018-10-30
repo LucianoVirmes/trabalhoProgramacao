@@ -1,6 +1,7 @@
 package principal;
 
 import java.io.IOException;
+import java.net.URL;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,6 +9,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Menu;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
+import principal.conexao.ConexaoUtil;
 
 public class MenuController {
 
@@ -184,6 +190,66 @@ public class MenuController {
 			bpPrincipal.setCenter(View);
 		} catch (IOException e1) {
 			e1.printStackTrace();
+		}
+    }
+    
+    @FXML
+    void relatorioAlugueisPorCarro(ActionEvent event) {
+    	URL url = getClass().getResource("/relatorios/relatorioAlugueisPorCarro.jasper");
+		try {
+			JasperPrint jasperPrint = JasperFillManager
+					 .fillReport(
+							 url.getPath(),
+							 null,
+							 ConexaoUtil.getConn());
+			JasperViewer.viewReport(jasperPrint);
+		} catch (JRException e) {
+			e.printStackTrace();
+		}
+    }
+
+    @FXML
+    void relatorioAquisicaoVeiculos(ActionEvent event) {
+    	URL url = getClass().getResource("/relatorios/relatorioAquisicaoVeiculos.jasper");
+		try {
+			JasperPrint jasperPrint = JasperFillManager
+					 .fillReport(
+							 url.getPath(),
+							 null,
+							 ConexaoUtil.getConn());
+			JasperViewer.viewReport(jasperPrint);
+		} catch (JRException e) {
+			e.printStackTrace();
+		}
+    }
+
+    @FXML
+    void relatorioCarrosAtivosDisponiveis(ActionEvent event) {
+    	URL url = getClass().getResource("/relatorios/relatorioCarrosAtivosDisponiveis.jasper");
+		try {
+			JasperPrint jasperPrint = JasperFillManager
+					 .fillReport(
+							 url.getPath(),
+							 null,
+							 ConexaoUtil.getConn());
+			JasperViewer.viewReport(jasperPrint);
+		} catch (JRException e) {
+			e.printStackTrace();
+		}
+    }
+
+    @FXML
+    void relatorioControleFuncionario(ActionEvent event) {
+    	URL url = getClass().getResource("/relatorios/relatorioControleFuncionario.jasper");
+		try {
+			JasperPrint jasperPrint = JasperFillManager
+					 .fillReport(
+							 url.getPath(),
+							 null,
+							 ConexaoUtil.getConn());
+			JasperViewer.viewReport(jasperPrint);
+		} catch (JRException e) {
+			e.printStackTrace();
 		}
     }
 }
