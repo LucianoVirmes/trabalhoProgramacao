@@ -55,7 +55,6 @@ public class DevolverVeiculoController {
 	private void initialize() {
 		tbcCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
 		tbcCarro.setCellValueFactory(new PropertyValueFactory<>("carro"));
-
 		tbcTipoAluguel.setCellValueFactory(new PropertyValueFactory<>("tipoAluguel"));
 		tbcCliente.setCellValueFactory(new PropertyValueFactory<>("cliente"));
 		tbcFuncionario.setCellValueFactory(new PropertyValueFactory<>("funcionario"));
