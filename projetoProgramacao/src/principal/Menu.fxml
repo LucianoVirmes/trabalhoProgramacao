@@ -49,9 +49,9 @@
                   <MenuItem mnemonicParsing="false" onAction="#relatorioControleFuncionario" text="Controle Funcionario" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Configurações">
+            <Menu mnemonicParsing="false" text="Sair">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#saiDoMenu" text="Sair" />
+                  <MenuItem mnemonicParsing="false" onAction="#saiDoMenu" text="Logout" />
                </items>
             </Menu>
         </menus>
