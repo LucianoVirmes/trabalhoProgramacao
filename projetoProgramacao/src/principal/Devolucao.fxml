@@ -55,7 +55,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button layoutX="624.0" layoutY="524.0" mnemonicParsing="false" text="Devolver veículo">
+            <Button fx:id="btnDevolver" layoutX="624.0" layoutY="524.0" mnemonicParsing="false" onAction="#devolverVeiculo" text="Devolver veículo">
                <font>
                   <Font name="Comic Sans MS" size="14.0" />
                </font>

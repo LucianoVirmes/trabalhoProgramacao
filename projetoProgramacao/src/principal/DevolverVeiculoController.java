@@ -1,5 +1,7 @@
 package principal;
 
+import java.time.LocalDate;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,7 +15,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import principal.dao.AbstractFactory;
 import principal.dao.AluguelDAO;
+import principal.dao.TipoPagamentoDAO;
 import principal.model.Aluguel;
+import principal.model.Devolucao;
+import principal.model.TipoPagamento;
 
 public class DevolverVeiculoController {
 
@@ -42,15 +47,44 @@ public class DevolverVeiculoController {
 	private TextField tfKmChegada;
 
 	@FXML
-	private Label lblValor;
+	private Label lblValor;	
+	
+	@FXML
+    private Button btnDevolver;
 
 	@FXML
-	private ComboBox<String> cbTipoPagamento;
+	private ComboBox<TipoPagamento> cbTipoPagamento;
 	@FXML
 	private Button btnBuscar;
 
 	private ObservableList<Aluguel> alugueis = FXCollections.observableArrayList();
+	
+	private TipoPagamentoDAO tipoDao = AbstractFactory.get().tipoPagamentoDao();
+	
+	private Devolucao devolucao;
 
+	public boolean populaAluguel() {
+		devolucao = new Devolucao();
+		
+		if(tblAluguel.getSelectionModel().getSelectedItem() == null){
+			return false;
+		}else {
+			devolucao.setAluguel(tblAluguel.getSelectionModel().getSelectedItem());
+		}
+		if(tfKmChegada.getText().isEmpty()) {
+			return false;
+		}else {
+			devolucao.setQuilometroChegada(Double.valueOf(tfKmChegada.getText()));
+		}
+		devolucao.setTipoPagamento(cbTipoPagamento.getValue());
+		if(!cbTipoPagamento.isArmed()) {
+			return false;
+		}
+		devolucao.setDataChegada(LocalDate.now());
+		return true;
+	}
+	
+	
 	@FXML
 	private void initialize() {
 		tbcCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
@@ -59,6 +93,7 @@ public class DevolverVeiculoController {
 		tbcCliente.setCellValueFactory(new PropertyValueFactory<>("cliente"));
 		tbcFuncionario.setCellValueFactory(new PropertyValueFactory<>("funcionario"));
 		tblAluguel.setItems(atualizaTabela());
+		populaCombo();
 	}
 
 	@FXML
@@ -81,5 +116,17 @@ public class DevolverVeiculoController {
 		alugueis = FXCollections.observableArrayList(aluguelDao.listar());
 		return alugueis;
 	}
+	
+	private void populaCombo(){
+		for(TipoPagamento tipo: tipoDao.listar()){
+			cbTipoPagamento.getItems().add(tipo);
+		}
+	}
+	
+	@FXML
+    void devolverVeiculo(ActionEvent event) {
 
+    }
+	
+	
 }
