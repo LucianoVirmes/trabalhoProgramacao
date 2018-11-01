@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import principal.dao.AbstractFactory;
 import principal.dao.AluguelDAO;
+import principal.dao.DevolucaoDAO;
 import principal.dao.TipoPagamentoDAO;
 import principal.model.Aluguel;
 import principal.model.Devolucao;
@@ -51,7 +52,10 @@ public class DevolverVeiculoController {
 	
 	@FXML
     private Button btnDevolver;
-
+	
+	@FXML
+	private Button btnCalcula;
+	
 	@FXML
 	private ComboBox<TipoPagamento> cbTipoPagamento;
 	@FXML
@@ -60,10 +64,11 @@ public class DevolverVeiculoController {
 	private ObservableList<Aluguel> alugueis = FXCollections.observableArrayList();
 	
 	private TipoPagamentoDAO tipoDao = AbstractFactory.get().tipoPagamentoDao();
+	private DevolucaoDAO devolucaoDao = AbstractFactory.get().devolucaoDao();
 	
 	private Devolucao devolucao;
 
-	public boolean populaAluguel() {
+	public boolean populaDevolucao() {
 		devolucao = new Devolucao();
 		
 		if(tblAluguel.getSelectionModel().getSelectedItem() == null){
@@ -123,9 +128,29 @@ public class DevolverVeiculoController {
 		}
 	}
 	
+	void valorTotal(){
+		double valor = ((devolucao.getAluguel().getCarro().getValor() + devolucao.getAluguel().getTipoAluguel().getValor()) +
+				((devolucao.calculaQuilometros()/1000) * devolucao.getAluguel().getTipoAluguel().getTaxa()));
+		valor = valor - ((devolucao.getTipoPagamento().getDesconto() * valor)/100);
+		devolucao.setValorTotal(valor);	
+	}
+	
+	@FXML
+    void calculaValor(ActionEvent event) {
+		populaDevolucao();
+		valorTotal();
+    }
+
+	
 	@FXML
     void devolverVeiculo(ActionEvent event) {
-
+		AlertaFactory alerta = new AlertaFactory();
+		valorTotal();
+		if(populaDevolucao()) {
+			if(alerta.confirmaAceitar()) {
+				devolucaoDao.inserir(devolucao);
+			}
+		}
     }
 	
 	

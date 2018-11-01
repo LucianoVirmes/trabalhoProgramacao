@@ -55,7 +55,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button fx:id="btnDevolver" layoutX="624.0" layoutY="524.0" mnemonicParsing="false" onAction="#devolverVeiculo" text="Devolver veículo">
+            <Button fx:id="btnDevolver" layoutX="624.0" layoutY="512.0" mnemonicParsing="false" onAction="#devolverVeiculo" text="Devolver veículo">
                <font>
                   <Font name="Comic Sans MS" size="14.0" />
                </font>
@@ -70,6 +70,11 @@
                   <Font size="18.0" />
                </font>
             </Label>
+            <Button fx:id="btnCalcula" layoutX="492.0" layoutY="512.0" mnemonicParsing="false" onAction="#calculaValor" text="Calcula valor">
+               <font>
+                  <Font name="Comic Sans MS" size="14.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
    </children>
