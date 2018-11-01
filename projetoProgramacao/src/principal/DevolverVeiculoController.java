@@ -145,9 +145,9 @@ public class DevolverVeiculoController {
 	@FXML
     void devolverVeiculo(ActionEvent event) {
 		AlertaFactory alerta = new AlertaFactory();
-		valorTotal();
 		if(populaDevolucao()) {
 			if(alerta.confirmaAceitar()) {
+				valorTotal();
 				devolucaoDao.inserir(devolucao);
 			}
 		}
