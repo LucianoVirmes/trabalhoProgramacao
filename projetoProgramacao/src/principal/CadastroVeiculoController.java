@@ -87,7 +87,7 @@ public class CadastroVeiculoController {
 	public boolean populaCarro() {
 		carro = new Carro();
 		carro.setAno(dtAno.getValue());
-		if(!dtAno.hasProperties()) {
+		if(dtAno.hasProperties()) {
 			return false;
 		}
 		carro.setCor(tfCor.getText());
@@ -114,7 +114,7 @@ public class CadastroVeiculoController {
 		carro.setDataDeAquisicao(LocalDate.now());
 		carro.setDataDeDesapropriacao(null);
 		carro.setFilial(cbFilial.getValue());
-		if(!cbFilial.hasProperties()) {
+		if(cbFilial.hasProperties()) {
 			return false;
 		}
 		if(tfValor.getText().isEmpty()) {
@@ -134,7 +134,6 @@ public class CadastroVeiculoController {
 		tfValor.clear();
 		if (cbkDisponivel.isSelected()) {
 			cbkDisponivel.setSelected(false);
-			;
 		}
 		cbFilial.getSelectionModel().clearSelection();
 	}
