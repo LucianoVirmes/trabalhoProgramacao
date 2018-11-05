@@ -13,8 +13,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import principal.dao.AbstractFactory;
 import principal.dao.AluguelDAO;
+import principal.dao.CarroDAO;
 import principal.dao.DevolucaoDAO;
 import principal.dao.TipoPagamentoDAO;
 import principal.model.Aluguel;
@@ -50,6 +52,9 @@ public class DevolverVeiculoController {
 	@FXML
 	private Label lblValor;	
 	
+    @FXML
+    private TextField tfCodAluguel;
+	
 	@FXML
     private Button btnDevolver;
 	
@@ -58,6 +63,7 @@ public class DevolverVeiculoController {
 	
 	@FXML
 	private ComboBox<TipoPagamento> cbTipoPagamento;
+	
 	@FXML
 	private Button btnBuscar;
 
@@ -65,16 +71,15 @@ public class DevolverVeiculoController {
 	
 	private TipoPagamentoDAO tipoDao = AbstractFactory.get().tipoPagamentoDao();
 	private DevolucaoDAO devolucaoDao = AbstractFactory.get().devolucaoDao();
+	private AluguelDAO aluguelDao = AbstractFactory.get().aluguelDao();
+	private CarroDAO carroDao = AbstractFactory.get().carroDao();
 	
 	private Devolucao devolucao;
 
 	public boolean populaDevolucao() {
 		devolucao = new Devolucao();
-		
-		if(tblAluguel.getSelectionModel().getSelectedItem() == null){
+		if(tfCodAluguel.getText().isEmpty()) {
 			return false;
-		}else {
-			devolucao.setAluguel(tblAluguel.getSelectionModel().getSelectedItem());
 		}
 		if(tfKmChegada.getText().isEmpty()) {
 			return false;
@@ -85,6 +90,7 @@ public class DevolverVeiculoController {
 		if(!cbTipoPagamento.isArmed()) {
 			return false;
 		}
+		devolucao.setAluguel(aluguelDao.buscar(Integer.valueOf(tfCodAluguel.getText())));
 		devolucao.setDataChegada(LocalDate.now());
 		return true;
 	}
@@ -133,22 +139,35 @@ public class DevolverVeiculoController {
 				((devolucao.calculaQuilometros()/1000) * devolucao.getAluguel().getTipoAluguel().getTaxa()));
 		valor = valor - ((devolucao.getTipoPagamento().getDesconto() * valor)/100);
 		devolucao.setValorTotal(valor);	
+		lblValor.setText(String.valueOf(valor));
+		System.out.println(valor);
 	}
 	
 	@FXML
+    void selecionaAluguel(MouseEvent event) {
+    	Aluguel aluguel = new Aluguel();
+    	if (tblAluguel.getSelectionModel().getSelectedItem() != null) {
+			aluguel = tblAluguel.getSelectionModel().getSelectedItem();
+			tfCodAluguel.setText(aluguel.getCodigo().toString());
+		}
+    }
+	
+    @FXML
     void calculaValor(ActionEvent event) {
-		populaDevolucao();
-		valorTotal();
+    	if(populaDevolucao()) {
+			valorTotal();
+		}
     }
 
-	
-	@FXML
+    @FXML
     void devolverVeiculo(ActionEvent event) {
-		AlertaFactory alerta = new AlertaFactory();
+    	AlertaFactory alerta = new AlertaFactory();
 		if(populaDevolucao()) {
 			if(alerta.confirmaAceitar()) {
 				valorTotal();
 				devolucaoDao.inserir(devolucao);
+				devolucao.getAluguel().getCarro().setDisponivel(true);
+				carroDao.alterar(devolucao.getAluguel().getCarro());
 			}
 		}
     }
