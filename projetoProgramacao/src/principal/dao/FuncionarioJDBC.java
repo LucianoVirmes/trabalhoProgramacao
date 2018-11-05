@@ -120,7 +120,7 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 	public Funcionario buscar(Integer codigo) {
 		Funcionario funcionario = null;
 		try {
-			String sql = "select * from Funcionario f where f.dataDemissao is null and codigo = ?;";
+			String sql = "select * from Funcionario where dataDemissao is null and codigo = ?;";
 			PreparedStatement ps = ConexaoUtil.getConn().prepareStatement(sql);
 			ps.setInt(1, codigo);
 			ResultSet rs1 = ps.executeQuery();

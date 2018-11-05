@@ -77,22 +77,27 @@ public class DevolverVeiculoController {
 	private Devolucao devolucao;
 
 	public boolean populaDevolucao() {
+		boolean retorno = true;
+		
+		Aluguel aluguel = new Aluguel();
 		devolucao = new Devolucao();
+		
+		aluguel = aluguelDao.buscar(Integer.valueOf(tfCodAluguel.getText()));
+		devolucao.setAluguel(aluguel);
+		System.out.println(aluguel);
 		if(tfCodAluguel.getText().isEmpty()) {
-			return false;
-		}
-		if(tfKmChegada.getText().isEmpty()) {
-			return false;
-		}else {
-			devolucao.setQuilometroChegada(Double.valueOf(tfKmChegada.getText()));
+			retorno = false;
 		}
 		devolucao.setTipoPagamento(cbTipoPagamento.getValue());
-		if(!cbTipoPagamento.isArmed()) {
-			return false;
-		}
-		devolucao.setAluguel(aluguelDao.buscar(Integer.valueOf(tfCodAluguel.getText())));
 		devolucao.setDataChegada(LocalDate.now());
-		return true;
+		devolucao.setQuilometroChegada(Double.valueOf(tfKmChegada.getText()));
+		if(tfKmChegada.getText().isEmpty()) {
+			retorno = false;
+		}
+		System.out.println(retorno);
+		System.out.println(devolucao.getAluguel().getQuilometrosSaida());
+		System.out.println(aluguel);
+		return retorno;
 	}
 	
 	
@@ -124,7 +129,7 @@ public class DevolverVeiculoController {
 
 	public ObservableList<Aluguel> atualizaTabela() {
 		AluguelDAO aluguelDao = AbstractFactory.get().aluguelDao();
-		alugueis = FXCollections.observableArrayList(aluguelDao.listar());
+		alugueis = FXCollections.observableArrayList(aluguelDao.alugueisAtivos());
 		return alugueis;
 	}
 	
@@ -140,7 +145,6 @@ public class DevolverVeiculoController {
 		valor = valor - ((devolucao.getTipoPagamento().getDesconto() * valor)/100);
 		devolucao.setValorTotal(valor);	
 		lblValor.setText(String.valueOf(valor));
-		System.out.println(valor);
 	}
 	
 	@FXML
@@ -154,8 +158,11 @@ public class DevolverVeiculoController {
 	
     @FXML
     void calculaValor(ActionEvent event) {
+    	AlertaFactory alerta = new AlertaFactory();
     	if(populaDevolucao()) {
 			valorTotal();
+		}else {
+			alerta.mensagemDeAlerta("preencha todos os campos");
 		}
     }
 
@@ -169,6 +176,9 @@ public class DevolverVeiculoController {
 				devolucao.getAluguel().getCarro().setDisponivel(true);
 				carroDao.alterar(devolucao.getAluguel().getCarro());
 			}
+		}
+		else {
+			alerta.mensagemDeAlerta("preencha todos os campos");
 		}
     }
 	

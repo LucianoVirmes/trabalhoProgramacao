@@ -6,6 +6,6 @@ import principal.model.Aluguel;
 
 public interface AluguelDAO extends GenericDAO<Aluguel>{
 
-	List<Aluguel> alugueisEmAndamento();
+	List<Aluguel> alugueisAtivos();
 	
 }

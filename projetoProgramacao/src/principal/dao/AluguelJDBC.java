@@ -105,6 +105,7 @@ public class AluguelJDBC implements AluguelDAO {
 
 	}
 
+	
 	@Override
 	public Aluguel buscar(Integer codigo) {
 		Aluguel aluguel = null;
@@ -116,11 +117,10 @@ public class AluguelJDBC implements AluguelDAO {
 			while (rs1.next()) {
 				aluguel = new Aluguel();
 				aluguel.setCodigo(rs1.getInt("codigo"));
-
 				Date data = rs1.getDate("dataAluguel");
 				aluguel.setDataAluguel(
 						Instant.ofEpochMilli(data.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
-				
+				aluguel.setQuilometrosSaida(rs1.getDouble("quilometroSaida"));
 				TipoAluguelJDBC tipoAluguelJDBC = new TipoAluguelJDBC();
 				aluguel.setTipoAluguel(tipoAluguelJDBC.buscar(rs1.getInt("codTipoAluguel")));
 				ClienteJDBC clienteJDBC = new ClienteJDBC();
@@ -131,7 +131,6 @@ public class AluguelJDBC implements AluguelDAO {
 				aluguel.setFuncionario(funcionarioJDBC.buscar(rs1.getInt("codFuncionario")));
 				FilialJDBC filialJDBC = new FilialJDBC();
 				aluguel.setFilial(filialJDBC.buscar(rs1.getInt("codFilial")));
-
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -141,31 +140,40 @@ public class AluguelJDBC implements AluguelDAO {
 	}
 
 	@Override
-	public List<Aluguel> alugueisEmAndamento() {
+	public List<Aluguel> alugueisAtivos() {
 		List<Aluguel> alugueis = new ArrayList<>();
 		try {
 			Statement statement = ConexaoUtil.getConn().createStatement();
-			ResultSet rs = statement.executeQuery("select * from alugueis_em_andamento");
+			ResultSet rs = statement.executeQuery("select * from Aluguel a join Carro c on a.codCarro = c.codigo\n" + 
+					"where c.disponivel is false;");
 			while (rs.next()) {
 				Aluguel aluguel = new Aluguel();
 				aluguel.setCodigo(rs.getInt("codigo"));
-				
-				aluguel.getCarro().setPlaca(rs.getString("placa"));;
-				
+
 				Date data = rs.getDate("dataAluguel");
 				aluguel.setDataAluguel(
 						Instant.ofEpochMilli(data.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
-				
-				aluguel.getTipoAluguel().setDescricao(rs.getString("descricao"));
-				aluguel.getCliente().setNome(rs.getString("nome"));
-				aluguel.setQuilometrosSaida(rs.getDouble("quilometrosSaida"));
-				
+
+				TipoAluguelJDBC tipoAluguelJDBC = new TipoAluguelJDBC();
+				aluguel.setTipoAluguel(tipoAluguelJDBC.buscar(rs.getInt("codTipoAluguel")));
+				ClienteJDBC clienteJDBC = new ClienteJDBC();
+				aluguel.setCliente(clienteJDBC.buscar(rs.getInt("codCliente")));
+				CarroJDBC carroJDBC = new CarroJDBC();
+				aluguel.setCarro(carroJDBC.buscar(rs.getInt("codCarro")));
+				FuncionarioJDBC funcionarioJDBC = new FuncionarioJDBC(); 
+				aluguel.setFuncionario(funcionarioJDBC.buscar(rs.getInt("codFuncionario")));
+				FilialJDBC filialJDBC = new FilialJDBC();
+				aluguel.setFilial(filialJDBC.buscar(rs.getInt("codFilial")));
+
 				alugueis.add(aluguel);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return alugueis;
+
+
 	}
+
 
 }

@@ -18,8 +18,18 @@ public class Devolucao {
 	 * @return quilometros percorridos durante o aluguel do veiculo
 	 */
 	public Double calculaQuilometros() {
-		Double km = this.quilometroChegada - this.aluguel.getQuilometrosSaida();
-		return km;
+		if(validaKm()) {
+			Double km = this.quilometroChegada - this.aluguel.getQuilometrosSaida();			
+			return km;
+		}
+		return 0.0;
+	}
+	
+	public boolean validaKm() {
+		if(this.quilometroChegada > this.aluguel.getQuilometrosSaida()) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
