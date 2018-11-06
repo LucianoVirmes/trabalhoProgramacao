@@ -118,9 +118,6 @@ public class AtualizaClienteController {
 			return false;
 		}
 		cliente.setDataNascimento(dtpDataNasc.getValue());
-		if(!dtpDataNasc.hasProperties()) {
-			return false;
-		}
 		return true;
 	}
 	public void limpaTela() {

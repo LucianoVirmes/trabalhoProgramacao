@@ -127,9 +127,6 @@ public class GerenciarVeiculoController {
 
 	public boolean populaCarro() {
 		carro.setAno(dtpAno.getValue());
-		if(!dtpAno.hasProperties()) {
-			return false;
-		}
 		carro.setCor(tfCor.getText());
 		if(tfCor.getText().isEmpty()) {
 			return false;
@@ -152,9 +149,6 @@ public class GerenciarVeiculoController {
 			carro.setValor(Double.valueOf(tfValor.getText()));			
 		}
 		carro.setFilial(cbFilial.getValue());
-		if(!cbFilial.isArmed()) {
-			return false;
-		}
 		if(ckbDisponivel.isSelected()) {
 			carro.setDisponivel(true);
 		}else {
