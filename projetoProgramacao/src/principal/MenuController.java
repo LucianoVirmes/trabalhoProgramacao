@@ -1,6 +1,9 @@
 package principal;
 
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import javafx.event.ActionEvent;
@@ -252,5 +255,17 @@ public class MenuController {
 			e.printStackTrace();
 		}
     }
+    
+    @FXML
+    void visiteSite(ActionEvent event) {
+    	 try {
+    		 	Desktop.getDesktop().browse(new URI("http://bestcaralugueis.epizy.com/index.html"));
+         	} catch (IOException e1) {
+             e1.printStackTrace();
+         	} catch (URISyntaxException e1) {
+             e1.printStackTrace();
+         	}
+    }
+    
     
 }
