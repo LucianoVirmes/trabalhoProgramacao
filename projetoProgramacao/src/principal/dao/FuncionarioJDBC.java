@@ -212,15 +212,47 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 		}
 		return funcionario;
 	}
+	
+	@Override
+	public List<Funcionario> listarFuncionarioFilial(Integer codigo) {
+		List<Funcionario> funcionarios = new ArrayList<>();
+		try {
+			String sql = "select * from Funcionario f where f.dataDemissao IS null and codFilial = ?";
+			PreparedStatement ps = ConexaoUtil.getConn().prepareStatement(sql);
+			ps.setInt(1, codigo);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Funcionario funcionario = new Funcionario();
+				funcionario.setCodigo(rs.getInt("codigo"));
+				funcionario.setNome(rs.getString("nome"));
+				funcionario.setSobrenome(rs.getString("sobrenome"));
+				Date data = rs.getDate("dataNascimento");
+				funcionario.setDataNascimento(
+						Instant.ofEpochMilli(data.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+				funcionario.setTelefone(rs.getString("telefone"));
+				funcionario.setCpf(rs.getString("cpf"));
+				funcionario.setEmail(rs.getString("email"));
+				funcionario.setSenha(rs.getString("senha"));
+				funcionario.setSalario(rs.getDouble("salario"));
+				
+				Date data1 = rs.getDate("dataAdmissao");
+				funcionario.setDataAdmissao(
+						Instant.ofEpochMilli(data1.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+				Date data2 = rs.getDate("dataDemissao");
+				if(data2 != null) {
+				funcionario.setDataDemissao(
+						Instant.ofEpochMilli(data2.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());					
+				}
+				FilialDAO filialDao = AbstractFactory.get().filialDao();
+				funcionario.setFilial(filialDao.buscar(rs.getInt("codFilial")));
+				funcionarios.add(funcionario);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return funcionarios;
 
-//	@Override
-//	public Integer retornaCodigo(Funcionario funcionario) {
-//		for(Funcionario func : listar()) {
-//			if(func.getCpf().equals(funcionario.getCpf())) {
-//				return func.getCodigo();
-//			}
-//		}			
-//		return null;
-//	}
+	}
+
 
 }

@@ -78,8 +78,6 @@ public class CarroJDBC implements CarroDAO{
 		List<Carro> carros = new ArrayList<>();
 		try {
 			Statement statement = ConexaoUtil.getConn().createStatement();
-//			ResultSet rs = statement.executeQuery("select * from Carro c join AquisicaoVeiculo a on c.codigo = a.codCarro"
-//					+ " where a.dataDesapropriacao = null;");
 			ResultSet rs = statement.executeQuery("select * from Carro c where c.dataDesapropriacao IS null;");
 			while (rs.next()) {
 				Carro carro = new Carro();
@@ -159,6 +157,7 @@ public class CarroJDBC implements CarroDAO{
 	public List<Carro> carrosDisponiveis() {
 		List<Carro> carros = new ArrayList<>();
 		try {
+			
 			Statement statement = ConexaoUtil.getConn().createStatement();
 			ResultSet rs = statement.executeQuery("select * from Carro where disponivel = true");
 			while (rs.next()) {
@@ -204,5 +203,46 @@ public class CarroJDBC implements CarroDAO{
 		}
 		
 	}
+	
+	@Override
+	public List<Carro> listarCarroFilial(Integer idFilial) {
+		List<Carro> carros = new ArrayList<>();
+		try {
+			String sql = "select * from Carro c where c.dataDesapropriacao IS null and codFilial = ?";
+			PreparedStatement ps = ConexaoUtil.getConn().prepareStatement(sql);
+			ps.setInt(1, idFilial);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Carro carro = new Carro();
+				carro.setCodigo(rs.getInt("codigo"));
+				carro.setMarca(rs.getString("marca"));
+				carro.setModelo(rs.getString("modelo"));
+				carro.setValor(rs.getDouble("valor"));
+				carro.setCor(rs.getString("cor"));
+				Date data = rs.getDate("ano");
+				carro.setAno(
+						Instant.ofEpochMilli(data.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+				carro.setPlaca(rs.getString("placa"));
+				carro.setDisponivel(rs.getBoolean("disponivel"));
+				Date data1 = rs.getDate("dataAquisicao");
+				carro.setDataDeAquisicao(
+						Instant.ofEpochMilli(data1.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+				Date data2 = rs.getDate("dataDesapropriacao");
+				if(data2 != null) {
+					carro.setDataDeDesapropriacao(
+							Instant.ofEpochMilli(data2.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+				}
+				FilialDAO filialDao = AbstractFactory.get().filialDao();
+				carro.setFilial(filialDao.buscar(rs.getInt("codFilial")));
+				
+				carros.add(carro);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return carros;
+
+	}
+
 
 }

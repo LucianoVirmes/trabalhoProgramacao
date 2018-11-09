@@ -78,7 +78,7 @@ public class CadastroAluguelController {
     	CarroDialogFabrica carroDialog = new CarroDialogFabrica(stageDono);
     	Carro carro = carroDialog.showDialog();
     	if(carro != null) {
-    		populaComboCarro();
+    		//populaComboCarro();
     		cbCarro.setValue(carro);
     	}
     }
@@ -101,6 +101,8 @@ public class CadastroAluguelController {
     	Filial filial = filialDialog.showDialog();
     	if(filial != null) {
     		populaComboFilial();
+    		populaComboCarro(filial);
+    		populaComboFuncionario(filial);
     		cbFilial.setValue(filial);
     	}
     }
@@ -111,7 +113,7 @@ public class CadastroAluguelController {
     	FuncionarioDialogFabrica funcionarioDialog = new FuncionarioDialogFabrica(stageDono);
     	Funcionario func = funcionarioDialog.showDialog();
     	if(func != null) {
-    		populaComboFuncionario();
+    		//populaComboFuncionario();
     		cbFuncionario.setValue(func);
     	}
     }
@@ -194,9 +196,9 @@ public class CadastroAluguelController {
 		}
 	}
     
-    private void populaComboCarro(){
-    	cbCarro.getSelectionModel().clearSelection();
-		for(Carro car: carroDao.listar()){
+    private void populaComboCarro(Filial filial){
+    	// cbCarro.getSelectionModel().clearSelection();
+		for(Carro car: carroDao.listarCarroFilial(filial.getCodigo())){
 			cbCarro.getItems().add(car);
 		}
 	}
@@ -215,10 +217,11 @@ public class CadastroAluguelController {
 		}
 	}
     
-    private void populaComboFuncionario(){
-    	cbFuncionario.getSelectionModel().clearSelection();
-		for(Funcionario funcionario: funcionarioDao.listar()){
+    private void populaComboFuncionario(Filial filial){
+    	//cbFuncionario.getSelectionModel().clearSelection();
+		for(Funcionario funcionario: funcionarioDao.listarFuncionarioFilial(filial.getCodigo())){
 			cbFuncionario.getItems().add(funcionario);
 		}
 	}
+    
 }
