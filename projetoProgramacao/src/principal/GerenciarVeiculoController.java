@@ -163,6 +163,7 @@ public class GerenciarVeiculoController {
     @FXML
     void buscar(ActionEvent event) {
     	tblVeiculos.setItems(buscarVeiculo());
+    	
     }
 
     @FXML
@@ -172,6 +173,7 @@ public class GerenciarVeiculoController {
 		if(alerta.confirmaExclusao()) {
 			carroDao.desapropriar(carro);
 		}
+		novoVeiculo();
     }
 
     @FXML
@@ -186,6 +188,7 @@ public class GerenciarVeiculoController {
     	}else {
     		alerta.mensagemDeAlerta("preencha todos os campos");
     	}
+    	novoVeiculo();
     }
 
     @FXML
@@ -200,5 +203,18 @@ public class GerenciarVeiculoController {
 		for(Filial filial: filialDao.listar()){
 			cbFilial.getItems().add(filial);
 		}
+	}
+    
+    void novoVeiculo() {
+    	tfMarca.clear();
+		tfValor.clear();
+		tfModelo.clear();
+		tfPlaca.clear();
+		tfCor.clear();
+		if(ckbDisponivel.isSelected()) {
+			ckbDisponivel.setSelected(false);
+		}
+		cbFilial.getSelectionModel().clearSelection();
+		tblVeiculos.setItems(FXCollections.observableArrayList(carroDao.listar()));
 	}
 }

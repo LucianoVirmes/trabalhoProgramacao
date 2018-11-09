@@ -195,7 +195,7 @@ public class CarroJDBC implements CarroDAO{
 	@Override
 	public void desapropriar(Carro dado) {
 		try {
-			String sql = "update Carro set dataDesapropriacao = now() where codCarro = ?";
+			String sql = "update Carro set dataDesapropriacao = now() where codigo = ?";
 			PreparedStatement statement = ConexaoUtil.getConn().prepareStatement(sql);
 			statement.setInt(1, dado.getCodigo());
 			statement.executeUpdate();

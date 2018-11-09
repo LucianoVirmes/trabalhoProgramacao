@@ -70,8 +70,8 @@ public class GerenciarTipoAluguelController {
 	
 	@FXML
 	void excluir(ActionEvent event) {
-		tipoDao.excluir(tipo);
-		novoTipoAluguel();
+			tipoDao.excluir(tipo);
+			novoTipoAluguel();
 	}
 
 	@FXML
@@ -91,8 +91,7 @@ public class GerenciarTipoAluguelController {
 		}else {
 			alerta.mensagemDeAlerta("preencha todos os campos");
 		}
-		novoTipoAluguel();
-		tblTipoAluguel.refresh();			
+		novoTipoAluguel();			
 
 	}
 

@@ -75,7 +75,7 @@ public class AlugueisEmAtividadeController {
 	
 	public ObservableList<Aluguel> atualizaTabela(){
 		AluguelDAO aluguelDao = AbstractFactory.get().aluguelDao();
-		alugueis = FXCollections.observableArrayList(aluguelDao.listar());
+		alugueis = FXCollections.observableArrayList(aluguelDao.alugueisAtivos());
 		return alugueis;
 	}
 	

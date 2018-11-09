@@ -46,7 +46,7 @@ public class TipoAluguelJDBC implements TipoAluguelDAO{
 	@Override
 	public void excluir(TipoAluguel dado) {
 		try {
-			String sql = "delete from TipoAluguel where codigo = ?";
+			String sql = "update TipoAluguel set inativo = false where codigo = ?;";
 			PreparedStatement statement = ConexaoUtil.getConn().prepareStatement(sql);
 			statement.setInt(1, dado.getCodigo());
 			statement.executeUpdate();
@@ -60,7 +60,7 @@ public class TipoAluguelJDBC implements TipoAluguelDAO{
 		List<TipoAluguel> tipos = new ArrayList<>();
 		try {
 			Statement statement = ConexaoUtil.getConn().createStatement();
-			ResultSet rs = statement.executeQuery("select * from TipoAluguel");
+			ResultSet rs = statement.executeQuery("select * from TipoAluguel where inativo = true;");
 			while (rs.next()) {
 				TipoAluguel tipo = new TipoAluguel();
 				tipo.setCodigo(rs.getInt("codigo"));
@@ -80,7 +80,7 @@ public class TipoAluguelJDBC implements TipoAluguelDAO{
 	public TipoAluguel buscar(Integer codigo) {
 		TipoAluguel tipo = null;
 		try {
-			String sql = "select * from TipoAluguel where codigo = ?";
+			String sql = "select * from TipoAluguel where codigo = ? and inativo = true";
 			PreparedStatement ps = ConexaoUtil.getConn().prepareStatement(sql);
 			ps.setInt(1, codigo);
 			ResultSet rs1 = ps.executeQuery();
@@ -97,5 +97,6 @@ public class TipoAluguelJDBC implements TipoAluguelDAO{
 		return tipo;
 
 	}
+
 
 }
