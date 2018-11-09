@@ -76,9 +76,6 @@ public class CadastroFuncionarioController {
 			return false;
 		}
 		funcionario.setDataNascimento(dtNascimento.getValue());
-		if(!dtNascimento.hasProperties()) {
-			return false;
-		}
 		funcionario.setEmail(tfEmail.getText());
 		if(tfEmail.getText().isEmpty()) {
 			return false;
@@ -96,7 +93,7 @@ public class CadastroFuncionarioController {
 			return false;
 		}
 		funcionario.setFilial(cbFilial.getValue());
-		if(!cbFilial.isArmed()) {
+		if(cbFilial.getSelectionModel().getSelectedItem()==null) {
 			return false;
 		}
 		if(tfSalario.getText().isEmpty()) {

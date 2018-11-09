@@ -72,9 +72,6 @@ public class CadastroClienteController {
 			return false;
 		}
 		cliente.setDataNascimento(dtNascimento.getValue());
-		if(!dtNascimento.hasProperties()) {
-			return false;
-		}
 		return true;
     }
     

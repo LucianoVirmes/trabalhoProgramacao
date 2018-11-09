@@ -94,9 +94,6 @@ public class DevolverVeiculoController {
 		if(tfKmChegada.getText().isEmpty()) {
 			retorno = false;
 		}
-		System.out.println(retorno);
-		System.out.println(devolucao.getAluguel().getQuilometrosSaida());
-		System.out.println(aluguel);
 		return retorno;
 	}
 	
@@ -140,7 +137,7 @@ public class DevolverVeiculoController {
 	}
 	
 	void valorTotal(){
-		double valor = ((devolucao.getAluguel().getCarro().getValor() + devolucao.getAluguel().getTipoAluguel().getValor()) +
+		double valor = (((devolucao.getAluguel().getCarro().getValor()/1000) + devolucao.getAluguel().getTipoAluguel().getValor()) +
 				((devolucao.calculaQuilometros()/1000) * devolucao.getAluguel().getTipoAluguel().getTaxa()));
 		valor = valor - ((devolucao.getTipoPagamento().getDesconto() * valor)/100);
 		devolucao.setValorTotal(valor);	

@@ -115,6 +115,7 @@ public class GerenciarFuncionarioController {
 		tfEmail.setText(func.getEmail());
 		tfSenha.setText(func.getSenha());
 		tfSalario.setText(func.getSalario().toString());
+		cbFilial.setValue(func.getFilial());
 		dtpDataNasc.setValue(func.getDataNascimento());
 	}
 

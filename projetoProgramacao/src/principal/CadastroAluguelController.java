@@ -1,4 +1,6 @@
 package principal;
+import java.time.LocalDate;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -146,27 +148,31 @@ public class CadastroAluguelController {
     private boolean populaAluguel() {
     	aluguel = new Aluguel();
     	aluguel.setCarro(cbCarro.getValue());
-    	if(!cbCarro.isArmed()) {
+    	if(cbCarro.getSelectionModel().getSelectedItem()==null) {
     		return false;
     	}
     	aluguel.setCliente(cbCliente.getValue());
-    	if(!cbCliente.isArmed()) {
+    	if(cbCliente.getSelectionModel().getSelectedItem()==null) {
     		return false;
     	}
-    	aluguel.setDataAluguel(dtAluguel.getValue());
-    	if(!dtAluguel.isArmed()) {
+    	if(dtAluguel.isArmed()) {
+    		aluguel.setDataAluguel(dtAluguel.getValue());
+    	}else {    		
+    		aluguel.setDataAluguel(LocalDate.now());
+    	}
+    	if(aluguel.getDataAluguel()== null) {
     		return false;
     	}
     	aluguel.setFilial(cbFilial.getValue());
-    	if(!cbFilial.isArmed()) {
+    	if(cbFilial.getSelectionModel().getSelectedItem()==null) {
     		return false;
     	}
     	aluguel.setFuncionario(cbFuncionario.getValue());
-    	if(!cbFuncionario.isArmed()) {
+    	if(cbFuncionario.getSelectionModel().getSelectedItem()==null) {
     		return false;
     	}
     	aluguel.setTipoAluguel(cbTipoAluguel.getValue());
-    	if(!cbTipoAluguel.isArmed()) {
+    	if(cbTipoAluguel.getSelectionModel().getSelectedItem()==null) {
     		return false;
     	}
     	if(tfKmSaida.getText().isEmpty()) {
