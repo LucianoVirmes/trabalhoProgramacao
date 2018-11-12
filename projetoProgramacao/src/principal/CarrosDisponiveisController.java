@@ -75,8 +75,14 @@ public class CarrosDisponiveisController {
     
     @FXML
     void maisBarato(ActionEvent event) {
-    	carro = carroDao.buscar(bancoDao.codigoCarroMaisBarato());
-    	tfPlaca.setText(carro.getPlaca());
+    	if(LoginController.getFuncionario() == null) {
+    		AlertaFactory alerta = new AlertaFactory();
+			alerta.mensagemDeAlerta("Você não possui acesso a este recurso com este usuário");
+    	}else {
+    		carro = carroDao.buscar(bancoDao.codigoCarroMaisBarato(LoginController.getFuncionario().getFilial().getCodigo()));
+    		tfPlaca.setText(carro.getPlaca());    		
+    	}
+    		
     }
     
     public ObservableList<Carro> atualizaTabela(){

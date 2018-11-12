@@ -75,7 +75,7 @@ public class CarroDialogController {
     
     @FXML
     void maisBarato(ActionEvent event) {
-    	carro = carroDao.buscar(bancoDao.codigoCarroMaisBarato());
+    	carro = carroDao.buscar(bancoDao.codigoCarroMaisBarato(LoginController.getFuncionario().getFilial().getCodigo()));
     	tfPlaca.setText(carro.getPlaca());
     }
     
