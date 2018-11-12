@@ -36,6 +36,7 @@ public class LoginController {
     	}
     	else if (funcionarioDao.verificaEmail(tfEmail.getText()) != null) {
     		f = funcionarioDao.verificaEmail(tfEmail.getText());
+    		CadastroAluguelController.setFuncionario(f);
     		if(f.getSenha().equals(pfSenha.getText())){
     			Main.changeScreen(TipoTela.MENU);
     		}else {
@@ -45,4 +46,6 @@ public class LoginController {
     		alerta.mensagemDeAlerta("email incompatível");
     	}
      }
+    
+    
 }

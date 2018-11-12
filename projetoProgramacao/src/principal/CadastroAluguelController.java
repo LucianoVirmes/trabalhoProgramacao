@@ -66,6 +66,12 @@ public class CadastroAluguelController {
     
     private Aluguel aluguel;
     
+    private static Funcionario funcionarioLogado;
+    
+    public static void setFuncionario(Funcionario func) {
+    	funcionarioLogado = func;
+    }
+    
     @FXML
     void buscarCliente(ActionEvent event) {
     	Stage stageDono = (Stage)btnBuscarCliente.getScene().getWindow();
@@ -137,11 +143,11 @@ public class CadastroAluguelController {
     	if(aluguel.getDataAluguel()== null) {
     		return false;
     	}
-    	aluguel.setFilial(cbFilial.getValue());
+    	aluguel.setFilial(funcionarioLogado.getFilial());
     	if(cbFilial.getSelectionModel().getSelectedItem()==null) {
     		return false;
     	}
-    	aluguel.setFuncionario(cbFuncionario.getValue());
+    	aluguel.setFuncionario(funcionarioLogado);
     	if(cbFuncionario.getSelectionModel().getSelectedItem()==null) {
     		return false;
     	}
@@ -186,12 +192,15 @@ public class CadastroAluguelController {
 		for(Filial filial: filialDao.listar()){
 			cbFilial.getItems().add(filial);
 		}
+		cbFilial.setValue(funcionarioLogado.getFilial());
 	}
     
     private void populaComboFuncionario(Filial filial){
 		for(Funcionario funcionario: funcionarioDao.listarFuncionarioFilial(filial.getCodigo())){
 			cbFuncionario.getItems().add(funcionario);
 		}
+		cbFuncionario.setValue(funcionarioLogado);
 	}
+ 
     
 }
