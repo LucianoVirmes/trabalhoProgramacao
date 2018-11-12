@@ -55,6 +55,7 @@ public class CadastroVeiculoController {
 	@FXML
 	private void initialize() {
 		populaCombo();
+		cbkDisponivel.setSelected(true);
 	}
 
 	private void populaCombo() {
