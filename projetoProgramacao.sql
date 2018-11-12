@@ -13,7 +13,8 @@ create table TipoAluguel(
 	codigo bigint(20) primary key auto_increment not null,
     descricao varchar(45) not null,
     valor decimal(12,2) not null,
-	taxa decimal(12,2) not null
+	taxa decimal(12,2) not null,
+    inativo boolean default true
 );
 
 create table Cliente(
@@ -301,7 +302,7 @@ delimiter ;
 
 select * from funcionario;
 
-select carro_mais_alugado();
+select carro_mais_barato();
 
 select * from carro;
 -- Procedure
@@ -348,3 +349,14 @@ delimiter ;
 
 call reajusta_taxa();
 
+select ta.* from TipoAluguel ta join Aluguel a on a.codTipoAluguel = ta.codigo
+											join Devolucao d on d.codAluguel = a.codigo
+where d.dataChegada is null;
+
+update TipoAluguel set inativo = false where codigo = ?;
+
+select * from TipoAluguel where inativo = true;
+
+select * from Funcionario;
+
+select * from filial join carro
