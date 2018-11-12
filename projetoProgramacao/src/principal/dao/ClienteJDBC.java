@@ -128,7 +128,7 @@ public class ClienteJDBC implements ClienteDAO {
 				cliente.setDataDeCadastro(
 						Instant.ofEpochMilli(data.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
 
-				cliente.setCnh(String.valueOf(rs1.getInt("cnh")));
+				cliente.setCnh(rs1.getString("cnh"));
 
 			}
 		} catch (SQLException e) {

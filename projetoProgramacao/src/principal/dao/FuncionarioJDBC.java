@@ -194,6 +194,9 @@ public class FuncionarioJDBC implements FuncionarioDAO {
 				funcionario.setSenha(rs1.getString("senha"));
 				funcionario.setSalario(rs1.getDouble("salario"));
 				
+				FilialJDBC filialJDBC = new FilialJDBC();
+				funcionario.setFilial(filialJDBC.buscar(rs1.getInt("codFilial")));
+				
 				data = rs1.getDate("dataDemissao");
 				if(data != null) {
 					funcionario.setDataDemissao(

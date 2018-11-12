@@ -31,11 +31,16 @@ public class MenuController {
 	void abreTelaCadastroFilial(ActionEvent event) {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("CadastroFilial.fxml"));
-		try {
-			AnchorPane View = (AnchorPane) loader.load();
-			bpPrincipal.setCenter(View);
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		if(LoginController.getFuncionario() == null) {
+			try {
+				AnchorPane View = (AnchorPane) loader.load();
+				bpPrincipal.setCenter(View);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}			
+		}else {
+			AlertaFactory alerta = new AlertaFactory();
+			alerta.mensagemDeAlerta("Você não tem acesso a esta tela");
 		}
 	}
 
@@ -82,13 +87,17 @@ public class MenuController {
 	void abreTelaCadastroFuncionario(ActionEvent event) {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("CadastroFuncionario.fxml"));
-		try {
-			AnchorPane View = (AnchorPane) loader.load();
-			bpPrincipal.setCenter(View);
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		if(LoginController.getFuncionario() == null) {
+			try {
+				AnchorPane View = (AnchorPane) loader.load();
+				bpPrincipal.setCenter(View);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}else {
+			AlertaFactory alerta = new AlertaFactory();
+			alerta.mensagemDeAlerta("Você não tem acesso a esta tela");
 		}
-
 	}
 
 	/* Aba gerenciar */
@@ -96,13 +105,17 @@ public class MenuController {
 	void abreTelaGerenciarFuncionario(ActionEvent event) {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("GerenciarFuncionario.fxml"));
-		try {
-			AnchorPane View = (AnchorPane) loader.load();
-			bpPrincipal.setCenter(View);
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		if(LoginController.getFuncionario() == null) {
+			try {
+				AnchorPane View = (AnchorPane) loader.load();
+				bpPrincipal.setCenter(View);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}else {
+			AlertaFactory alerta = new AlertaFactory();
+			alerta.mensagemDeAlerta("Você não tem acesso a esta tela");
 		}
-
 	}
 
 	@FXML

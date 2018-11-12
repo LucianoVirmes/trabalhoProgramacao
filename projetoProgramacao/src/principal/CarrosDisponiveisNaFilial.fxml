@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="principal.CarroDialogController">
+   <children>
+      <Pane prefHeight="600.0" prefWidth="800.0" />
+      <Button fx:id="btnCarroMaisBarato" layoutX="34.0" layoutY="28.0" mnemonicParsing="false" onAction="#maisBarato" text="Carro mais barato">
+         <font>
+            <Font name="Comic Sans MS" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="tbnBuscar" layoutX="328.0" layoutY="78.0" mnemonicParsing="false" onAction="#buscar" prefHeight="0.0" prefWidth="69.0" text="Buscar">
+         <font>
+            <Font name="Comic Sans MS" size="13.0" />
+         </font>
+      </Button>
+      <TextField fx:id="tfPlaca" layoutX="132.0" layoutY="78.0" prefHeight="29.0" prefWidth="196.0" />
+      <TableView fx:id="tblCarros" layoutX="27.0" layoutY="125.0" onMouseClicked="#selecionaCarro" prefHeight="424.0" prefWidth="751.0">
+         <columns>
+            <TableColumn fx:id="tbcPlaca" prefWidth="61.042545318603516" text="Placa" />
+            <TableColumn fx:id="tbcMarca" prefWidth="149.8794708251953" text="Marca" />
+            <TableColumn fx:id="tbcModelo" minWidth="0.0" prefWidth="141.1205596923828" text="Modelo" />
+            <TableColumn fx:id="tbcDisponibilidade" prefWidth="149.77304077148438" text="Disponibilidade" />
+            <TableColumn fx:id="tbcValor" minWidth="0.0" prefWidth="126.2269287109375" text="Valor" />
+            <TableColumn fx:id="tbcCor" minWidth="0.0" prefWidth="119.0" text="Cor" />
+         </columns>
+      </TableView>
+      <Label layoutX="30.0" layoutY="83.0" text="Placa do veiculo">
+         <font>
+            <Font name="Comic Sans MS" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="554.0" layoutY="22.0" text="Carros disponiveis">
+         <font>
+            <Font name="Comic Sans MS" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

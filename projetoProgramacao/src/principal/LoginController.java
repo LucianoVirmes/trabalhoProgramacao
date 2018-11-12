@@ -22,6 +22,14 @@ public class LoginController {
     
     private FuncionarioDAO funcionarioDao = AbstractFactory.get().funcionarioDao(); 
     
+
+	// funcionario determinado por login
+    private static Funcionario funcionarioLogado;
+    
+    public static Funcionario getFuncionario() {
+    	return funcionarioLogado;
+    }
+    
     /**
      * verifica se o email e senha sao compativeis
      * ou se é admin admin, se for realiza login. 
@@ -29,15 +37,15 @@ public class LoginController {
      */
     @FXML
     void entrar(ActionEvent event) {
-    	Funcionario f = new Funcionario();
+    	Funcionario funcio = new Funcionario();
     	AlertaFactory alerta = new AlertaFactory();
     	if(tfEmail.getText().equals("admin") && pfSenha.getText().equals("admin")) {
     		Main.changeScreen(TipoTela.MENU);
     	}
     	else if (funcionarioDao.verificaEmail(tfEmail.getText()) != null) {
-    		f = funcionarioDao.verificaEmail(tfEmail.getText());
-    		CadastroAluguelController.setFuncionario(f);
-    		if(f.getSenha().equals(pfSenha.getText())){
+    		funcio = funcionarioDao.verificaEmail(tfEmail.getText());
+    		if(funcio.getSenha().equals(pfSenha.getText())){
+    			funcionarioLogado = funcio;
     			Main.changeScreen(TipoTela.MENU);
     		}else {
     			alerta.mensagemDeAlerta("Senha incompatível");
