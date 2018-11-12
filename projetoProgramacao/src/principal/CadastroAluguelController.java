@@ -66,6 +66,7 @@ public class CadastroAluguelController {
     
     private Aluguel aluguel;
     
+    // funcionario determinado por login
     private static Funcionario funcionarioLogado;
     
     public static void setFuncionario(Funcionario func) {
