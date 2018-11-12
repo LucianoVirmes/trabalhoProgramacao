@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
 	private static Stage stage;
+	
+	
 
 	/***
 	 * Scenes criados como estaticos e privados para carregados no start
@@ -66,4 +68,6 @@ public class Main extends Application {
 		}
 		launch(args);
 	}
+	
+	
 }
