@@ -18,7 +18,7 @@
                <font>
                   <Font name="Comic Sans MS" size="13.0" />
                </font></Label>
-            <Label layoutX="82.0" layoutY="158.0" text="Carro:">
+            <Label layoutX="81.0" layoutY="201.0" text="Carro:">
                <font>
                   <Font name="Comic Sans MS" size="13.0" />
                </font></Label>
@@ -27,23 +27,20 @@
                   <Font name="Comic Sans MS" size="24.0" />
                </font></Text>
             <DatePicker fx:id="dtAluguel" layoutX="129.0" layoutY="103.0" />
-            <ComboBox fx:id="cbCarro" layoutX="127.0" layoutY="153.0" prefHeight="25.0" prefWidth="192.0" />
-            <Button fx:id="btnBuscarCarro" layoutX="318.0" layoutY="153.0" mnemonicParsing="false" onAction="#buscarCarro" text="Buscar">
+            <ComboBox fx:id="cbFilial" layoutX="127.0" layoutY="151.0" prefHeight="29.0" prefWidth="192.0" />
+            <Button fx:id="btnBuscarFilial" layoutX="318.0" layoutY="151.0" mnemonicParsing="false" onAction="#buscarFilial" text="Buscar">
                <font>
                   <Font name="Comic Sans MS" size="13.0" />
                </font></Button>
-            <ComboBox fx:id="cbCliente" layoutX="127.0" layoutY="194.0" prefHeight="25.0" prefWidth="192.0" />
-            <Button fx:id="btnBuscarCliente" layoutX="317.0" layoutY="194.0" mnemonicParsing="false" onAction="#buscarCliente" text="Buscar">
+            <ComboBox fx:id="cbCarro" layoutX="126.0" layoutY="196.0" prefHeight="25.0" prefWidth="192.0" />
+            <ComboBox fx:id="cbFuncionario" layoutX="127.0" layoutY="240.0" prefHeight="25.0" prefWidth="192.0" />
+            <ComboBox fx:id="cbCliente" layoutX="126.0" layoutY="286.0" prefHeight="29.0" prefWidth="192.0" />
+            <Button fx:id="btnBuscarCliente" layoutX="316.0" layoutY="286.0" mnemonicParsing="false" onAction="#buscarCliente" prefHeight="7.0" prefWidth="59.0" text="Buscar">
                <font>
                   <Font name="Comic Sans MS" size="13.0" />
                </font></Button>
-            <ComboBox fx:id="cbTipoAluguel" layoutX="127.0" layoutY="242.0" prefHeight="25.0" prefWidth="209.0" />
-            <Button fx:id="btnBuscarTipoAluguel" layoutX="336.0" layoutY="242.0" mnemonicParsing="false" onAction="#buscarTipoAluguel" text="Buscar">
-               <font>
-                  <Font name="Comic Sans MS" size="13.0" />
-               </font></Button>
-            <ComboBox fx:id="cbFuncionario" layoutX="126.0" layoutY="288.0" prefHeight="25.0" prefWidth="192.0" />
-            <Button fx:id="btnBuscarFuncionario" layoutX="317.0" layoutY="288.0" mnemonicParsing="false" onAction="#buscarFuncionario" text="Buscar">
+            <ComboBox fx:id="cbTipoAluguel" layoutX="126.0" layoutY="338.0" prefHeight="29.0" prefWidth="209.0" />
+            <Button fx:id="btnBuscarTipoAluguel" layoutX="335.0" layoutY="338.0" mnemonicParsing="false" onAction="#buscarTipoAluguel" text="Buscar">
                <font>
                   <Font name="Comic Sans MS" size="13.0" />
                </font></Button>
@@ -51,25 +48,20 @@
                <font>
                   <Font name="Comic Sans MS" size="13.0" />
                </font></Label>
-            <Label layoutX="21.0" layoutY="248.0" text="Tipo de Aluguel:">
+            <Label layoutX="21.0" layoutY="342.0" text="Tipo de Aluguel:">
                <font>
                   <Font name="Comic Sans MS" size="13.0" />
                </font></Label>
-            <Label layoutX="71.0" layoutY="200.0" text="Cliente:">
+            <Label layoutX="70.0" layoutY="292.0" text="Cliente:">
                <font>
                   <Font name="Comic Sans MS" size="13.0" />
                </font></Label>
-            <Label layoutX="87.0" layoutY="339.0" text="Filial">
+            <Label layoutX="87.0" layoutY="154.0" text="Filial:">
                <font>
                   <Font name="Comic Sans MS" size="13.0" />
                </font></Label>
-            <ComboBox fx:id="cbFilial" layoutX="127.0" layoutY="336.0" prefHeight="25.0" prefWidth="192.0" />
-            <Button fx:id="btnBuscarFilial" layoutX="318.0" layoutY="336.0" mnemonicParsing="false" onAction="#buscarFilial" text="Buscar">
-               <font>
-                  <Font name="Comic Sans MS" size="13.0" />
-               </font></Button>
-            <TextField fx:id="tfKmSaida" layoutX="181.0" layoutY="393.0" />
-            <Label layoutX="53.0" layoutY="293.0" text="Funcionario">
+            <TextField fx:id="tfKmSaida" layoutX="184.0" layoutY="393.0" prefHeight="27.0" prefWidth="209.0" />
+            <Label layoutX="53.0" layoutY="244.0" text="Funcionario:">
                <font>
                   <Font name="Comic Sans MS" size="13.0" />
                </font></Label>
@@ -77,6 +69,11 @@
                <font>
                   <Font name="Comic Sans MS" size="14.0" />
                </font></Button>
+            <Label layoutX="416.0" layoutY="157.0" text="Escolha a filial antes de selecionar carro e funcionario">
+               <font>
+                  <Font name="Comic Sans MS" size="14.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

@@ -31,9 +31,6 @@ public class CadastroAluguelController {
     private ComboBox<Carro> cbCarro;
     
     @FXML
-    private Button btnBuscarCarro;
-    
-    @FXML
     private ComboBox<Cliente> cbCliente;
     
     @FXML
@@ -47,9 +44,6 @@ public class CadastroAluguelController {
     
     @FXML
     private ComboBox<Funcionario> cbFuncionario;
-    
-    @FXML
-    private Button btnBuscarFuncionario;
     
     @FXML
     private ComboBox<Filial> cbFilial;
@@ -73,16 +67,6 @@ public class CadastroAluguelController {
     private Aluguel aluguel;
     
     @FXML
-    void buscarCarro(ActionEvent event) {
-    	Stage stageDono = (Stage)btnBuscarCarro.getScene().getWindow();
-    	CarroDialogFabrica carroDialog = new CarroDialogFabrica(stageDono);
-    	Carro carro = carroDialog.showDialog();
-    	if(carro != null) {
-    		cbCarro.setValue(carro);
-    	}
-    }
-    
-    @FXML
     void buscarCliente(ActionEvent event) {
     	Stage stageDono = (Stage)btnBuscarCliente.getScene().getWindow();
     	ClienteDialogFabrica clienteDialog = new ClienteDialogFabrica(stageDono);
@@ -103,16 +87,6 @@ public class CadastroAluguelController {
     		populaComboCarro(filial);
     		populaComboFuncionario(filial);
     		cbFilial.setValue(filial);
-    	}
-    }
-
-    @FXML
-    void buscarFuncionario(ActionEvent event) {
-    	Stage stageDono = (Stage)btnBuscarFuncionario.getScene().getWindow();
-    	FuncionarioDialogFabrica funcionarioDialog = new FuncionarioDialogFabrica(stageDono);
-    	Funcionario func = funcionarioDialog.showDialog();
-    	if(func != null) {
-    		cbFuncionario.setValue(func);
     	}
     }
 
@@ -195,7 +169,6 @@ public class CadastroAluguelController {
 	}
     
     private void populaComboCarro(Filial filial){
-    	// cbCarro.getSelectionModel().clearSelection();
 		for(Carro car: carroDao.listarCarroFilial(filial.getCodigo())){
 			cbCarro.getItems().add(car);
 		}
@@ -216,7 +189,6 @@ public class CadastroAluguelController {
 	}
     
     private void populaComboFuncionario(Filial filial){
-    	//cbFuncionario.getSelectionModel().clearSelection();
 		for(Funcionario funcionario: funcionarioDao.listarFuncionarioFilial(filial.getCodigo())){
 			cbFuncionario.getItems().add(funcionario);
 		}
