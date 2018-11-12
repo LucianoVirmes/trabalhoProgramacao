@@ -32,8 +32,8 @@ public class MenuController {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("CadastroFilial.fxml"));
 		try {
-			AnchorPane cursoView = (AnchorPane) loader.load();
-			bpPrincipal.setCenter(cursoView);
+			AnchorPane View = (AnchorPane) loader.load();
+			bpPrincipal.setCenter(View);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -44,8 +44,8 @@ public class MenuController {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("CadastroVeiculo.fxml"));
 		try {
-			AnchorPane cursoView = (AnchorPane) loader.load();
-			bpPrincipal.setCenter(cursoView);
+			AnchorPane View = (AnchorPane) loader.load();
+			bpPrincipal.setCenter(View);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -57,8 +57,8 @@ public class MenuController {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("CadastroAluguel.fxml"));
 		try {
-			AnchorPane cursoView = (AnchorPane) loader.load();
-			bpPrincipal.setCenter(cursoView);
+			AnchorPane View = (AnchorPane) loader.load();
+			bpPrincipal.setCenter(View);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -70,8 +70,8 @@ public class MenuController {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("CadastroCliente.fxml"));
 		try {
-			AnchorPane cursoView = (AnchorPane) loader.load();
-			bpPrincipal.setCenter(cursoView);
+			AnchorPane View = (AnchorPane) loader.load();
+			bpPrincipal.setCenter(View);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -83,8 +83,8 @@ public class MenuController {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("CadastroFuncionario.fxml"));
 		try {
-			AnchorPane cursoView = (AnchorPane) loader.load();
-			bpPrincipal.setCenter(cursoView);
+			AnchorPane View = (AnchorPane) loader.load();
+			bpPrincipal.setCenter(View);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -97,8 +97,8 @@ public class MenuController {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("GerenciarFuncionario.fxml"));
 		try {
-			AnchorPane cursoView = (AnchorPane) loader.load();
-			bpPrincipal.setCenter(cursoView);
+			AnchorPane View = (AnchorPane) loader.load();
+			bpPrincipal.setCenter(View);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -110,8 +110,8 @@ public class MenuController {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("GerenciarVeiculo.fxml"));
 		try {
-			AnchorPane cursoView = (AnchorPane) loader.load();
-			bpPrincipal.setCenter(cursoView);
+			AnchorPane View = (AnchorPane) loader.load();
+			bpPrincipal.setCenter(View);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -123,8 +123,8 @@ public class MenuController {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("GerenciarTipoAluguel.fxml"));
 		try {
-			AnchorPane cursoView = (AnchorPane) loader.load();
-			bpPrincipal.setCenter(cursoView);
+			AnchorPane View = (AnchorPane) loader.load();
+			bpPrincipal.setCenter(View);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -205,7 +205,7 @@ public class MenuController {
 							 url.getPath(),
 							 null,
 							 ConexaoUtil.getConn());
-			JasperViewer.viewReport(jasperPrint);
+			JasperViewer.viewReport(jasperPrint, false);
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
@@ -220,7 +220,7 @@ public class MenuController {
 							 url.getPath(),
 							 null,
 							 ConexaoUtil.getConn());
-			JasperViewer.viewReport(jasperPrint);
+			JasperViewer.viewReport(jasperPrint, false);
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
@@ -235,7 +235,7 @@ public class MenuController {
 							 url.getPath(),
 							 null,
 							 ConexaoUtil.getConn());
-			JasperViewer.viewReport(jasperPrint);
+			JasperViewer.viewReport(jasperPrint, false);
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
@@ -250,7 +250,7 @@ public class MenuController {
 							 url.getPath(),
 							 null,
 							 ConexaoUtil.getConn());
-			JasperViewer.viewReport(jasperPrint);
+			JasperViewer.viewReport(jasperPrint, false);
 		} catch (JRException e) {
 			e.printStackTrace();
 		}

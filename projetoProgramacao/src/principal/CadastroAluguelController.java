@@ -78,7 +78,6 @@ public class CadastroAluguelController {
     	CarroDialogFabrica carroDialog = new CarroDialogFabrica(stageDono);
     	Carro carro = carroDialog.showDialog();
     	if(carro != null) {
-    		//populaComboCarro();
     		cbCarro.setValue(carro);
     	}
     }
@@ -113,7 +112,6 @@ public class CadastroAluguelController {
     	FuncionarioDialogFabrica funcionarioDialog = new FuncionarioDialogFabrica(stageDono);
     	Funcionario func = funcionarioDialog.showDialog();
     	if(func != null) {
-    		//populaComboFuncionario();
     		cbFuncionario.setValue(func);
     	}
     }
