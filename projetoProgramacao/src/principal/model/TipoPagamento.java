@@ -46,4 +46,5 @@ public class TipoPagamento {
 		return this.descricao + " : " + this.desconto.toString();
 	}
 
+	
 }
