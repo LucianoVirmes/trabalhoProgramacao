@@ -45,7 +45,6 @@
                </font>
             </Label>
             <ComboBox fx:id="cbTipoPagamento" layoutX="152.0" layoutY="432.0" prefHeight="27.0" prefWidth="231.0" />
-            <TextField fx:id="tfCodAluguel" layoutX="666.0" layoutY="389.0" prefHeight="27.0" prefWidth="107.0" />
             <Label layoutX="31.0" layoutY="512.0" text="Valor Total:">
                <font>
                   <Font name="Comic Sans MS" size="18.0" />
@@ -76,7 +75,11 @@
                   <Font name="Comic Sans MS" size="14.0" />
                </font>
             </Button>
-            <Label layoutX="543.0" layoutY="394.0" text="Código do aluguel:" />
+            <Label layoutX="543.0" layoutY="394.0" text="Código do aluguel:">
+               <font>
+                  <Font name="Comic Sans MS" size="14.0" />
+               </font></Label>
+            <Label fx:id="lblCodigo" layoutX="670.0" layoutY="394.0" prefHeight="17.0" prefWidth="74.0" />
          </children>
       </Pane>
    </children>

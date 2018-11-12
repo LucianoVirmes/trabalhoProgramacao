@@ -208,7 +208,7 @@ public class CarroJDBC implements CarroDAO{
 	public List<Carro> listarCarroFilial(Integer idFilial) {
 		List<Carro> carros = new ArrayList<>();
 		try {
-			String sql = "select * from Carro c where c.dataDesapropriacao IS null and codFilial = ?";
+			String sql = "select * from Carro c where c.dataDesapropriacao IS null and disponivel = true and codFilial = ?";
 			PreparedStatement ps = ConexaoUtil.getConn().prepareStatement(sql);
 			ps.setInt(1, idFilial);
 			ResultSet rs = ps.executeQuery();

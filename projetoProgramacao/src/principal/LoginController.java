@@ -24,10 +24,14 @@ public class LoginController {
     
 
 	// funcionario determinado por login
-    private static Funcionario funcionarioLogado;
+    private static Funcionario funcionarioLogado = null;
     
     public static Funcionario getFuncionario() {
     	return funcionarioLogado;
+    }
+    
+    public static void setFuncionario(Funcionario funcionario) {
+    	funcionarioLogado = funcionario;
     }
     
     /**

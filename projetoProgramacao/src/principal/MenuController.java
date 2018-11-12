@@ -60,14 +60,18 @@ public class MenuController {
 	@FXML
 	void abreTelaCadastroAluguel(ActionEvent event) {
 		FXMLLoader loader = new FXMLLoader();
+		AlertaFactory alerta = new AlertaFactory();
 		loader.setLocation(getClass().getResource("CadastroAluguel.fxml"));
-		try {
-			AnchorPane View = (AnchorPane) loader.load();
-			bpPrincipal.setCenter(View);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-
+		if(LoginController.getFuncionario() == null) {
+    		alerta.mensagemDeAlerta("Você deve logar como funcionario para realizar esta ação");
+		}else{
+			try {
+				AnchorPane View = (AnchorPane) loader.load();
+				bpPrincipal.setCenter(View);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}	
 	}
 
 	@FXML
@@ -171,6 +175,7 @@ public class MenuController {
     @FXML
     void saiDoMenu(ActionEvent event) {
     	Main.changeScreen(TipoTela.LOGIN);
+    	LoginController.setFuncionario(null);
     }	
 	
     @FXML

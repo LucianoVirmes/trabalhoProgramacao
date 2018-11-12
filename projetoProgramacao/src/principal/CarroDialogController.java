@@ -81,7 +81,7 @@ public class CarroDialogController {
     
     public ObservableList<Carro> atualizaTabela(){
     	CarroDAO carroDao = AbstractFactory.get().carroDao();
-		carros = FXCollections.observableArrayList(carroDao.listarCarroFilial(LoginController.getFuncionario().getCodigo()));
+		carros = FXCollections.observableArrayList(carroDao.listarCarroFilial(LoginController.getFuncionario().getFilial().getCodigo()));
 		return carros;
 	}
     

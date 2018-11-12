@@ -5,7 +5,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import principal.dao.AbstractFactory;
@@ -22,9 +21,6 @@ import principal.model.TipoAluguel;
 
 public class CadastroAluguelController {
 
-    @FXML
-    private DatePicker dtAluguel;
-    
     @FXML
     private ComboBox<Carro> cbCarro;
     
@@ -106,20 +102,16 @@ public class CadastroAluguelController {
     @FXML
     void realizarAluguel(ActionEvent event) {
     	AlertaFactory alerta = new AlertaFactory();
-    	if(populaAluguel()) {
-    		if(LoginController.getFuncionario() == null) {
-    			alerta.mensagemDeAlerta("Você deve logar como funcionario para realizar esta ação");
-    		}else {
-    			if(alerta.confirmaAceitar()) {
-    				aluguelDao.inserir(aluguel); 
-    				Carro car = aluguel.getCarro();
-    				car.setDisponivel(false);
-    				carroDao.alterar(car);
-    			}    			
-    		}
-    	}else {
-    		alerta.mensagemDeAlerta("preencha todos os campos");
-    	}
+		if(populaAluguel()) {
+			if(alerta.confirmaAceitar()) {
+				aluguelDao.inserir(aluguel); 
+				Carro car = aluguel.getCarro();
+				car.setDisponivel(false);
+				carroDao.alterar(car);
+			}    			
+		}else {
+			alerta.mensagemDeAlerta("preencha todos os campos");
+		}    		
  	
 	}
 
@@ -133,15 +125,9 @@ public class CadastroAluguelController {
     	aluguel.setCliente(cbCliente.getValue());
     	if(cbCliente.getSelectionModel().getSelectedItem()==null) {
     		return false;
-    	}
-    	if(dtAluguel.isArmed()) {
-    		aluguel.setDataAluguel(dtAluguel.getValue());
-    	}else {    		
-    		aluguel.setDataAluguel(LocalDate.now());
-    	}
-    	if(aluguel.getDataAluguel()== null) {
-    		return false;
-    	}
+    	}    		
+    	aluguel.setDataAluguel(LocalDate.now());
+    
     	aluguel.setFilial(LoginController.getFuncionario().getFilial());
     	aluguel.setFuncionario(LoginController.getFuncionario());
     	aluguel.setTipoAluguel(cbTipoAluguel.getValue());
@@ -167,7 +153,7 @@ public class CadastroAluguelController {
 		}
 	}
     
-    private void populaComboCarro(){
+    private void populaComboCarro() {
     	Filial filial = LoginController.getFuncionario().getFilial(); 
 		for(Carro car: carroDao.listarCarroFilial(filial.getCodigo())){
 			cbCarro.getItems().add(car);

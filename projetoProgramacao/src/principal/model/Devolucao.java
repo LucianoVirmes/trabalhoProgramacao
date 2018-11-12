@@ -22,7 +22,7 @@ public class Devolucao {
 			Double km = this.quilometroChegada - this.aluguel.getQuilometrosSaida();			
 			return km;
 		}
-		return 0.0;
+		return null;
 	}
 	
 	public boolean validaKm() {

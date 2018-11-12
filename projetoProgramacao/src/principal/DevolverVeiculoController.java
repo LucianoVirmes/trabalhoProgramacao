@@ -1,6 +1,7 @@
 package principal;
 
 import java.time.LocalDate;
+import java.util.Locale;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -52,8 +53,8 @@ public class DevolverVeiculoController {
 	@FXML
 	private Label lblValor;	
 	
-    @FXML
-    private TextField tfCodAluguel;
+	@FXML
+	private Label lblCodigo;
 	
 	@FXML
     private Button btnDevolver;
@@ -82,18 +83,17 @@ public class DevolverVeiculoController {
 		Aluguel aluguel = new Aluguel();
 		devolucao = new Devolucao();
 		
-		aluguel = aluguelDao.buscar(Integer.valueOf(tfCodAluguel.getText()));
+		aluguel = aluguelDao.buscar(Integer.valueOf(lblCodigo.getText()));
 		devolucao.setAluguel(aluguel);
-		System.out.println(aluguel);
-		if(tfCodAluguel.getText().isEmpty()) {
+		if(lblCodigo.getText().isEmpty()) {
 			retorno = false;
 		}
 		devolucao.setTipoPagamento(cbTipoPagamento.getValue());
 		devolucao.setDataChegada(LocalDate.now());
-		devolucao.setQuilometroChegada(Double.valueOf(tfKmChegada.getText()));
 		if(tfKmChegada.getText().isEmpty()) {
 			retorno = false;
 		}
+		devolucao.setQuilometroChegada(Double.valueOf(tfKmChegada.getText()));
 		return retorno;
 	}
 	
@@ -137,11 +137,16 @@ public class DevolverVeiculoController {
 	}
 	
 	void valorTotal(){
-		double valor = (((devolucao.getAluguel().getCarro().getValor()/1000) + devolucao.getAluguel().getTipoAluguel().getValor()) +
-				((devolucao.calculaQuilometros()/1000) * devolucao.getAluguel().getTipoAluguel().getTaxa()));
-		valor = valor - ((devolucao.getTipoPagamento().getDesconto() * valor)/100);
-		devolucao.setValorTotal(valor);	
-		lblValor.setText(String.valueOf(valor));
+		AlertaFactory alerta = new AlertaFactory();
+		if(devolucao.calculaQuilometros() == null) {
+			alerta.mensagemDeAlerta("Quilometragem de chegada inválida");
+		}else {
+			double valor = (((devolucao.getAluguel().getCarro().getValor() * devolucao.calculaQuilometros())/100) +
+					devolucao.getAluguel().getTipoAluguel().getValor()) * devolucao.getAluguel().getTipoAluguel().getTaxa();
+			valor = valor - ((devolucao.getTipoPagamento().getDesconto() * valor)/100);
+			devolucao.setValorTotal(valor);	
+			lblValor.setText(String.format(Locale.US, "%.2f", valor));		
+		}
 	}
 	
 	@FXML
@@ -149,7 +154,7 @@ public class DevolverVeiculoController {
     	Aluguel aluguel = new Aluguel();
     	if (tblAluguel.getSelectionModel().getSelectedItem() != null) {
 			aluguel = tblAluguel.getSelectionModel().getSelectedItem();
-			tfCodAluguel.setText(aluguel.getCodigo().toString());
+			lblCodigo.setText(aluguel.getCodigo().toString());
 		}
     }
 	
