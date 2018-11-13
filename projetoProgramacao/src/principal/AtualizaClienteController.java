@@ -136,6 +136,7 @@ public class AtualizaClienteController {
 			if(cliente.validaCpf()) {
 				if (alerta.confirmaAceitar()) {
 					clienteDao.alterar(cliente);
+					alerta.salvoComSucesso();
 					limpaTela();
 				}
 			}			

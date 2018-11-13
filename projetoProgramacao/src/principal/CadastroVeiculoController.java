@@ -70,6 +70,7 @@ public class CadastroVeiculoController {
 		if(populaCarro()) {
 			if(alerta.confirmaAceitar()) {
 				carroDao.inserir(carro);
+				alerta.salvoComSucesso();
 				novoCarro();
 			}			
 		}else {

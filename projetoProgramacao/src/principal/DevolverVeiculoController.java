@@ -177,11 +177,19 @@ public class DevolverVeiculoController {
 				devolucaoDao.inserir(devolucao);
 				devolucao.getAluguel().getCarro().setDisponivel(true);
 				carroDao.alterar(devolucao.getAluguel().getCarro());
+				limpaDevolver();
+				alerta.salvoComSucesso();
 			}
 		}
 		else {
 			alerta.mensagemDeAlerta("preencha todos os campos");
 		}
+    }
+    
+    public void limpaDevolver() {
+    	devolucao = new Devolucao();
+    	tfKmChegada.clear();
+    	cbTipoPagamento.getSelectionModel().clearSelection();
     }
 	
 	

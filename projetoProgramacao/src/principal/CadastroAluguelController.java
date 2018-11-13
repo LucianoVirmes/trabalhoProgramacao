@@ -108,6 +108,7 @@ public class CadastroAluguelController {
 				Carro car = aluguel.getCarro();
 				car.setDisponivel(false);
 				carroDao.alterar(car);
+				alerta.salvoComSucesso();
 			}    			
 		}else {
 			alerta.mensagemDeAlerta("preencha todos os campos");

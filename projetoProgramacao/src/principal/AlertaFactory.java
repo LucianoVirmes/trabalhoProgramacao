@@ -41,7 +41,14 @@ public class AlertaFactory {
 	 */
 	public boolean mensagemDeAlerta(String tipoDeInconsistencia) {
 		Alerta alerta = new Alerta(); 
-		Optional<ButtonType> result = alerta.criarAlert_UmBotao("ERRO: " + tipoDeInconsistencia, ButtonType.OK).showAndWait();		
+		Optional<ButtonType> result = alerta.criarAlert_UmBotaoErro("ERRO: " + tipoDeInconsistencia, ButtonType.OK).showAndWait();		
+		alerta.tipoBotaoAceita(ButtonType.OK, "OK");
+		return ButtonType.OK.equals(result.get());
+	}
+	
+	public boolean salvoComSucesso() {
+		Alerta alerta = new Alerta(); 
+		Optional<ButtonType> result = alerta.criarAlert_UmBotao("Dados salvos com sucesso", ButtonType.OK).showAndWait();		
 		alerta.tipoBotaoAceita(ButtonType.OK, "OK");
 		return ButtonType.OK.equals(result.get());
 	}

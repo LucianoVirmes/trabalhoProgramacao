@@ -59,6 +59,7 @@ public class CadastroFilialController {
 		if(populaFilial()) {
 			if (alerta.confirmaAceitar()) {
 				filialDao.inserir(filial);
+				alerta.salvoComSucesso();
 			}					
 		}else {
 			alerta.mensagemDeAlerta("preencha todos os campos");

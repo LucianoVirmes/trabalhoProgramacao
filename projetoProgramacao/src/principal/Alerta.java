@@ -36,9 +36,15 @@ public class Alerta {
 	 * @param aceita - tipo do botao para aceitar
 	 * @return Alert
 	 */
-	public Alert criarAlert_UmBotao(String mensagem, ButtonType aceita) {
-		alerta = new Alert(AlertType.CONFIRMATION, mensagem, aceita);
+	public Alert criarAlert_UmBotaoErro(String mensagem, ButtonType aceita) {
+		alerta = new Alert(AlertType.WARNING, mensagem, aceita);
 		tipoBotaoAceita(aceita, "Sim");
+		return alerta;
+	}
+	
+	public Alert criarAlert_UmBotao(String mensagem, ButtonType aceita) {
+		alerta = new Alert(AlertType.NONE, mensagem, aceita);
+		tipoBotaoAceita(aceita, "OK");
 		return alerta;
 	}
 	

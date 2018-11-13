@@ -112,6 +112,7 @@ public class CadastroFuncionarioController {
 				if(funcionario.validaCpf()) {
 					if (alerta.confirmaAceitar()) {
 						funcionarioDao.inserir(funcionario);
+						alerta.salvoComSucesso();
 						novoFuncionario();
 					}
 				}else {
