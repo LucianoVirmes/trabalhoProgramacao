@@ -84,6 +84,7 @@ public class CadastroClienteController {
     			if(cliente.validaCpf()) {
     				if (alerta.confirmaAceitar()) {
     					clienteDao.inserir(cliente);
+    					novoCliente();
     				}
     			}else {
     				alerta.mensagemDeAlerta("CPF inválido");
