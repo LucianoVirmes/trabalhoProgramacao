@@ -115,7 +115,7 @@ public class ClienteJDBC implements ClienteDAO {
 				cliente = new Cliente();
 				cliente.setCodigo(rs1.getInt("codigo"));
 				cliente.setNome(rs1.getString("nome"));
-				cliente.setSobrenome("sobrenome");
+				cliente.setSobrenome(rs1.getString("sobrenome"));
 				Date data = rs1.getDate("dataNascimento");
 				cliente.setDataNascimento(
 						Instant.ofEpochMilli(data.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
