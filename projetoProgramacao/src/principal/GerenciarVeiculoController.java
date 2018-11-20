@@ -14,8 +14,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import principal.dao.AbstractFactory;
+import principal.dao.AluguelDAO;
 import principal.dao.CarroDAO;
 import principal.dao.FilialDAO;
+import principal.model.Aluguel;
 import principal.model.Carro;
 import principal.model.Filial;
 
@@ -23,66 +25,67 @@ public class GerenciarVeiculoController {
 
 	@FXML
 	private TextField tfBuscar;
-	
+
 	@FXML
 	private Button btnBuscar;
-	
+
 	@FXML
 	private TableView<Carro> tblVeiculos;
-	
+
 	@FXML
 	private TableColumn<Carro, String> tbcPlaca;
-	
+
 	@FXML
 	private TableColumn<Carro, String> tbcMarca;
-	
+
 	@FXML
 	private TableColumn<Carro, String> tbcModelo;
-	
+
 	@FXML
 	private TableColumn<Carro, Double> tbcValor;
-	
+
 	@FXML
 	private TableColumn<Carro, Boolean> tbcDisponibilidade;
 
-    @FXML
-    private TextField tfMarca;
-
-    @FXML
-    private TextField tfModelo;
-
-    @FXML
-    private TextField tfCor;
-
-    @FXML
-    private TextField tfPlaca;
-
-    @FXML
-    private TextField tfValor;
-
-    @FXML
-    private DatePicker dtpAno;
-    
 	@FXML
-    private CheckBox ckbDisponivel;
+	private TextField tfMarca;
 
-    @FXML
-    private ComboBox<Filial> cbFilial;
+	@FXML
+	private TextField tfModelo;
 
-    @FXML
-    private Button btnSalvar;
-    
-    @FXML
-    private Button btnDesapropriar;
+	@FXML
+	private TextField tfCor;
 
-    private Carro carro;
-    
-    private CarroDAO carroDao = AbstractFactory.get().carroDao();
-    private FilialDAO filialDao = AbstractFactory.get().filialDao();
-    
-    private ObservableList<Carro> carros = FXCollections.observableArrayList();
-    
-    @FXML
+	@FXML
+	private TextField tfPlaca;
+
+	@FXML
+	private TextField tfValor;
+
+	@FXML
+	private DatePicker dtpAno;
+
+	@FXML
+	private CheckBox ckbDisponivel;
+
+	@FXML
+	private ComboBox<Filial> cbFilial;
+
+	@FXML
+	private Button btnSalvar;
+
+	@FXML
+	private Button btnDesapropriar;
+
+	private Carro carro;
+	private Aluguel aluguel;
+	private CarroDAO carroDao = AbstractFactory.get().carroDao();
+	private AluguelDAO aluguelDao = AbstractFactory.get().aluguelDao();
+	private FilialDAO filialDao = AbstractFactory.get().filialDao();
+
+	private ObservableList<Carro> carros = FXCollections.observableArrayList();
+
+	@FXML
 	private void initialize() {
 		tbcPlaca.setCellValueFactory(new PropertyValueFactory<>("placa"));
 		tbcMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
@@ -92,12 +95,12 @@ public class GerenciarVeiculoController {
 		tblVeiculos.setItems(atualizaTabela());
 		populaCombo();
 	}
-    
+
 	private ObservableList<Carro> atualizaTabela() {
 		carros = FXCollections.observableArrayList(carroDao.listar());
 		return carros;
 	}
-	
+
 	private ObservableList<Carro> buscarVeiculo() {
 		ObservableList<Carro> carroPesquisa = FXCollections.observableArrayList();
 		for (int x = 0; x < carros.size(); x++) {
@@ -107,7 +110,7 @@ public class GerenciarVeiculoController {
 		}
 		return carroPesquisa;
 	}
-	
+
 	public void populaTela(Carro car) {
 		tfMarca.setText(car.getMarca());
 		tfModelo.setText(car.getModelo());
@@ -115,103 +118,108 @@ public class GerenciarVeiculoController {
 		tfPlaca.setText(car.getPlaca());
 		tfValor.setText(car.getValor().toString());
 		dtpAno.setValue(car.getAno());
-		if(car.isDisponivel()) {
+		aluguel = aluguelDao.buscar(car.getCodigo());
+		if (car.isDisponivel()) {
 			ckbDisponivel.setSelected(true);
 		} else {
 			ckbDisponivel.setSelected(false);
 
 		}
 		cbFilial.getSelectionModel().select(car.getFilial());
-		
+
 	}
 
 	public boolean populaCarro() {
 		carro.setAno(dtpAno.getValue());
 		carro.setCor(tfCor.getText());
-		if(tfCor.getText().isEmpty()) {
+		if (tfCor.getText().isEmpty()) {
 			return false;
 		}
 		carro.setMarca(tfMarca.getText());
-		if(tfMarca.getText().isEmpty()) {
+		if (tfMarca.getText().isEmpty()) {
 			return false;
 		}
 		carro.setModelo(tfModelo.getText());
-		if(tfModelo.getText().isEmpty()) {
+		if (tfModelo.getText().isEmpty()) {
 			return false;
 		}
 		carro.setPlaca(tfPlaca.getText());
-		if(tfPlaca.getText().isEmpty()) {
+		if (tfPlaca.getText().isEmpty()) {
 			return false;
 		}
-		if(tfValor.getText().isEmpty()) {
+		if (tfValor.getText().isEmpty()) {
 			return false;
-		}else {
-			carro.setValor(Double.valueOf(tfValor.getText()));			
+		} else {
+			carro.setValor(Double.valueOf(tfValor.getText()));
 		}
 		carro.setFilial(cbFilial.getValue());
-		if(ckbDisponivel.isSelected()) {
+		if (ckbDisponivel.isSelected()) {
 			carro.setDisponivel(true);
-		}else {
-			carro.setDisponivel(false);			
+		} else {
+			carro.setDisponivel(false);
 		}
 		return true;
 	}
 
+	@FXML
+	void buscar(ActionEvent event) {
+		tblVeiculos.setItems(buscarVeiculo());
 
-    
-    
-    @FXML
-    void buscar(ActionEvent event) {
-    	tblVeiculos.setItems(buscarVeiculo());
-    	
-    }
+	}
 
-    @FXML
-    void desapropriar(ActionEvent event) {
-    	AlertaFactory alerta = new AlertaFactory();
+	@FXML
+	void desapropriar(ActionEvent event) {
+		AlertaFactory alerta = new AlertaFactory();
 		carro = tblVeiculos.getSelectionModel().getSelectedItem();
-		if(alerta.confirmaExclusao()) {
+		if (alerta.confirmaExclusao()) {
 			carroDao.desapropriar(carro);
 		}
 		novoVeiculo();
-    }
+	}
 
-    @FXML
-    void salvar(ActionEvent event) {
-    	AlertaFactory alerta = new AlertaFactory();
-    	if(populaCarro()) {
-    		if(alerta.confirmaAceitar()) {
-    			carroDao.alterar(carro);
-    			ckbDisponivel.setSelected(false);
-    			tblVeiculos.refresh();
-    		}
-    	}else {
-    		alerta.mensagemDeAlerta("preencha todos os campos");
-    	}
-    	novoVeiculo();
-    }
+	@FXML
+	void salvar(ActionEvent event) {
+		AlertaFactory alerta = new AlertaFactory();
 
-    @FXML
-    void selecionaCarro(MouseEvent event) {
-    	if (tblVeiculos.getSelectionModel().getSelectedItem() != null) {
+		if (aluguel == null) {
+
+			if (populaCarro()) {
+				if (alerta.confirmaAceitar()) {
+					carroDao.alterar(carro);
+					ckbDisponivel.setSelected(false);
+					tblVeiculos.refresh();
+				}
+			} else {
+				alerta.mensagemDeAlerta("preencha todos os campos");
+			}
+			novoVeiculo();
+		}
+		else {
+			alerta.mensagemDeAlerta("Não é possivel alterar um veiculo que possui um aluguel em atividade!");
+		}
+	}
+
+	@FXML
+	void selecionaCarro(MouseEvent event) {
+		if (tblVeiculos.getSelectionModel().getSelectedItem() != null) {
 			carro = tblVeiculos.getSelectionModel().getSelectedItem();
 			populaTela(carro);
 		}
-    }
-    
-    private void populaCombo(){
-		for(Filial filial: filialDao.listar()){
+	}
+
+	private void populaCombo() {
+		for (Filial filial : filialDao.listar()) {
 			cbFilial.getItems().add(filial);
 		}
 	}
-    
-    void novoVeiculo() {
-    	tfMarca.clear();
+
+	void novoVeiculo() {
+		tfMarca.clear();
 		tfValor.clear();
 		tfModelo.clear();
 		tfPlaca.clear();
 		tfCor.clear();
-		if(ckbDisponivel.isSelected()) {
+		if (ckbDisponivel.isSelected()) {
 			ckbDisponivel.setSelected(false);
 		}
 		cbFilial.getSelectionModel().clearSelection();
