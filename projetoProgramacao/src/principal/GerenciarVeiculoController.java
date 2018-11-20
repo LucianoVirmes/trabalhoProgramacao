@@ -118,7 +118,7 @@ public class GerenciarVeiculoController {
 		tfPlaca.setText(car.getPlaca());
 		tfValor.setText(car.getValor().toString());
 		dtpAno.setValue(car.getAno());
-		aluguel = aluguelDao.buscar(car.getCodigo());
+		aluguel = aluguelDao.buscarPorCarro(car.getCodigo());
 		if (car.isDisponivel()) {
 			ckbDisponivel.setSelected(true);
 		} else {

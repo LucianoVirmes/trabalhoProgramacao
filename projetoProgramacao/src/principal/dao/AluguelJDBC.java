@@ -138,7 +138,40 @@ public class AluguelJDBC implements AluguelDAO {
 		return aluguel;
 
 	}
+	
+	public Aluguel buscarPorCarro(Integer codigo) {
+		Aluguel aluguel = null;
+		try {
+			String sql = "select * from Aluguel where codCarro = ?";
+			PreparedStatement ps = ConexaoUtil.getConn().prepareStatement(sql);
+			ps.setInt(1, codigo);
+			ResultSet rs1 = ps.executeQuery();
+			while (rs1.next()) {
+				aluguel = new Aluguel();
+				aluguel.setCodigo(rs1.getInt("codigo"));
+				Date data = rs1.getDate("dataAluguel");
+				aluguel.setDataAluguel(
+						Instant.ofEpochMilli(data.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+				aluguel.setQuilometrosSaida(rs1.getDouble("quilometroSaida"));
+				TipoAluguelJDBC tipoAluguelJDBC = new TipoAluguelJDBC();
+				aluguel.setTipoAluguel(tipoAluguelJDBC.buscar(rs1.getInt("codTipoAluguel")));
+				ClienteJDBC clienteJDBC = new ClienteJDBC();
+				aluguel.setCliente(clienteJDBC.buscar(rs1.getInt("codCliente")));
+				CarroJDBC carroJDBC = new CarroJDBC();
+				aluguel.setCarro(carroJDBC.buscar(rs1.getInt("codCarro")));
+				FuncionarioJDBC funcionarioJDBC = new FuncionarioJDBC(); 
+				aluguel.setFuncionario(funcionarioJDBC.buscar(rs1.getInt("codFuncionario")));
+				FilialJDBC filialJDBC = new FilialJDBC();
+				aluguel.setFilial(filialJDBC.buscar(rs1.getInt("codFilial")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return aluguel;
 
+	}
+
+	
 	@Override
 	public List<Aluguel> alugueisAtivos() {
 		List<Aluguel> alugueis = new ArrayList<>();

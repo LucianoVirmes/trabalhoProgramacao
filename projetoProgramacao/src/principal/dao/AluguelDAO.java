@@ -8,4 +8,6 @@ public interface AluguelDAO extends GenericDAO<Aluguel>{
 
 	List<Aluguel> alugueisAtivos();
 	
+	Aluguel buscarPorCarro(Integer codigo);
+	
 }
