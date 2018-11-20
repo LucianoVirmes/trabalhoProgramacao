@@ -195,7 +195,7 @@ public class GerenciarVeiculoController {
 			novoVeiculo();
 		}
 		else {
-			alerta.mensagemDeAlerta("Não é possivel alterar um veiculo que possui um aluguel em atividade!");
+			alerta.mensagemDeAlerta("NÃ£o Ã© possivel alterar um veiculo que possui um aluguel em atividade!");
 		}
 	}
 
